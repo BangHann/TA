@@ -1,0 +1,22 @@
+.grid-card{
+    display: flex;
+    justify-content: center;
+}
+
+.card{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 260px;
+    height: 470px;
+    background: #ececec;
+}
+
+.card-img-kopi{
+    display: block;
+    width: 260px;
+    height: 220px;
+    margin: 0 auto;
+    border-radius: 10px;
+    object-fit: cover;
+}

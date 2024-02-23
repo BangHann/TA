@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaksi extends Model
+class Kopi extends Model
 {
     use HasFactory;
-    protected $table = 'tbl_transaksi';
+    protected $table = 'tbl_kopi';
     protected $guarded = [];
 }
