@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/kopi_index', [KopiController::class, 'index']);
+Route::get('/index', [KopiController::class, 'index']);
