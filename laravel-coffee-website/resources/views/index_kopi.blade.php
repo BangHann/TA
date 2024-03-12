@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,9 @@
 
     <title>Kopi Index Page</title>
 </head>
-<body>
+<body> --}}
+@extends('layouts.user')
+@section('content')
     <center>
         <h1>BangHan Coffee</h1>
     </center>
@@ -31,5 +33,7 @@
             </div>
         @endforeach
     </div>
-</body>
-</html>
+@endsection
+
+{{-- </body>
+</html> --}}
