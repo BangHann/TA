@@ -21,6 +21,9 @@
     object-fit: cover;
 } */
 
+nav{
+    background: #FFE5B6;
+}
 
 .grid-card{
     display: grid;
@@ -33,8 +36,8 @@
 .card{
     /* padding: 10px; */
     border-radius: 8px;
-    width: 100%; /* Kartu akan mengisi lebar grid */
-    max-width: 160px; /* Maksimum lebar kartu */
+    /* width: 100%; */
+    width: 160px; /* Maksimum lebar kartu */
     height: auto; /* Kartu akan menyesuaikan tinggi gambar */
     background: #ececec;
 }

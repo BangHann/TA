@@ -35,7 +35,7 @@ class KopiTableSeeder extends Seeder
 
         Kopi::create([
             'jenis_kopi' => 'Liberika atau Exelsa',
-            'foto' => 'Liberika_Exelsa.jpg',
+            'foto' => 'logo1.png',
             'harga' => 17000,
             'stok' => 25,
             'deskripsi' => 'Biji kopi liberika berbentuk seperti biji buah kurma, agak lonjong dan berukuran lebih besar. Kopi ini memiliki karakteristik rasa yang sedikit asam dan mirip seperti buah.'
@@ -51,7 +51,7 @@ class KopiTableSeeder extends Seeder
 
         Kopi::create([
             'jenis_kopi' => 'Liberika atau Exelsa',
-            'foto' => 'Liberika_Exelsa.jpg',
+            'foto' => 'logo1.png',
             'harga' => 17000,
             'stok' => 25,
             'deskripsi' => 'Biji kopi liberika berbentuk seperti biji buah kurma, agak lonjong dan berukuran lebih besar. Kopi ini memiliki karakteristik rasa yang sedikit asam dan mirip seperti buah.'
