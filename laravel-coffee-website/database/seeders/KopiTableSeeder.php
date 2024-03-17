@@ -16,7 +16,7 @@ class KopiTableSeeder extends Seeder
         // Bersihkan data tabel sebelum menambahkan data
         Kopi::truncate();
 
-        // Tambahkan data kopis
+        // Tambahkan data kopi
         Kopi::create([
             'jenis_kopi' => 'Arabika',
             'foto' => 'Arabica.jpg',
@@ -39,6 +39,30 @@ class KopiTableSeeder extends Seeder
             'harga' => 17000,
             'stok' => 25,
             'deskripsi' => 'Biji kopi liberika berbentuk seperti biji buah kurma, agak lonjong dan berukuran lebih besar. Kopi ini memiliki karakteristik rasa yang sedikit asam dan mirip seperti buah.'
-        ]); 
+        ]);
+
+        Kopi::create([
+            'jenis_kopi' => 'Robusta',
+            'foto' => 'Robusta.jpg',
+            'harga' => 12000,
+            'stok' => 30,
+            'deskripsi' => 'Biji kopi robusta berbentuk agak bulat, melengkung, dan lebih tebal jika dibandingkan kopi arabika. Kopi robusta memiliki warna yang kuat dan lebih kental ketika dibuat kopi.'
+        ]);
+
+        Kopi::create([
+            'jenis_kopi' => 'Liberika atau Exelsa',
+            'foto' => 'Liberika_Exelsa.jpg',
+            'harga' => 17000,
+            'stok' => 25,
+            'deskripsi' => 'Biji kopi liberika berbentuk seperti biji buah kurma, agak lonjong dan berukuran lebih besar. Kopi ini memiliki karakteristik rasa yang sedikit asam dan mirip seperti buah.'
+        ]);
+
+        Kopi::create([
+            'jenis_kopi' => 'Arabika',
+            'foto' => 'Arabica.jpg',
+            'harga' => 15000,
+            'stok' => 45,
+            'deskripsi' => 'Biji kopi arabika memiliki ciri-ciri ukuran biji yang lebih kecil dibandingkan biji kopi jenis robusta, selain itu, kandungannya kafeinnya lebih rendah, rasa dan aromanya juga lebih nikmat.'
+        ]);
     }
 }

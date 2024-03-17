@@ -1,4 +1,4 @@
-.grid-card{
+/* .grid-card{
     display: flex;
     justify-content: center;
 }
@@ -19,4 +19,47 @@
     margin: 0 auto;
     border-radius: 10px;
     object-fit: cover;
+} */
+
+
+.grid-card{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* Menggunakan grid untuk menyesuaikan kartu dengan ukuran layar */
+    /* gap: 10px; */
+    justify-items: center; /* Pusatkan item di dalam grid */
+    grid-row-gap: 20px
+}
+
+.card{
+    /* padding: 10px; */
+    border-radius: 8px;
+    width: 100%; /* Kartu akan mengisi lebar grid */
+    max-width: 160px; /* Maksimum lebar kartu */
+    height: auto; /* Kartu akan menyesuaikan tinggi gambar */
+    background: #ececec;
+}
+
+.card-img-kopi{
+    display: block;
+    width: 100%; /* Gambar akan mengisi lebar kartu */
+    height: 140px; /* Tetapkan tinggi gambar */
+    /* border-radius: 10px; */
+    object-fit: cover;
+}
+
+
+@media screen and (min-width: 500px) {
+    .grid-card {
+        width: 85%;
+    }
+}
+/* Media query untuk menambahkan margin 28px pada tampilan mobile */
+@media screen and (max-width: 500px) {
+    /* .grid-card {
+        grid-row-gap: 20px
+    } */
+
+    /* .card {
+        margin: 0 14px; 
+    } */
 }

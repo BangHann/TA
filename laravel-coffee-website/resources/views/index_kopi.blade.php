@@ -11,28 +11,31 @@
 </head>
 <body> --}}
 @extends('layouts.user')
+@section('judul', 'Home')
 @section('content')
     <center>
-        <h1>BangHan Coffee</h1>
+        <p class="text-2xl font-bold my-4">Seteguk Kopi</p>
     </center>
     
-    <div class="grid-card">
-        @foreach ($kopi as $item)
-            <div class="card">
-                <img src="{{ asset('images/' . $item->foto) }}" class="card-img-kopi" alt="{{ $item->jenis_kopi }}">
-                <div class="card-body">
-                    <h3 class="card-title">{{ $item->jenis_kopi }}</h3>
-                    <p class="card-text" style="text-align: justify">{{ $item->deskripsi }}</p>
-                    <b><p class="card-text">Rp {{ number_format($item->harga, 2) }}</p></b>
-                    <p class="card-text">Stok: {{ $item->stok }}</p>
-                    <!-- Tambahan informasi lainnya sesuai kebutuhan -->
+    <div class="lg:flex justify-center">
+        <div class="grid-card mx-7 gap-4">
+            @foreach ($kopi as $item)
+                <div class="card">
+                    <img src="{{ asset('images/' . $item->foto) }}" class="card-img-kopi rounded-t-lg" alt="{{ $item->jenis_kopi }}">
+                    <div class="card-body m-2">
+                        <h3 class="card-title text-xl leading-5">{{ $item->jenis_kopi }}</h3>
+                        {{-- <p class="card-text" style="text-align: justify">{{ $item->deskripsi }}</p> --}}
+                        <b><p class="card-text">Rp {{ number_format($item->harga, 2) }}</p></b>
+                        <p class="card-text">Stok: {{ $item->stok }}</p>
+                        <!-- Tambahan informasi lainnya sesuai kebutuhan -->
 
-                    <!-- Tombol untuk menuju detail jika diperlukan -->
-                    {{-- <a href="{{ route('', $item->id) }}" class="btn btn-primary">Lihat Detail</a> --}}
+                        <!-- Tombol untuk menuju detail jika diperlukan -->
+                        {{-- <a href="{{ route('', $item->id) }}" class="btn btn-primary">Lihat Detail</a> --}}
+                    </div>
                 </div>
-            </div>
-        @endforeach
-    </div>
+            @endforeach
+        </div>
+</div>
 @endsection
 
 {{-- </body>
