@@ -23,10 +23,10 @@
                 <div class="card">
                     <img src="{{ asset('images/' . $item->foto) }}" class="card-img-kopi rounded-t-lg" alt="{{ $item->jenis_kopi }}">
                     <div class="card-body m-2">
-                        <h3 class="card-title text-xl leading-5">{{ $item->jenis_kopi }}</h3>
+                        <h3 class="card-title text-sm leading-5">{{ $item->jenis_kopi }}</h3>
                         {{-- <p class="card-text" style="text-align: justify">{{ $item->deskripsi }}</p> --}}
-                        <b><p class="card-text">Rp {{ number_format($item->harga, 2) }}</p></b>
-                        <p class="card-text">Stok: {{ $item->stok }}</p>
+                        <b><p class="card-text text-sm">Rp {{ number_format($item->harga, 2) }}</p></b>
+                        <p class="card-text text-[10px]">Stok: {{ $item->stok }}</p>
                         <!-- Tambahan informasi lainnya sesuai kebutuhan -->
 
                         <!-- Tombol untuk menuju detail jika diperlukan -->
