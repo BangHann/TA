@@ -12,4 +12,10 @@ class KopiController extends Controller
         $kopi = Kopi::all();
         return view('index_kopi', compact('kopi'));
     }
+
+    public function dashboard()
+    {
+        // $kopi = Kopi::all();
+        return view('layouts/admin');
+    }
 }

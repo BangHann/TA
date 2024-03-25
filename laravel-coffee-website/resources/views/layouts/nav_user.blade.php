@@ -7,8 +7,11 @@
         <div class="flex items-center gap-2">
             <i class="material-icons">shopping_cart</i>
             <div class="bg-[#00000050] w-0.5 h-6 mx-3"></div>
-            <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
-            <p>Hello, BangHan</p>
+            <a href="/admin-dashboard" class="flex items-center gap-2">
+                <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
+                <p>Hello, BangHan</p>
+            </a>
+            
         </div>
     </div>
     

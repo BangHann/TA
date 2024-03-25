@@ -19,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::get('/index', [KopiController::class, 'index']);
+
+//ADMIN
+Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
