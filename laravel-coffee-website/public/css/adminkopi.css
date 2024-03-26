@@ -1,0 +1,4 @@
+.dropdown-content a:hover {
+    background-color: #3490dc; /* Warna latar belakang saat dihover */
+    color: #FFF; /* Warna teks saat dihover */
+}
