@@ -22,3 +22,10 @@ Route::get('/index', [KopiController::class, 'index']);
 
 //ADMIN
 Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
+Route::get('/admin-datakopi', [KopiController::class, 'datakopiadmin']);
+Route::get('/admin-datakopi-add', function () {
+    return view('admin/datakopi/add');
+});
+Route::get('/admin-keuangan', function () {
+    return view('admin/keuangan/index');
+});

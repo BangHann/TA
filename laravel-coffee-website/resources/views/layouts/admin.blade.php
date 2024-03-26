@@ -15,7 +15,6 @@
     <div class="flex gap-2">
         @include('layouts.sidebar')
         <div>
-            Main Page Dashboard Admin
             @yield('admin-content')
         </div>
     </div>
