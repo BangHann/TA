@@ -21,7 +21,7 @@ class KopiController extends Controller
 
     public function datakopiadmin()
     {
-        // $kopi = Kopi::all();
-        return view('admin/datakopi/index');
+        $kopi = Kopi::all();
+        return view('admin/datakopi/index', compact('kopi'));
     }
 }
