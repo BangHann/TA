@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KopiController;
+use App\Http\Controllers\RasaKopiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,4 @@ Route::get('/admin-datakopi-add', function () {
 Route::get('/admin-keuangan', function () {
     return view('admin/keuangan/index');
 });
+Route::get('/admin-listrasakopi', [RasaKopiController::class, 'index']);
