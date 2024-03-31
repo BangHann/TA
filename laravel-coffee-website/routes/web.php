@@ -31,3 +31,6 @@ Route::get('/admin-keuangan', function () {
     return view('admin/keuangan/index');
 });
 Route::get('/admin-listrasakopi', [RasaKopiController::class, 'index']);
+Route::get('/admin-addrasakopi', function () {
+    return view('admin/rasakopi/add_rasa');
+});

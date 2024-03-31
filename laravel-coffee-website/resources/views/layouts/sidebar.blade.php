@@ -13,7 +13,7 @@
             <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif">Rasa Kopi</summary>
             <div class="flex flex-col">
                 <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif" href="/admin-listrasakopi">List Rasa</a>
-                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('p')) bg-[#ddc79e] @endif" href="/admin-datakopi-add">Add Rasa</a>
+                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-addrasakopi')) bg-[#ddc79e] @endif" href="/admin-addrasakopi">Add Rasa</a>
             </div>
         </details>
         <details>
