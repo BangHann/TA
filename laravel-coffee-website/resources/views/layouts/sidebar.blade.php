@@ -19,8 +19,8 @@
         <details>
             <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('admin-datakopi-add') || Request::is('admin-datakopi')) bg-[#ddc79e] @endif">Data Kopi</summary>
             <div class="flex flex-col">
-                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-datakopi')) bg-[#ddc79e] @endif" href="/admin-datakopi">Index</a>
-                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-datakopi-add')) bg-[#ddc79e] @endif" href="/admin-datakopi-add">Add</a>
+                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-datakopi')) bg-[#ddc79e] @endif" href="/admin-datakopi">List Kopi</a>
+                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-datakopi-add')) bg-[#ddc79e] @endif" href="/admin-datakopi-add">Add Kopi</a>
             </div>
         </details>
         <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-keuangan')) bg-[#ddc79e] @endif" href="/admin-keuangan">Laporan Keuangan</a>
