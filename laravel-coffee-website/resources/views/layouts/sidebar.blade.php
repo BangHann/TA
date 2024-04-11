@@ -24,5 +24,15 @@
             </div>
         </details>
         <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-keuangan')) bg-[#ddc79e] @endif" href="/admin-keuangan">Laporan Keuangan</a>
+        <form method="POST" action="{{ route('logout') }}" class="py-2 px-2 font-semibold">
+            @csrf
+
+                {{-- <x-dropdown-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </x-dropdown-link> --}}
+            <button type="submit" class="w-full py-2 bg-[#baa785] hover:bg-[#82755d] hover:text-[#FFE5B6] rounded-md">Logout</button>
+        </form>
     </div>
 </div>
