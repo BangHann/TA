@@ -1,29 +1,21 @@
+import defaultTheme from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.js",
-    "./resources/**/*.vue",
-  ],
-  theme: {
-    extend: {},
-    screens: {
-      // 'sm': '640px',
-      // // => @media (min-width: 640px) { ... }
+    content: [
+        './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+        './storage/framework/views/*.php',
+        './resources/views/**/*.blade.php',
+    ],
 
-      // 'md': '768px',
-      // // => @media (min-width: 768px) { ... }
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+            },
+        },
+    },
 
-      'lg': '500px', //Bila lebar diatas 500px maka...
-      // => @media (min-width: 1024px) { ... }
-
-      // 'xl': '1280px',
-      // // => @media (min-width: 1280px) { ... }
-
-      // '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
-    }
-  },
-  plugins: [],
-}
-
+    plugins: [forms],
+};
