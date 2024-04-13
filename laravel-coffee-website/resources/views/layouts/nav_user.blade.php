@@ -25,7 +25,7 @@
                     <button class="dropbtn">
                         <div href="" class="flex items-center gap-2">
                             <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
-                            <p>Hello, BangHan</p>
+                            <p class="">Hello, BangHan</p>
                         </div>
                     </button>
                     <div class="dropdown-content">

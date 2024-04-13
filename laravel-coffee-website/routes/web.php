@@ -44,8 +44,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 // Route::middleware('auth')->group(function () {
-Route::middleware('auth', 'user')->group(function () {
-    // Route::get('/index', [KopiController::class, 'index']);
+Route::middleware(['auth','user'])->group(function () {
+    Route::get('/kopi/{id}', [KopiController::class, 'detail']);
 
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

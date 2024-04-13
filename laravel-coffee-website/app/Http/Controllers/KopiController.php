@@ -24,4 +24,10 @@ class KopiController extends Controller
         $kopi = Kopi::all();
         return view('admin/datakopi/index', compact('kopi'));
     }
+
+    public function detail($id)
+    {
+        $detail_kopi = Kopi::find($id);
+        return view('user.detailkopi', compact('detail_kopi'));
+    }
 }
