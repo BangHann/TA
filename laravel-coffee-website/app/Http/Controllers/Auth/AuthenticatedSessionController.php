@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         // Redirect ke rute yang sesuai berdasarkan peran pengguna
         if ($role === 'user') {
-            return redirect('/index'); // Redirect ke dashboard admin jika peran adalah admin
+            return redirect('/'); // Redirect ke dashboard admin jika peran adalah admin
         } else if($role=='admin'){
             return redirect('/admin-dashboard');
         }else{

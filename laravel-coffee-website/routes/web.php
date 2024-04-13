@@ -17,9 +17,9 @@ use App\Http\Controllers\GatewayController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -56,7 +56,8 @@ Route::middleware('auth', 'role:user')->group(function () {
 require __DIR__.'/auth.php';
 
 
-Route::get('/index', [KopiController::class, 'index']);
+// Route::get('/index', [KopiController::class, 'index']);
+Route::get('/', [KopiController::class, 'index']);
 
 // //ADMIN
 // Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
