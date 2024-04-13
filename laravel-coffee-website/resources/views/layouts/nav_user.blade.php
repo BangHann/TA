@@ -16,10 +16,26 @@
             @auth
                 <i class="material-icons">shopping_cart</i>
                 <div class="bg-[#00000050] w-0.5 h-6 mx-3"></div>
-                <a href="/admin-dashboard" class="flex items-center gap-2">
+                {{-- <a href="/admin-dashboard" class="flex items-center gap-2">
                     <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
                     <p>Hello, BangHan</p>
-                </a> 
+                </a>  --}}
+
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        <div href="" class="flex items-center gap-2">
+                            <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
+                            <p>Hello, BangHan</p>
+                        </div>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <form method="POST" action="{{ route('logout') }}" class="py-1 px-4 hover:bg-[#ddd]">
+                            @csrf
+                            <button type="submit" class="w-full py-2 rounded-md flex justify-start">Logout</button>
+                        </form>
+                    </div>
+                </div>
             @endauth
             
             

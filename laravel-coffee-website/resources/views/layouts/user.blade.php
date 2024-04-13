@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo1.png') }}">
     <link rel="stylesheet" href="{{ asset('css/kopi.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
     @vite('resources/css/app.css')
 
     <!-- PWA  -->
