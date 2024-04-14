@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('tbl_kopi', function (Blueprint $table) {
             $table->id();
+
+            // Foreign key ke tabel rasa kopi
+            // $table->unsignedBigInteger('rasa_id');
+            // $table->foreign('rasa_id')->references('id')->on('tbl_rasa_kopi')->onDelete('cascade');
+
             $table->string('jenis_kopi');
             $table->string('foto');
             $table->float('harga');

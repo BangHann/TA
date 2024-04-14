@@ -14,23 +14,31 @@ class RasaKopiTableSeeder extends Seeder
     public function run(): void
     {
         // Bersihkan data tabel sebelum menambahkan data
-        RasaKopi::truncate();
+        // RasaKopi::truncate();
 
         // Tambahkan data kopi
         RasaKopi::create([ 
-            'nama_rasa' => 'Gula Aren'
+            'kopi_id' => 1,
+            'nama_rasa' => 'Gula Aren',            
+            'stock' => 7,
         ]);
 
         RasaKopi::create([ 
-            'nama_rasa' => 'Pandan'
+            'kopi_id' => 2,
+            'nama_rasa' => 'Pandan',            
+            'stock' => 13,
         ]);
 
         RasaKopi::create([ 
-            'nama_rasa' => 'Hazelnut'
+            'kopi_id' => 3,
+            'nama_rasa' => 'Hazelnut',            
+            'stock' => 5,
         ]);
 
         RasaKopi::create([ 
-            'nama_rasa' => 'Vanilla'
+            'kopi_id' => 4,
+            'nama_rasa' => 'Vanilla',            
+            'stock' => 10,
         ]);
     }
 }

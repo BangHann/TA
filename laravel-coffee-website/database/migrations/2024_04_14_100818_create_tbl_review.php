@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_rasa_kopi', function (Blueprint $table) {
+        Schema::create('tbl_review', function (Blueprint $table) {
             $table->id();
 
             // Foreign key ke tabel kopi
             $table->unsignedBigInteger('kopi_id');
             $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
 
-            $table->string('nama_rasa');
-            $table->integer('stock');
+            // Foreign key ke tabel user
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->integer('bintang');
+            $table->string('deskripsi');
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_rasa_kopi');
+        Schema::dropIfExists('tbl_review');
     }
 };
