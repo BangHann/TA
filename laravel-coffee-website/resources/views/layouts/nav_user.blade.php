@@ -40,6 +40,25 @@
                         </form>
                     </div>
                 </div>
+
+                <script>
+                    // Fungsi untuk memperbarui nomor keranjang
+                    function updateCartCount() {
+                        // Kirim permintaan AJAX ke backend untuk mendapatkan jumlah item dalam keranjang
+                        fetch('/cart/count')
+                            .then(response => response.json())
+                            .then(data => {
+                                // Perbarui nomor keranjang dengan jumlah yang diterima
+                                document.getElementById('cartCount').textContent = data.count;
+                            })
+                            .catch(error => {
+                                console.error('Error updating cart count:', error);
+                            });
+                    }
+                
+                    // Panggil fungsi updateCartCount saat halaman dimuat
+                    window.addEventListener('load', updateCartCount);
+                </script>
             @endauth
             
             
@@ -48,21 +67,3 @@
     
 </nav>
 
-<script>
-    // Fungsi untuk memperbarui nomor keranjang
-    function updateCartCount() {
-        // Kirim permintaan AJAX ke backend untuk mendapatkan jumlah item dalam keranjang
-        fetch('/cart/count')
-            .then(response => response.json())
-            .then(data => {
-                // Perbarui nomor keranjang dengan jumlah yang diterima
-                document.getElementById('cartCount').textContent = data.count;
-            })
-            .catch(error => {
-                console.error('Error updating cart count:', error);
-            });
-    }
-
-    // Panggil fungsi updateCartCount saat halaman dimuat
-    window.addEventListener('load', updateCartCount);
-</script>

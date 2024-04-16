@@ -47,7 +47,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 // Route::middleware('auth')->group(function () {
 Route::middleware(['auth','user'])->group(function () {
-    Route::get('/kopi/{id}', [KopiController::class, 'detail']);
     Route::get('/cart', [CartController::class, 'index_cart']);
     Route::post('/add_cart', [CartController::class, 'add_cart']);
     Route::get('/cart/count', [CartController::class, 'getCartCount']);
@@ -64,6 +63,7 @@ require __DIR__.'/auth.php';
 
 // Route::get('/index', [KopiController::class, 'index']);
 Route::get('/', [KopiController::class, 'index']);
+Route::get('/kopi/{id}', [KopiController::class, 'detail']);
 
 // //ADMIN
 // Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
