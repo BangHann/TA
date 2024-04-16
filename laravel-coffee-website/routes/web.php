@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/gateway', [GatewayController::class, 'door']);
+Route::get('/home', [GatewayController::class, 'door']);
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -49,6 +49,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
 Route::middleware(['auth','user'])->group(function () {
     Route::get('/kopi/{id}', [KopiController::class, 'detail']);
     Route::get('/cart', [CartController::class, 'index_cart']);
+    Route::post('/add_cart', [CartController::class, 'add_cart']);
+    Route::get('/cart/count', [CartController::class, 'getCartCount']);
+
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -17,8 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    // public const HOME = '/gateway';
-    public const HOME = '/dashboard';
+    public const HOME = '/home';
+    // public const HOME = '/dashboard';
     
 
     /**
@@ -39,21 +39,4 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
         });
     }
-
-    // public function redirectTo()
-    // {
-    //     if (Auth::check()) {
-    //         // Periksa peran pengguna setelah login
-    //         $role = Auth::user()->role;
-
-    //         // Redirect ke rute yang sesuai berdasarkan peran pengguna
-    //         if ($role === 'admin') {
-    //             return route('admin.main');
-    //         } else {
-    //             return route('index_kopi');
-    //         }
-    //     }
-
-    //     return route('login'); // Default redirect jika tidak ada pengguna yang login
-    // }
 }

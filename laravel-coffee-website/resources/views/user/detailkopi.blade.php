@@ -27,12 +27,15 @@
                 Order
             </a>
             <div class="w-[40%]">
-                {{-- <form action="">
+                <form action="/add_cart" method="post">
+                    @csrf
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}"> <!-- Assuming $kopi->id contains the ID of the coffee -->
+                    <button type="submit" class="w-full rounded-md py-3 border border-black text-black hover:bg-[#dcc69e] text-sm">Add to Cart</button>
+                </form>
+                {{-- <a class="" href="/cart">
                     <button class="w-full rounded-md py-3 border border-black text-black hover:bg-[#dcc69e] text-sm">Add to Cart</button>
-                </form> --}}
-                <a class="" href="/cart">
-                    <button class="w-full rounded-md py-3 border border-black text-black hover:bg-[#dcc69e] text-sm">Add to Cart</button>
-                </a>
+                </a> --}}
             </div>
             
         </div>

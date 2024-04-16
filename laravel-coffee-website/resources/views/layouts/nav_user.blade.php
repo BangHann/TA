@@ -14,7 +14,10 @@
                 </a>
             @endguest
             @auth
-                <i class="material-icons">shopping_cart</i>
+                <a href="/cart">
+                    <i class="material-icons">shopping_cart</i>
+                    <span id="cartCount">{{ $cartCount }}</span>
+                </a>
                 <div class="bg-[#00000050] w-0.5 h-6 mx-3"></div>
                 <a href="/profile" class="flex items-center gap-2 sm:hidden">
                     <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
@@ -44,3 +47,22 @@
     </div>
     
 </nav>
+
+<script>
+    // Fungsi untuk memperbarui nomor keranjang
+    function updateCartCount() {
+        // Kirim permintaan AJAX ke backend untuk mendapatkan jumlah item dalam keranjang
+        fetch('/cart/count')
+            .then(response => response.json())
+            .then(data => {
+                // Perbarui nomor keranjang dengan jumlah yang diterima
+                document.getElementById('cartCount').textContent = data.count;
+            })
+            .catch(error => {
+                console.error('Error updating cart count:', error);
+            });
+    }
+
+    // Panggil fungsi updateCartCount saat halaman dimuat
+    window.addEventListener('load', updateCartCount);
+</script>
