@@ -10,4 +10,9 @@ class Cart extends Model
     use HasFactory;
     protected $table = 'tbl_cart';
     protected $guarded = [];
+
+    public function kopi()
+    {
+        return $this->belongsTo(Kopi::class);
+    }
 }

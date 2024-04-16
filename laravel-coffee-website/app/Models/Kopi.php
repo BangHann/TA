@@ -10,4 +10,9 @@ class Kopi extends Model
     use HasFactory;
     protected $table = 'tbl_kopi';
     protected $guarded = [];
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

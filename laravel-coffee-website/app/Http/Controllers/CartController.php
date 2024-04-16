@@ -11,7 +11,10 @@ class CartController extends Controller
 {
     public function index_cart()
     {
-        $cart_data = Cart::all();
+        // $cart_data = Cart::all();
+        $cart_data = Cart::with('kopi')->get();
+        // $jenis = $cart_data->jenis_kopi;
+        // dd($jenis);
         $cartCount = Cart::where('id_user', auth()->id())->count();
         return view('user.cart', compact('cart_data', 'cartCount'));
     }
@@ -30,7 +33,7 @@ class CartController extends Controller
             $quantity = $request->quantity ?? 1;
             // dd($quantity);
             // Hitung total harga
-            $total = $quantity * $kopi->price;
+            $total = $quantity * $kopi->harga;
 
             // Buat atau perbarui keranjang belanja pengguna
             Cart::create([
@@ -64,5 +67,12 @@ class CartController extends Controller
         
         // $cartCount = Cart::where('id_user', auth()->id())->count();
         // return view('layouts.nav_user', ['cartCount' => $cartCount]);
+    }
+
+    public function destroy($id)
+    {
+        $data_cart = Cart::find($id);
+        $data_cart->delete();
+        return redirect()->back();
     }
 }
