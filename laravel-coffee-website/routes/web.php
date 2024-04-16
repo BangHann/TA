@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GatewayController;
+
 use App\Http\Controllers\KopiController;
 use App\Http\Controllers\RasaKopiController;
-use App\Http\Controllers\GatewayController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +48,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 // Route::middleware('auth')->group(function () {
 Route::middleware(['auth','user'])->group(function () {
     Route::get('/kopi/{id}', [KopiController::class, 'detail']);
+    Route::get('/cart', [CartController::class, 'index_cart']);
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

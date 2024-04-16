@@ -1,5 +1,5 @@
 @extends('layouts.user')
-@section('judul', 'Home')
+@section('judul', $detail_kopi->jenis_kopi)
 @section('content')
     <div class="my-4 lg:flex justify-center h-screen">
         {{-- Detail Kopi {{ $detail_kopi->id }} --}}
@@ -27,9 +27,12 @@
                 Order
             </a>
             <div class="w-[40%]">
-                <form action="">
+                {{-- <form action="">
                     <button class="w-full rounded-md py-3 border border-black text-black hover:bg-[#dcc69e] text-sm">Add to Cart</button>
-                </form>
+                </form> --}}
+                <a class="" href="/cart">
+                    <button class="w-full rounded-md py-3 border border-black text-black hover:bg-[#dcc69e] text-sm">Add to Cart</button>
+                </a>
             </div>
             
         </div>
