@@ -29,18 +29,20 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
         // Periksa peran pengguna setelah login
         $role = Auth::user()->role;
 
         // Redirect ke rute yang sesuai berdasarkan peran pengguna
-        // if ($role === 'user') {
-        //     return redirect('/'); // Redirect ke dashboard admin jika peran adalah admin
-        // } else if($role === 'admin'){
-        //     return redirect('/admin-dashboard');
-        // }else{
-        //     return redirect()->back();
-        // }
+        if ($role === 'user') {
+            // return redirect('/'); // Redirect ke dashboard admin jika peran adalah admin
+            // return redirect()->intended('/');
+            return redirect()->back();
+        } else if($role === 'admin'){
+            return redirect('/admin-dashboard');
+        }else{
+            return redirect()->back();
+        }
         // else {
         //     return redirect()->intended('/index'); // Redirect ke halaman index jika peran adalah user
         // }

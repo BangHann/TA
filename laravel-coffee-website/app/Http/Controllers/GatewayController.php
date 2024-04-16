@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kopi; // Import model Kopi
+use App\Models\Cart;
 
 class GatewayController extends Controller
 {
@@ -16,7 +17,8 @@ class GatewayController extends Controller
             if($role=='user')
             {
                 $kopi = Kopi::all();
-                return view('index_kopi', compact('kopi'));
+                $cartCount = Cart::where('id_user', auth()->id())->count();
+                return view('index_kopi', compact('kopi', 'cartCount'));
             }
             else if($role=='admin')
             {
