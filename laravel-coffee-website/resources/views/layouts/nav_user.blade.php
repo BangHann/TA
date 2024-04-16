@@ -14,9 +14,13 @@
                 </a>
             @endguest
             @auth
-                <a href="/cart">
+                <a href="/cart" class="flex">
                     <i class="material-icons">shopping_cart</i>
-                    <span id="cartCount">{{ $cartCount }}</span>
+                    @if ($cartCount > 0)
+                        <div class="flex items-center justify-center text-[8px] h-4 font-semibold text-white w-[16px] bg-red-500 rounded-[100px]">
+                            <p id="cartCount">{{ $cartCount }}</p>
+                        </div>
+                    @endif
                 </a>
                 <div class="bg-[#00000050] w-0.5 h-6 mx-3"></div>
                 <a href="/profile" class="flex items-center gap-2 sm:hidden">
