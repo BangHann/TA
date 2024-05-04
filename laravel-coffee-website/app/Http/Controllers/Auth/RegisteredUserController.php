@@ -56,7 +56,8 @@ class RegisteredUserController extends Controller
         if ($role === 'admin') {
             return redirect()->intended('/admin-dashboard'); // Redirect ke dashboard admin jika peran adalah admin
         } else {
-            return redirect()->intended('/home'); // Redirect ke halaman index jika peran adalah user
+            // return redirect()->intended('/home'); // Redirect ke halaman index jika peran adalah user
+            return redirect('/home'); 
         }
     }
 }

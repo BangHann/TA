@@ -37,7 +37,7 @@
                         </div>
                     </button>
                     <div class="dropdown-content">
-                        <a href="#">Profile</a>
+                        <a href="/profile">Profile</a>
                         <form method="POST" action="{{ route('logout') }}" class="py-1 px-4 hover:bg-[#ddd]">
                             @csrf
                             <button type="submit" class="w-full py-2 rounded-md flex justify-start">Logout</button>

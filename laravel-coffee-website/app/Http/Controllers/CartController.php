@@ -12,7 +12,8 @@ class CartController extends Controller
     public function index_cart()
     {
         // $cart_data = Cart::all();
-        $cart_data = Cart::with('kopi')->get();
+        // $cart_data = Cart::with('kopi')->get();
+        $cart_data = Cart::where('id_user', auth()->id())->get();
         // $jenis = $cart_data->jenis_kopi;
         // dd($jenis);
         $cartCount = Cart::where('id_user', auth()->id())->count();
@@ -61,6 +62,7 @@ class CartController extends Controller
     {
         // if(Auth::id()){
             $count = Cart::where('id_user', auth()->id())->count();
+            // dd($count);
             return response()->json(['count' => $count]);
         // }
         // else
