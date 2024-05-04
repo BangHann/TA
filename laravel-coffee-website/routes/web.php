@@ -7,6 +7,7 @@ use App\Http\Controllers\GatewayController;
 use App\Http\Controllers\KopiController;
 use App\Http\Controllers\RasaKopiController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,7 @@ Route::middleware(['auth','user'])->group(function () {
     Route::post('/add_cart', [CartController::class, 'add_cart']);
     Route::get('/cart/count', [CartController::class, 'getCartCount']);
     Route::get('/delete_cart/{id}', [CartController::class, 'destroy']);
+    Route::get('/checkout', [TransaksiController::class, 'index']);
 
 
 

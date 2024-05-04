@@ -23,7 +23,7 @@
     
     <footer class="fixed w-full bg-[#FFE5B6] text-black text-center py-3 bottom-0">
         <div class="flex justify-center gap-2">
-            <a class="w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="">
+            <a class="w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="/checkout">
                 Order
             </a>
             <div class="w-[40%]">

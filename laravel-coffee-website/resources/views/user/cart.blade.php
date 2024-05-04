@@ -10,14 +10,14 @@
         
         @if ($cart_data->count() > 0)
             @foreach ($cart_data as $cart)
-                <div class="cart-item">
+                <div class="cart-item mb-4">
                     <div class="flex justify-end m-1 mr-2">
                         <a class="font-semibold text-[12px] text-red-500" href="/delete_cart/{{ $cart->id }}" onclick="return confirm('Anda yakin akan menghapus pesanan?')">
                         Hapus
                         </a>
                     </div>
                     
-                    <div class="flex flex-row mx-4 mb-8 gap-4 items-start">
+                    <div class="flex flex-row mx-4 mb-2 gap-4 items-start">
                         <img class="w-[81px] h-[84px] gap-0 opacity-[0px] rounded-xl object-cover" src="{{ asset('images/' . $cart->kopi->foto) }}" alt="foto pesanan">
                         <div class="flex flex-col">
                             <p class="text-[12px]">{{ $cart->kopi->jenis_kopi }}</p>
@@ -31,8 +31,10 @@
                 </div>
                 
             @endforeach
+            <form action="">
 
-            <a class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="">
+            </form>
+            <a class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="/checkout">
                 Order
             </a>
         @else

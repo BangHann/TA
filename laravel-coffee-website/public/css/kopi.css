@@ -68,12 +68,12 @@ nav{
 }
 
 .cart-item{
-    width:300px;
+    width:342px;
     height: 154px;
 
     /* top: 187px; */
     /* left: 20px; */
-    margin: 10px 24px 10px 24px;
+    /* margin: 10px 24px 10px 24px; */
     gap: 0px;
     border-radius: 10px;
     border: 1px;
