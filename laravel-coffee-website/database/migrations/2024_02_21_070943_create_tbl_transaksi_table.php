@@ -15,7 +15,10 @@ return new class extends Migration
             $table->id();
             // $table->integer('no_transaksi');
             // $table->date('tgl_transaksi');
-
+            $table->string('name');
+            $table->text('address');
+            $table->bigInteger('phone');
+            $table->integer('qty');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             
