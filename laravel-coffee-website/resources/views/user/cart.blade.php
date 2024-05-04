@@ -31,6 +31,10 @@
                 </div>
                 
             @endforeach
+
+            <a class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="">
+                Order
+            </a>
         @else
             <p>Wah, keranjang belanjaanmu kosong!</p>
         @endif
