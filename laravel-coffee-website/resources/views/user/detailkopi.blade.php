@@ -26,16 +26,36 @@
             {{-- <a class="w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="/checkout">
                 Order
             </a> --}}
-            <div class="w-[40%]">
-<form action="/add_order" method="post">
-                @csrf
-                <input type="hidden" name="quantity" value="1">
-                <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}"> <!-- Assuming $kopi->id contains the ID of the coffee -->
-                <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
-                    Order
-                </button>
-            </form>
-            </div>
+            {{-- <div class="w-[40%]"> --}}
+                {{-- @php
+                    $tidakada_bukti_payment = \App\Models\Transaksi::where('id_user', auth()->id())
+                        ->whereNull('bukti_payment')->first();
+                @endphp --}}
+                @if($tidakada_bukti_payment)
+                    <a class="w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="/checkout">
+                        Order
+                    </a>
+                @else
+                    <div class="w-[40%]">
+                        <form action="/add_order" method="post">
+                            @csrf
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}">
+                            <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
+                                Order
+                            </button>
+                        </form>
+                    </div>
+                @endif
+                {{-- <form action="/add_order" method="post">
+                    @csrf
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}"> <!-- Assuming $kopi->id contains the ID of the coffee -->
+                    <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
+                        Order
+                    </button>
+                </form> --}}
+            {{-- </div> --}}
             
             <div class="w-[40%]">
                 <form action="/add_cart" method="post">

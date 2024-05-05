@@ -29,5 +29,8 @@ class GatewayController extends Controller
                 return redirect()->back();
             }
         }
+        else{
+            return redirect('/');
+        }
     }
 }

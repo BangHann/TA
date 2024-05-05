@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kopi;
 use App\Models\Cart;
+use App\Models\Transaksi;
 
 class KopiController extends Controller
 {
@@ -33,6 +34,7 @@ class KopiController extends Controller
     {
         $detail_kopi = Kopi::find($id);
         $cartCount = Cart::where('id_user', auth()->id())->count();
-        return view('user.detailkopi', compact('detail_kopi', 'cartCount'));
+        $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
+        return view('user.detailkopi', compact('detail_kopi', 'cartCount', 'tidakada_bukti_payment'));
     }
 }

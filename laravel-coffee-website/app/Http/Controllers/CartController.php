@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Kopi; // Import model Kopi
+use App\Models\Transaksi;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -15,9 +16,9 @@ class CartController extends Controller
         // $cart_data = Cart::with('kopi')->get();
         $cart_data = Cart::where('id_user', auth()->id())->get();
         // $jenis = $cart_data->jenis_kopi;
-        // dd($jenis);
         $cartCount = Cart::where('id_user', auth()->id())->count();
-        return view('user.cart', compact('cart_data', 'cartCount'));
+        $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
+        return view('user.cart', compact('cart_data', 'cartCount', 'tidakada_bukti_payment'));
     }
 
     public function add_cart(Request $request)
@@ -41,7 +42,7 @@ class CartController extends Controller
                 'id_user' => Auth::id(), 
                 'kopi_id' => $request->kopi_id,
                 'quantity' => $quantity, 
-                'total' => $total
+                'jumlah' => $total
             ]);
 
             // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang

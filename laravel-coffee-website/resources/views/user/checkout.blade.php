@@ -3,8 +3,13 @@
 @section('content')
 
 <div class="my-4 mx-6 flex flex-col">
-    <div>
-        <p class="text-xl font-semibold mb-4">Checkout</p>
+    <div class="mb-4">
+        <p class="text-xl font-semibold">Checkout</p>
+        <div class="flex flex-row justify-between">
+            <p class="text-xs">No. Transaksi</p>
+            <p class="text-xs">{{ $transaksi->id }}</p>
+        </div>
+        
     </div>
     <form action="">
         <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-2">

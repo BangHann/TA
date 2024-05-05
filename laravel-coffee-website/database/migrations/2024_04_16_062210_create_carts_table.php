@@ -21,8 +21,11 @@ return new class extends Migration
             $table->unsignedBigInteger('kopi_id');
             $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
 
+            $table->unsignedBigInteger('transaksi_id')->nullable();
+            $table->foreign('transaksi_id')->references('id')->on('tbl_transaksi')->onDelete('cascade')->nullable();
+
             $table->integer('quantity');
-            $table->integer('total');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

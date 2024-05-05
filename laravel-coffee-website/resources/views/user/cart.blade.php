@@ -31,12 +31,23 @@
                 </div>
                 
             @endforeach
-            <form action="">
-
-            </form>
-            <a class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="/checkout">
-                Order
-            </a>
+            
+                @if($tidakada_bukti_payment)
+                    <a class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="/checkout">
+                        Order
+                    </a>
+                @else
+                    <div class="w-[40%]">
+                        <form action="/cart_order" method="post">
+                            @csrf
+                            {{-- <input type="hidden" name="quantity" value="1"> --}}
+                            {{-- <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}"> --}}
+                            <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
+                                Order
+                            </button>
+                        </form>
+                    </div>
+                @endif
         @else
             <p>Wah, keranjang belanjaanmu kosong!</p>
         @endif

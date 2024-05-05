@@ -16,15 +16,18 @@ return new class extends Migration
             // $table->integer('no_transaksi');
             // $table->date('tgl_transaksi');
             $table->string('name');
-            $table->text('address');
-            $table->bigInteger('phone');
-            $table->integer('qty');
+            $table->text('address')->nullable();
+            $table->bigInteger('phone')->nullable();
+            $table->integer('qty')->nullable();
+            
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
             
-            $table->bigInteger('total_price');
-            $table->enum('status_transaksi', ['Unpaid', 'Paid']);
-            // $table->string('image_transaksi');
+            $table->bigInteger('total_price')->nullable();
+            $table->enum('status_transaksi', ['Unpaid', 'Paid'])->nullable();
+            $table->string('bukti_payment')->nullable();
+            $table->enum('dine_in', ['yes', 'no'])->nullable();
+            $table->integer('no_meja')->nullable();
             $table->timestamps();
         });
     }
