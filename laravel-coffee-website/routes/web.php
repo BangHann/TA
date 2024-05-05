@@ -52,6 +52,7 @@ Route::middleware(['auth','user'])->group(function () {
     Route::post('/add_cart', [CartController::class, 'add_cart']);
     Route::get('/cart/count', [CartController::class, 'getCartCount']);
     Route::get('/delete_cart/{id}', [CartController::class, 'destroy']);
+    Route::post('/add_order', [TransaksiController::class, 'add_order']);
     Route::get('/checkout', [TransaksiController::class, 'index']);
 
 

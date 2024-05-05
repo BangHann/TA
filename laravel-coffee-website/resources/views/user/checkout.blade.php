@@ -4,10 +4,10 @@
 
 <div class="my-4 mx-6 flex flex-col">
     <div>
-        <p class="text-base font-semibold mb-4">Checkout</p>
+        <p class="text-xl font-semibold mb-4">Checkout</p>
     </div>
     <form action="">
-        <div class="w-[342px] border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-2">
+        <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-2">
             <p class="text-sm font-semibold ">{{ Auth::user()->name_user }}</p>
             <div class="flex flex-col gap-1">
                 <select class="p-1 text-xs rounded-md mb-1" name="order" id="orderSelect" onchange="toggleTableInput()" >
@@ -19,12 +19,11 @@
                     <label class="text-xs" for="tableNumberInput">Nomor Meja</label>
                     <input class="p-1 text-xs rounded-md " type="number" placeholder="" id="" min="1" max="50">
                 </div>
-                
             </div>
         </div>
     
         @foreach ($cart_data as $cart)
-        <div class="w-[342px] border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-1">
+        <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-1">
             <div class="flex justify-end mr-2">
                 <a class="font-semibold text-[12px] text-red-500" href="/delete_cart/{{ $cart->id }}" onclick="return confirm('Anda yakin akan menghapus pesanan?')">
                 Hapus
@@ -42,7 +41,7 @@
             </div>
         </div>
         @endforeach
-        <div class="w-[342px] text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between">
+        <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between">
             <p class="font-semibold">Total Harga</p>
             <p>{{ $total_amount }}</p>
         </div>

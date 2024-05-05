@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Kopi;
 use App\Models\Cart;
@@ -27,5 +28,41 @@ class TransaksiController extends Controller
         // return view('layouts.nav_user', ['cartCount' => $cartCount]);
         return view('user.checkout', compact('kopi', 'cart_data', 'total_amount', 'cartCount'));
         // return view('user.checkout', compact('kopi', 'cartCount'));
+    }
+
+    public function add_order(Request $request)
+    {
+
+        if(Auth::id()){
+            // Mendapatkan data kopi dari database
+            $kopi = Kopi::find($request->kopi_id);
+            if (!$kopi) {
+                return redirect()->back()->with('error', 'Kopi not found');
+            }
+
+            // Mengatur nilai default quantity menjadi 1 jika tidak disertakan dalam permintaan
+            $quantity = $request->quantity ?? 1;
+            $total = $quantity * $kopi->harga;
+
+            // Buat atau perbarui keranjang belanja pengguna
+            Cart::create([
+                'id_user' => Auth::id(), 
+                'kopi_id' => $request->kopi_id,
+                'quantity' => $quantity, 
+                'total' => $total
+            ]);
+
+            // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
+            return redirect('/checkout')->with('success', 'Item added to cart');
+        }
+        else{
+            return redirect('/login');
+        }
+        // Validasi request
+        $request->validate([
+            'kopi_id' => 'required|exists:tbl_kopi,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
     }
 }
