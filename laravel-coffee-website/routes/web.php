@@ -46,6 +46,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin/rasakopi/add_rasa');
     });
     Route::get('/order-list', [TransaksiAdminController::class, 'orderlist_admin']);
+    Route::get('/order-detail/{id}', [TransaksiAdminController::class, 'detail']);
 });
 
 // Route::middleware('auth')->group(function () {

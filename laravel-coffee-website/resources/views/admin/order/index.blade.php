@@ -14,6 +14,7 @@
                     <th>No. Meja</th>
                     <th>Status Order</th>
                     <th>Bukti Bayar</th>
+                    <th>Acton</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,9 +25,17 @@
                     <td>{{ $item->total_price }}</td>
                     <td>{{ $item->dine_in}}</td>
                     <td>{{ $item->no_meja }}</td>
-                    <td>{{ $item->status_transaksi }}</td>
+                    <td>{{ $item->order_telah_diantar }}</td>
                     <td><img class="w-20" src="{{ asset('images/' . $item->bukti_payment) }}" alt="gambar kopi"></td>
-                    {{-- <td>Action</td> --}}
+                    <td>
+                        <a class="" href="/order-detail/{{ $item->id }}">Detail</a>
+                        <form action="">
+                            @csrf
+                            <button type="submit" onclick="return confirm('Pesanan sudah lengkap?')">
+                                Delivered
+                            </button>
+                        </form>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

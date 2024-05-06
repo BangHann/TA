@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('bukti_payment')->nullable();
             $table->enum('dine_in', ['yes', 'no'])->nullable();
             $table->integer('no_meja')->nullable();
-            $table->enum('order_telah_diantar', ['yes', 'no'])->nullable();
+            // $table->enum('order_telah_diantar', ['yes', 'no'])->nullable();
+            $table->enum('order_telah_diantar', ['belum diantar', 'sudah diantar'])->default('belum diantar')->nullable();
             $table->timestamps();
         });
     }
