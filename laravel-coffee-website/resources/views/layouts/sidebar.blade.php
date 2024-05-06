@@ -8,7 +8,7 @@
 
     <div class="flex flex-col gap-1">
         <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-dashboard')) bg-[#ddc79e] @endif" href="/admin-dashboard">Dashboard</a>
-        {{-- <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] " href="">Rasa Kopi</a> --}}
+        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('/order-list')) bg-[#ddc79e] @endif" href="/order-list">Customer Order List</a>
         <details>
             <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif">Rasa Kopi</summary>
             <div class="flex flex-col">

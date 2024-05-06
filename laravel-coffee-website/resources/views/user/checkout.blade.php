@@ -41,7 +41,7 @@
                     <div class="flex flex-col">
                         <p class="text-[12px]">{{ $cart->kopi->jenis_kopi }}</p>
                         <p class="font-bold text-[12px]">Rp. {{ $cart->kopi->harga }}</p>
-                        <input class="rounded-[4px] w-[60px] h-[30px] border border-solid border-[#D9D9D9]" type="number" placeholder="{{ $cart->quantity }}"" value="qty">
+                        <input class="rounded-[4px] w-[60px] h-[30px] border border-solid border-[#D9D9D9]" type="number" placeholder="{{ $cart->quantity }}" value="">
                     </div>
                     
                 </div>

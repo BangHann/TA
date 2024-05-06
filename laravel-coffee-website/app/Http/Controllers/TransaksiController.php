@@ -64,7 +64,7 @@ class TransaksiController extends Controller
             ]);
             
             // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
-            return redirect('/checkout')->with('success', 'Item added to cart');
+            return redirect('/checkout');
         }
         else{
             return redirect('/login');

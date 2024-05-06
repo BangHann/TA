@@ -11,7 +11,7 @@ class GatewayController extends Controller
 {
     public function door()
     {
-        if(Auth::id())
+        if(Auth::check())
         {
             $role=Auth()->user()->role;
             if($role=='user')
@@ -27,7 +27,7 @@ class GatewayController extends Controller
             }
             else
             {
-                return redirect()->back();
+                return redirect()->back()->with('error', 'Invalid user role');
             }
         }
         else{

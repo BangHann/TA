@@ -8,6 +8,7 @@ use App\Http\Controllers\KopiController;
 use App\Http\Controllers\RasaKopiController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\TransaksiAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin-addrasakopi', function () {
         return view('admin/rasakopi/add_rasa');
     });
+    Route::get('/order-list', [TransaksiAdminController::class, 'orderlist_admin']);
 });
 
 // Route::middleware('auth')->group(function () {
