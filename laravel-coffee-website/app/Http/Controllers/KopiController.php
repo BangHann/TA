@@ -13,7 +13,8 @@ class KopiController extends Controller
     {
         $kopi = Kopi::all();
 
-        $cartCount = Cart::where('id_user', auth()->id())->count();
+        // $cartCount = Cart::where('id_user', auth()->id())->count();
+        $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
         // return view('layouts.nav_user', ['cartCount' => $cartCount]);
         return view('index_kopi', compact('kopi', 'cartCount'));
     }
@@ -33,7 +34,8 @@ class KopiController extends Controller
     public function detail($id)
     {
         $detail_kopi = Kopi::find($id);
-        $cartCount = Cart::where('id_user', auth()->id())->count();
+        // $cartCount = Cart::where('id_user', auth()->id())->count();
+        $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
         return view('user.detailkopi', compact('detail_kopi', 'cartCount', 'tidakada_bukti_payment'));
     }

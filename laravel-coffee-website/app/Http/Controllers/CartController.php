@@ -14,10 +14,12 @@ class CartController extends Controller
     {
         // $cart_data = Cart::all();
         // $cart_data = Cart::with('kopi')->get();
-        $cart_data = Cart::where('id_user', auth()->id())->get();
-        // $jenis = $cart_data->jenis_kopi;
-        $cartCount = Cart::where('id_user', auth()->id())->count();
+        // $cart_data = Cart::where('id_user', auth()->id())->get();
+        // $cartCount = Cart::where('id_user', auth()->id())->count();
+        $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
+        $cart_data = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')->get();
+        // dd($existingCart);
         return view('user.cart', compact('cart_data', 'cartCount', 'tidakada_bukti_payment'));
     }
 
@@ -62,7 +64,8 @@ class CartController extends Controller
     public function getCartCount()
     {
         // if(Auth::id()){
-            $count = Cart::where('id_user', auth()->id())->count();
+            // $count = Cart::where('id_user', auth()->id())->count();
+            $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
             // dd($count);
             return response()->json(['count' => $count]);
         // }
@@ -78,4 +81,6 @@ class CartController extends Controller
         $data_cart->delete();
         return redirect()->back();
     }
+
+    
 }
