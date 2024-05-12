@@ -25,4 +25,18 @@ class TransaksiAdminController extends Controller
         // dd($order_items);
         return view('admin.order.detail_order', compact('transaksi_detail','order_items'));
     }
+
+    Public function delivered($id)
+    {
+        // Cari data transaksi berdasarkan ID
+        $transaksi = Transaksi::findOrFail($id);
+
+        // Ubah nilai kolom order_telah_diantar menjadi "Sudah diantar"
+        $transaksi->update([
+            'order_telah_diantar' => 'Sudah diantar'
+        ]);
+
+        // Redirect kembali ke halaman sebelumnya atau halaman tertentu
+        return redirect()->back()->with('success', 'Status pesanan telah diubah menjadi "Sudah diantar"');
+    }
 }

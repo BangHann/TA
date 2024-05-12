@@ -29,7 +29,7 @@ return new class extends Migration
             $table->enum('dine_in', ['yes', 'no'])->nullable();
             $table->integer('no_meja')->nullable();
             // $table->enum('order_telah_diantar', ['yes', 'no'])->nullable();
-            $table->enum('order_telah_diantar', ['belum diantar', 'sudah diantar'])->default('belum diantar')->nullable();
+            $table->enum('order_telah_diantar', ['Belum diantar', 'Sudah diantar'])->default('Belum Diantar')->nullable();
             $table->timestamps();
         });
     }

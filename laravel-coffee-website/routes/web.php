@@ -47,6 +47,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
     Route::get('/order-list', [TransaksiAdminController::class, 'orderlist_admin']);
     Route::get('/order-detail/{id}', [TransaksiAdminController::class, 'detail']);
+    Route::post('/delivered/{id}', [TransaksiAdminController::class, 'delivered']);
+
 });
 
 // Route::middleware('auth')->group(function () {
