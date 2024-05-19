@@ -135,18 +135,7 @@ class TransaksiController extends Controller
     public function checkout_order(Request $request)
     {
         if(Auth::id()){
-            // Transaksi::update([
-            //     'bukti_paymet' => $request->bukti_bayar,
-            //     // 'bukti_paymet' =>'pakbos1.jpg',
-            //     'dine_in' => $request->order, 
-            //     'no_meja' => $request->nomor_meja, 
-            //     'total_price' => $request->total_amount
-            // ]);
-
-            // Cek apakah ada keranjang belanja yang belum memiliki transaksi_id
             
-            // $existingCart = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')
-            // ->where('kopi_id', $request->kopi_id)->first();
             
             // Validasi request
             $request->validate([
@@ -168,7 +157,7 @@ class TransaksiController extends Controller
                 // get the extension
                 $extension = $image->getClientOriginalExtension();
                 // create a new file name
-                $new_name = date('Y-m-d').'.'.$extension;
+                $new_name = time().'.'.$extension;
                 // move file to public/images/new and use $new_name
                 $image->move(public_path('images/bukti_bayar'), $new_name);
         
@@ -195,5 +184,19 @@ class TransaksiController extends Controller
         else{
             return redirect('/login');
         }
+
+
+        // Transaksi::update([
+            //     'bukti_paymet' => $request->bukti_bayar,
+            //     // 'bukti_paymet' =>'pakbos1.jpg',
+            //     'dine_in' => $request->order, 
+            //     'no_meja' => $request->nomor_meja, 
+            //     'total_price' => $request->total_amount
+            // ]);
+
+            // Cek apakah ada keranjang belanja yang belum memiliki transaksi_id
+            
+            // $existingCart = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')
+            // ->where('kopi_id', $request->kopi_id)->first();
     }
 }

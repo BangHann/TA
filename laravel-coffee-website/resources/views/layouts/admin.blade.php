@@ -9,6 +9,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo1.png') }}">
     <link rel="stylesheet" href="{{ asset('css/adminkopi.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     @vite('resources/css/app.css')
 </head>
 <body>

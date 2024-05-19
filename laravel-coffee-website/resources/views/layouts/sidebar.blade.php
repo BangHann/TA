@@ -8,7 +8,12 @@
 
     <div class="flex flex-col gap-1">
         <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-dashboard')) bg-[#ddc79e] @endif" href="/admin-dashboard">Dashboard</a>
-        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('/order-list')) bg-[#ddc79e] @endif" href="/order-list">Customer Order List</a>
+        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('/order-list')) bg-[#ddc79e] @endif" href="/order-list">
+            <div class="flex items-center gap-2">
+                <p>Customer Order List</p>
+                <p id="undelivered-count" class="hidden">-</p>
+            </div>
+        </a>
         <details>
             <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif">Rasa Kopi</summary>
             <div class="flex flex-col">
@@ -36,3 +41,37 @@
         </form>
     </div>
 </div>
+
+
+
+<script>
+    $(document).ready(function(){
+        function fetchData() {
+            $.ajax({
+                url: "/undeliver/count",
+                type: "GET",
+                dataType: "json",
+                success: function(response){
+                    if(response.count > 0) {
+                        $('#undelivered-count').removeClass('hidden').addClass(
+                            'flex items-center justify-center text-[10px] h-[18px] font-semibold text-white w-[18px] bg-red-500 rounded-[100px]'
+                        ).text(response.count);
+                    } 
+                    // else {
+                    //     $('#undelivered-count').addClass('hidden');
+                    // }
+                },
+                error: function(xhr, status, error){
+                    console.error(error);
+                    $('#undelivered-count').text('Failed to fetch data.');
+                }
+            });
+        }
+
+        // Initial data fetch
+        fetchData();
+
+        // Auto reload data 
+        setInterval(fetchData, 1000);
+    });
+</script>

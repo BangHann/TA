@@ -14,7 +14,19 @@ class TransaksiAdminController extends Controller
     public function orderlist_admin()
     {
         $transaksi_data = Transaksi::all();
-        return view('admin.order.index', compact('transaksi_data'));
+        // if(request()->expectsJson()) {
+        //     return response()->json(['transaksi_data' => $transaksi_data]);
+        // }
+        return view('admin.order.index', ['transaksi_data' => $transaksi_data]);
+
+        
+        // return view('admin.order.index', compact('transaksi_data'));
+        // Mengembalikan data dalam format JSON
+    }
+
+    public function data_order_admin(){
+        $transaksi_data = Transaksi::all();
+        return response()->json(['transaksi_data' => $transaksi_data]);
     }
 
     public function detail($id)
@@ -38,5 +50,19 @@ class TransaksiAdminController extends Controller
 
         // Redirect kembali ke halaman sebelumnya atau halaman tertentu
         return redirect()->back()->with('success', 'Status pesanan telah diubah menjadi "Sudah diantar"');
+    }
+
+    public function count_undelivered()
+    {
+        // if(Auth::id()){
+            // $count = Cart::where('id_user', auth()->id())->count();
+
+        $count = Transaksi::where('order_telah_diantar', 'Belum diantar')
+                ->whereNotNull('bukti_payment')->count();
+
+                                // Debugging log
+        \Log::info('Undelivered count: ' . $count);
+
+        return response()->json(['count' => $count]);
     }
 }

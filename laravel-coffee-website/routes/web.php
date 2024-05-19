@@ -46,8 +46,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         return view('admin/rasakopi/add_rasa');
     });
     Route::get('/order-list', [TransaksiAdminController::class, 'orderlist_admin']);
+    Route::get('/data-order-admin', [TransaksiAdminController::class, 'data_order_admin']);
     Route::get('/order-detail/{id}', [TransaksiAdminController::class, 'detail']);
     Route::post('/delivered/{id}', [TransaksiAdminController::class, 'delivered']);
+    Route::get('/undeliver/count', [TransaksiAdminController::class, 'count_undelivered']);
 
 });
 
