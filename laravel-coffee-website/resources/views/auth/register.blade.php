@@ -5,12 +5,13 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+            <x-input-label for="name" :value="__('Nickname')" />
+            {{-- <label for='nickname' class="block font-medium text-sm text-gray-700 dark:text-gray-300">Nickname</label> --}}
+            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name"/>
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <div class="flex gap-2 mt-4">
+        <div class="flex gap-2 mt-4 hidden">
             {{-- Username --}}
             {{-- <div class="">
                 <label for='username' class="block font-medium text-sm text-gray-700 dark:text-gray-300">Username</label>

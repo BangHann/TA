@@ -148,6 +148,27 @@ class TransaksiController extends Controller
             // ->where('kopi_id', $request->kopi_id)->first();
 
             $transaksi = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
+            if( request()->hasFile('thumb') ) {
+
+                $file = request()->file('thumb');
+            
+                //Relative upload location (public folder)
+                $upload_path = 'foo/bar/';
+            
+                //separete in an array with image name and extension
+                $name = explode('.', $file->getClientOriginalName());
+            
+                //1 - sanitaze the image name
+                //2 - add an unique id to avoid same name images
+                //3 - put the image extension
+                $imageName = str_slug($name[0]) . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            
+                //Here you have the upload relative path with the image name
+                //Ex: image/catalog/your-file-name_21321312312.jpg
+                $file_with_path = $upload_path . $imagename;
+            
+                //Move the tmp file to a permanent file
+                $file->move(base_path() . $upload_path, $imageName);}
             $transaksi->update([
                 // 'bukti_payment' => $request->bukti_bayar,
                 'bukti_payment' =>'pakbos1.jpg',
