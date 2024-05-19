@@ -9,6 +9,9 @@
     <link rel="icon" type="image/x-icon" href="{{ asset('images/logo1.png') }}">
     <link rel="stylesheet" href="{{ asset('css/kopi.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dropdown.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     @vite('resources/css/app.css')
 
     <!-- PWA  -->
@@ -41,24 +44,5 @@
             console.error("Service workers are not supported.");
         }
     </script>
-
-<script>
-    // Fungsi untuk memperbarui nomor keranjang
-    function updateCartCount() {
-        // Kirim permintaan AJAX ke backend untuk mendapatkan jumlah item dalam keranjang
-        fetch('/cart/count')
-            .then(response => response.json())
-            .then(data => {
-                // Perbarui nomor keranjang dengan jumlah yang diterima
-                document.getElementById('cartCount').textContent = data.count;
-            })
-            .catch(error => {
-                console.error('Error updating cart count:', error);
-            });
-    }
-
-    // Panggil fungsi updateCartCount saat halaman dimuat
-    window.addEventListener('load', updateCartCount);
-</script>
 </body>
 </html>

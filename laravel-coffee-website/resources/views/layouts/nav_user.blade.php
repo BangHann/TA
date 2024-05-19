@@ -16,11 +16,10 @@
             @auth
                 <a href="/cart" class="flex">
                     <i class="material-icons">shopping_cart</i>
-                    @if ($cartCount > 0)
-                        <div class="flex items-center justify-center text-[8px] h-4 font-semibold text-white w-[16px] bg-red-500 rounded-[100px]">
-                            <p id="cartCount">{{ $cartCount }}</p>
-                        </div>
-                    @endif
+                    <div class="">
+                        <p class="hidden" id="cart_number">-</p>
+                        {{-- <p id="cartCount">{{ $cartCount }}</p> --}}
+                    </div>
                 </a>
                 <div class="bg-[#00000050] w-0.5 h-6 mx-3"></div>
                 <a href="/profile" class="flex items-center gap-2 sm:hidden">
@@ -44,30 +43,32 @@
                         </form>
                     </div>
                 </div>
-
-                <script>
-                    // Fungsi untuk memperbarui nomor keranjang
-                    function updateCartCount() {
-                        // Kirim permintaan AJAX ke backend untuk mendapatkan jumlah item dalam keranjang
-                        fetch('/cart/count')
-                            .then(response => response.json())
-                            .then(data => {
-                                // Perbarui nomor keranjang dengan jumlah yang diterima
-                                document.getElementById('cartCount').textContent = data.count;
-                            })
-                            .catch(error => {
-                                console.error('Error updating cart count:', error);
-                            });
-                    }
-                
-                    // Panggil fungsi updateCartCount saat halaman dimuat
-                    window.addEventListener('load', updateCartCount);
-                </script>
             @endauth
-            
-            
         </div>
     </div>
     
 </nav>
 
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: "/cart/count",
+            type: "GET",
+            dataType: "json",
+            success: function(response){
+                if(response.cartCount > 0) {
+                    $('#cart_number').removeClass('hidden').addClass(
+                        'flex items-center justify-center text-[8px] h-4 font-semibold text-white w-[16px] bg-red-500 rounded-[100px]'
+                    ).text(response.cartCount);
+                } 
+                // else {
+                //     $('#undelivered-count').addClass('hidden');
+                // }
+            },
+            error: function(xhr, status, error){
+                console.error(error);
+                $('#cart_number').text('Failed to fetch data.');
+            }
+        });
+    });
+</script>

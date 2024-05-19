@@ -66,11 +66,11 @@ class CartController extends Controller
         // if(Auth::id()){
             // $count = Cart::where('id_user', auth()->id())->count();
             $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
-            // dd($count);
-            return response()->json(['count' => $cartCount]);
+            \Log::info('Undelivered count: ' . $cartCount);
+            // dd($cartCount );
+            return response()->json(['cartCount' => $cartCount]);
         // }
         // else
-        
         // $cartCount = Cart::where('id_user', auth()->id())->count();
         // return view('layouts.nav_user', ['cartCount' => $cartCount]);
     }
