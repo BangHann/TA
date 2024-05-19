@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\Models\Kopi;
 use App\Models\Cart;
@@ -146,36 +147,38 @@ class TransaksiController extends Controller
             
             // $existingCart = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')
             // ->where('kopi_id', $request->kopi_id)->first();
+            
+            // Validasi request
+            $request->validate([
+                // 'kopi_id' => 'required|exists:tbl_kopi,id',
+                // 'quantity' => 'required|integer|min:1',
+                'bukti_bayar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            ],
+            [
+                'bukti_bayar.image' => 'Bukti bayar harus jpg/jpeg/png',
+                'bukti_bayar.mimes' => 'Bukti bayar harus jpg/jpeg/png',
+                'bukti_bayar.max' => 'Ukuran file harus < 2MB'
+            ]);
 
             $transaksi = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
-            if( request()->hasFile('thumb') ) {
-
-                $file = request()->file('thumb');
             
-                //Relative upload location (public folder)
-                $upload_path = 'foo/bar/';
-            
-                //separete in an array with image name and extension
-                $name = explode('.', $file->getClientOriginalName());
-            
-                //1 - sanitaze the image name
-                //2 - add an unique id to avoid same name images
-                //3 - put the image extension
-                $imageName = str_slug($name[0]) . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            
-                //Here you have the upload relative path with the image name
-                //Ex: image/catalog/your-file-name_21321312312.jpg
-                $file_with_path = $upload_path . $imagename;
-            
-                //Move the tmp file to a permanent file
-                $file->move(base_path() . $upload_path, $imageName);}
-            $transaksi->update([
-                // 'bukti_payment' => $request->bukti_bayar,
-                'bukti_payment' =>'pakbos1.jpg',
-                'dine_in' => $request->order, 
-                'no_meja' => $request->nomor_meja, 
-                'total_price' => $request->total_amount
-            ]);
+            // $imageName = $request->file('bukti_bayar');
+            if ($request->hasFile('bukti_bayar')) {
+                $image = $request->file('bukti_bayar');
+                // get the extension
+                $extension = $image->getClientOriginalExtension();
+                // create a new file name
+                $new_name = date('Y-m-d').'.'.$extension;
+                // move file to public/images/new and use $new_name
+                $image->move(public_path('images/bukti_bayar'), $new_name);
+        
+                $transaksi->update([
+                    'bukti_payment' => $new_name,
+                    'dine_in' => $request->order, 
+                    'no_meja' => $request->nomor_meja, 
+                    'total_price' => $request->total_amount
+                ]);
+            }
 
             Cart::where('id_user', Auth::id())->whereNull('transaksi_id')
             ->update(['transaksi_id' => $transaksi->id]);
@@ -192,10 +195,5 @@ class TransaksiController extends Controller
         else{
             return redirect('/login');
         }
-        // Validasi request
-        $request->validate([
-            'kopi_id' => 'required|exists:tbl_kopi,id',
-            'quantity' => 'required|integer|min:1',
-        ]);
     }
 }

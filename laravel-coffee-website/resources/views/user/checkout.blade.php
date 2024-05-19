@@ -11,7 +11,7 @@
         </div>
         
     </div>
-    <form action="/checkout_order" method="post">
+    <form action="/checkout_order" method="post" enctype="multipart/form-data">
         @csrf
         <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-2">
             <p class="text-sm font-semibold ">{{ Auth::user()->name_user }}</p>
@@ -89,10 +89,17 @@
 
         {{-- kirim bukti pembayaran --}}
         <label for="fileInput" class="text-xs">
-            Bukti Pembayaran
-            <input id="fileInput" type="file" name='bukti_bayar' class="p-1 text-xs rounded-md border border-[#D9D9D9] mb-2">
+            <p class="font-semibold">Bukti Pembayaran</p>
+            <input id="fileInput" type="file" name='bukti_bayar' class="p-1 text-xs rounded-md border border-[#D9D9D9]">
         </label>
-        <button class="flex justify-center rounded-md p-2 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" type="submit">
+        @if ($errors->has('bukti_bayar'))
+            <div class="text-red-600 text-xs my-1">
+                {{ $errors->first('bukti_bayar') }} 
+                {{-- Bukti bayar harus jpg/jpeg/png --}}
+            </div>
+        @endif
+
+        <button class="flex justify-center rounded-md p-2 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm mt-4" type="submit">
             Kirim Bukti Pembayaran
         </button>
     </form>

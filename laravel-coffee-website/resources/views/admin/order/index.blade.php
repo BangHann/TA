@@ -26,18 +26,18 @@
                     <td>{{ $item->dine_in}}</td>
                     <td>{{ $item->no_meja }}</td>
                     <td>
-                        @if ($item->order_telah_diantar == 'belum diantar')
-                            <p class="text-red-600 font-medium">{{ $item->order_telah_diantar }}</p>
+                        @if ($item->order_telah_diantar == 'Belum diantar')
+                            <p class="text-red-600 font-semibold">{{ $item->order_telah_diantar }}</p>
                         @else
-                            <p class="text-lime-600 font-medium">{{ $item->order_telah_diantar }}</p>
+                            <p class="text-lime-600 font-semibold">{{ $item->order_telah_diantar }}</p>
                         @endif
                         {{-- {{ $item->order_telah_diantar }} --}}
                     </td>
                     <td>
                         @if($item->bukti_payment)
-                            <img class="w-20" src="{{ asset('images/' . $item->bukti_payment) }}" alt="gambar kopi">
+                            <img class="w-20" src="{{ asset('images/bukti_bayar/'. $item->bukti_payment) }}" alt="gambar kopi">
                         @else
-                            <p>Belum Bayar</p>
+                            <p class="text-red-600 font-semibold">Belum Bayar</p>
                         @endif
                     </td>
                     <td class="w-[211px]">
@@ -72,6 +72,6 @@
 <script>
     setTimeout(function() {
         window.location.reload();
-    }, 30000); // 30 detik
+    }, 10000); // 10 detik
 </script>
 @endsection
