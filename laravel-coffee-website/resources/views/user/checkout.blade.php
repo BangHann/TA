@@ -21,7 +21,7 @@
                     <option value="yes">Dine In</option>
                     <option value="no">Takeaway</option>
                 </select>
-                <div class="flex flex-row items-center gap-2 hidden" id="tableNumberInput">
+                <div class="hidden" id="tableNumberInput">
                     <label class="text-xs" for="tableNumberInput">Nomor Meja</label>
                     <input class="p-1 text-xs rounded-md " type="number" name="nomor_meja" placeholder="" id="tableNumberInput" min="1" max="50">
                 </div>
@@ -113,11 +113,12 @@
         
         // Jika Dine In dipilih, tampilkan input nomor meja; jika tidak, sembunyikan input nomor meja
         if (orderSelect.value === "yes") {
-            // tableNumberInput.style.display = "block";
-            tableNumberInput.classList.remove('hidden')
-        } else {
-            tableNumberInput.classList.add('hidden')
-            // tableNumberInput.style.display = "none";
+            tableNumberInput.classList.remove('hidden');
+            tableNumberInput.classList.add('flex', 'flex-row', 'items-center', 'gap-2');
+        } 
+        else {
+            tableNumberInput.classList.add('hidden');
+            tableNumberInput.classList.remove('flex', 'flex-row', 'items-center', 'gap-2');
         }
     }
 </script>
