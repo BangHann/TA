@@ -1,8 +1,8 @@
 @extends('layouts/admin')
 
 @section('admin-content')
-<div class="flex flex-col gap-4 mt-2">
-    <p class="text-xl font-bold">Customer Order</p>
+<div class="admin-container">
+    <p class="text-2xl font-semibold">Customer Order</p>
     <div class="flex justify-center">
         <table id="order-table" class="text-secondary w-4/5 font-sans">
             <thead class="">

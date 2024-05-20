@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Kopi;
 use App\Models\Cart;
 use App\Models\Transaksi;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class KopiController extends Controller
 {
@@ -22,7 +24,11 @@ class KopiController extends Controller
     public function dashboard()
     {
         // $kopi = Kopi::all();
-        return view('admin/main');
+        $totalPrice = Transaksi::sum('total_price');
+        $totalTransaksi = Transaksi::count();
+        $totalUsers = User::count();
+
+        return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers'));
     }
 
     public function datakopiadmin()

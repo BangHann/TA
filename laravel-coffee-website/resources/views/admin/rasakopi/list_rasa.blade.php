@@ -1,8 +1,8 @@
 @extends('layouts/admin')
 
 @section('admin-content')
-    <div class="flex flex-col gap-4 mt-2">
-        <p class="text-xl font-bold">Data Tabel Rasa Kopi</p>
+    <div class="admin-container">
+        <p class="text-2xl font-semibold">Data Tabel Rasa Kopi</p>
         <div class="flex justify-center">
             <table class=" w-4/5">
                 <thead>

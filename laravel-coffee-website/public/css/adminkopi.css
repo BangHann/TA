@@ -17,3 +17,10 @@ td, th {
 th{
     text-align: center;
 }
+
+.admin-container{
+    margin: 30px;
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem; 
+}

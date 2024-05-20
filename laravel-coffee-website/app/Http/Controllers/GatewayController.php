@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Kopi; // Import model Kopi
 use App\Models\Cart;
+use App\Models\Transaksi;
+use App\Models\User;
 
 class GatewayController extends Controller
 {
@@ -23,7 +25,11 @@ class GatewayController extends Controller
             }
             else if($role=='admin')
             {
-                return view ('admin.main');
+                $totalPrice = Transaksi::sum('total_price');
+                $totalTransaksi = Transaksi::count();
+                $totalUsers = User::count();
+
+                return view('admin/main', compact('totalPrice', 'totalTransaksi', 'totalUsers'));
             }
             else
             {

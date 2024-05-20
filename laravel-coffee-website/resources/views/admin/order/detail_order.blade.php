@@ -1,8 +1,9 @@
 @extends('layouts/admin')
 
 @section('admin-content')
-<div class="flex flex-col gap-2 mt-2">
-    <p class="text-xl font-bold">{{ $transaksi_detail->name }} Order Detail </p>
+<div class="admin-container">
+    <p class="text-2xl font-semibold">Customer Order</p>
+    <p class="text-lg font-bold">{{ $transaksi_detail->name }} Order Detail </p>
     <div class="flex flex-col text-sm">
         @if ($transaksi_detail->dine_in == 'no')
             <p class="font-medium">Takeaway</p>
