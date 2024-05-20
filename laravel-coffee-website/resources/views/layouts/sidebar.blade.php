@@ -37,7 +37,7 @@
                                     this.closest('form').submit();">
                     {{ __('Log Out') }}
                 </x-dropdown-link> --}}
-            <button type="submit" class="w-full py-2 bg-[#baa785] hover:bg-[#82755d] hover:text-[#FFE5B6] rounded-md">Logout</button>
+            <button type="submit" class="w-full rounded-md py-2 bg-[#3d372b] border border-[#3d372b] text-primary hover:bg-[#25211a] font-medium text-sm">Logout</button>
         </form>
     </div>
 </div>

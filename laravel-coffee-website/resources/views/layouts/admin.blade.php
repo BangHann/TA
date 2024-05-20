@@ -15,7 +15,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-[#f3f3f3]">
-    <div class="flex gap-2">
+    <div class="flex gap-1">
         @include('layouts.sidebar')
         <div class="flex-1 overflow-x-auto">
             @yield('admin-content')
