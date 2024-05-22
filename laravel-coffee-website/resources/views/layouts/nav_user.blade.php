@@ -23,7 +23,7 @@
                 </a>
                 <div class="bg-[#00000050] w-0.5 h-6 mx-3"></div>
                 <a href="/profile" class="flex items-center gap-2 sm:hidden">
-                    <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
+                    <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/'. Auth::user()->user_foto) }}" alt="">
                     {{-- <p class="hidden sm:block">Hello, {{ Auth::user()->name_user }}</p> --}}
                 </a> 
                 
@@ -31,7 +31,7 @@
                 <div class="dropdown hidden sm:block">
                     <button class="dropbtn">
                         <div href="" class="flex items-center gap-2">
-                            <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/pakbos1.jpg') }}" alt="">
+                            <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/'. Auth::user()->user_foto) }}" alt="">
                             <p class="hidden sm:block">Hello, {{ Auth::user()->name_user }}</p>
                         </div>
                     </button>

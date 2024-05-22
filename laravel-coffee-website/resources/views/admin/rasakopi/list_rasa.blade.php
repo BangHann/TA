@@ -5,8 +5,8 @@
         <p class="text-2xl font-semibold">Data Rasa Kopi</p>
 
         <div class="flex justify-end">
-            <button id="openModalButton" class="rounded-md text-secondary border-secondary border font-medium text-xs bg-primary p-2 px-7 hover:bg-[#ddc79e]">
-                + Add Rasa
+            <button id="openModalButton" class="rounded-md text-secondary border-secondary border font-medium text-xs bg-primary p-2 px-4 hover:bg-[#ddc79e]">
+                + Tambah Rasa
             </button>
         </div>
         
@@ -54,7 +54,7 @@
     <div id="myModal" class="hidden">
         <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
             <div class="flex justify-between items-center">
-                <h1 class="text-lg font-semibold mb-4">Tambah Rasa Kapi</h1>
+                <h1 class="text-lg font-semibold mb-4">Tambah Rasa Kopi</h1>
                 <button id="closeModalButton" class="p-2">
                     <h1 class="text-lg font-semibold mb-4">x</h1>
                 </button>
@@ -63,7 +63,7 @@
             <form action="/add-rasakopi" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Nama Rasa</label>
+                    <label for="rasa" class="block text-sm font-medium text-gray-700">Nama Rasa</label>
                     <input type="text" name="rasa" id="rasa" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
@@ -77,7 +77,7 @@
                 </div>
                 <div class="flex justify-end">
                     <div>
-                        <a href="" id="closeModalButton" class="bg-[#6C757D] text-white px-4 py-2 rounded-md hover:bg-[#52595e]">Batal</a>
+                        <a href="" id="closeModalButton" class="bg-secondary text-primary px-4 py-2 rounded-md hover:bg-secondary_hover">Batal</a>
                         <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded-md hover:bg-[#ddc79e]">Simpan</button>
                     </div>
                     
@@ -115,7 +115,7 @@
                 </div>
                 <div class="flex justify-end">
                     <div>
-                        <a href="#" id="closeEditModalButton" class="bg-[#6C757D] text-white px-4 py-2 rounded-md hover:bg-[#52595e]">Batal</a>
+                        <a href="#" id="closeEditModalButton" class="bg-secondary text-primary px-4 py-2 rounded-md hover:bg-secondary_hover">Batal</a>
                         <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded-md hover:bg-[#ddc79e]">Update</button>
                     </div>
                 </div>
@@ -138,8 +138,8 @@
             document.getElementById('myModal').classList.remove('bg-[#0000006f]', 'fixed', 'top-0', 'left-0', 'w-full', 'h-full', 'flex', 'items-center', 'justify-center');
         });
 
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modal = document.getElementById('myModal');
+        // const modalOverlay = document.getElementById('modalOverlay');
+        // const modal = document.getElementById('myModal');
 
         // Open edit modal
         document.querySelectorAll('.edit-button').forEach(button => {

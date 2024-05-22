@@ -42,7 +42,7 @@
                         tableRows += '<tr>';
                         tableRows += '<td class="text-center">' + (index + 1) + '</td>';
                         tableRows += '<td>' + item.name + '</td>';
-                        tableRows += '<td> Rp. ' + (item.total_price?item.total_price: '-') + '</td>';
+                        tableRows += '<td> Rp. ' + parseFloat(item.total_price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + '</td>';
                         tableRows += '<td>' + (item.dine_in == 'no' ? 'Takeaway': item.dine_in ? item.dine_in : '-') + '</td>';
                         tableRows += '<td>' + (item.no_meja ? item.no_meja : '-') + '</td>';
                         tableRows += '<td>' + (item.order_telah_diantar == 'Belum diantar' ? '<p class="text-red-600 font-semibold">'+ item.order_telah_diantar +'</p>':

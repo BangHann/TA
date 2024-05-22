@@ -7,29 +7,30 @@
     <div class="h-[1px] bg-black my-1 mx-2"></div>
 
     <div class="flex flex-col gap-1">
-        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-dashboard')) bg-[#ddc79e] @endif" href="/admin-dashboard">Dashboard</a>
-        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('/order-list')) bg-[#ddc79e] @endif" href="/order-list">
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-dashboard')) bg-primary_hover @endif" href="/admin-dashboard">Dashboard</a>
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('/order-list')) bg-primary_hover @endif" href="/order-list">
             <div class="flex items-center gap-2">
-                <p>Customer Order List</p>
+                <p>List Customer Order</p>
                 <p id="undelivered-count" class="hidden">-</p>
             </div>
         </a>
-        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif" href="/admin-listrasakopi">List Rasa</a>
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-listrasakopi')) bg-primary_hover @endif" href="/admin-listrasakopi">List Rasa Kopi</a>
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-datakopi')) bg-primary_hover @endif" href="/admin-datakopi">List Kopi</a>
         {{-- <details>
-            <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif">Rasa Kopi</summary>
+            <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-primary_hover @endif">Rasa Kopi</summary>
             <div class="flex flex-col">
                 
-                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-addrasakopi')) bg-[#ddc79e] @endif" href="/admin-addrasakopi">Add Rasa</a>
+                <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-addrasakopi')) bg-primary_hover @endif" href="/admin-addrasakopi">Add Rasa</a>
             </div>
         </details> --}}
-        <details>
-            <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('admin-datakopi-add') || Request::is('admin-datakopi')) bg-[#ddc79e] @endif">Data Kopi</summary>
+        {{-- <details>
+            <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('admin-datakopi-add') || Request::is('admin-datakopi')) bg-primary_hover @endif">Data Kopi</summary>
             <div class="flex flex-col">
-                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-datakopi')) bg-[#ddc79e] @endif" href="/admin-datakopi">List Kopi</a>
-                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-datakopi-add')) bg-[#ddc79e] @endif" href="/admin-datakopi-add">Add Kopi</a>
+                <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-datakopi')) bg-primary_hover @endif" href="/admin-datakopi">List Kopi</a>
+                <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-datakopi-add')) bg-primary_hover @endif" href="/admin-datakopi-add">Add Kopi</a>
             </div>
-        </details>
-        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-keuangan')) bg-[#ddc79e] @endif" href="/admin-keuangan">Laporan Keuangan</a>
+        </details> --}}
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-keuangan')) bg-primary_hover @endif" href="/admin-keuangan">Laporan Keuangan</a>
         <form method="POST" action="{{ route('logout') }}" class="py-2 px-2 font-semibold">
             @csrf
 

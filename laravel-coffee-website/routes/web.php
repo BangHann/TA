@@ -35,16 +35,20 @@ Route::get('/home', [GatewayController::class, 'door']);
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
     Route::get('/admin-datakopi', [KopiController::class, 'datakopiadmin']);
-    Route::get('/admin-datakopi-add', function () {
-        return view('admin/datakopi/add');
-    });
+    Route::post('/add_kopi', [KopiController::class, 'tambah']);
+    Route::put('/update_kopi/{id}', [KopiController::class, 'update']);
+    Route::delete('/delete_kopi/{id}', [KopiController::class, 'hapus']);
+    
+    // Route::get('/admin-datakopi-add', function () {
+    //     return view('admin/datakopi/add');
+    // });
     Route::get('/admin-keuangan', function () {
         return view('admin/keuangan/index');
     });
     Route::get('/admin-listrasakopi', [RasaKopiController::class, 'index']);
-    Route::get('/admin-addrasakopi', function () {
-        return view('admin/rasakopi/add_rasa');
-    });
+    // Route::get('/admin-addrasakopi', function () {
+    //     return view('admin/rasakopi/add_rasa');
+    // });
     Route::get('/order-list', [TransaksiAdminController::class, 'orderlist_admin']);
     Route::get('/data-order-admin', [TransaksiAdminController::class, 'data_order_admin']);
     Route::get('/order-detail/{id}', [TransaksiAdminController::class, 'detail']);

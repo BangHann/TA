@@ -17,7 +17,9 @@ export default {
             },
             colors: {
                 primary: '#FFE5B6', // Ganti dengan warna primary Anda
-                secondary: '#3d372b'
+                secondary: '#3d372b',
+                primary_hover: '#ddc79e',
+                secondary_hover:'#25211a',
             },
         },
     },
