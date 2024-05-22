@@ -10,7 +10,7 @@
         <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-dashboard')) bg-primary_hover @endif" href="/admin-dashboard">Dashboard</a>
         <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('/order-list')) bg-primary_hover @endif" href="/order-list">
             <div class="flex items-center gap-2">
-                <p>List Customer Order</p>
+                <p>Transaksi</p>
                 <p id="undelivered-count" class="hidden">-</p>
             </div>
         </a>
@@ -30,15 +30,10 @@
                 <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-datakopi-add')) bg-primary_hover @endif" href="/admin-datakopi-add">Add Kopi</a>
             </div>
         </details> --}}
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-keuangan')) bg-primary_hover @endif" href="/admin-keuangan">Laporan Keuangan</a>
+        {{-- <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-keuangan')) bg-primary_hover @endif" href="/admin-keuangan">Laporan Keuangan</a> --}}
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-keuangan')) bg-primary_hover @endif" href="/admin-keuangan">Users</a>
         <form method="POST" action="{{ route('logout') }}" class="py-2 px-2 font-semibold">
             @csrf
-
-                {{-- <x-dropdown-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </x-dropdown-link> --}}
             <button type="submit" class="w-full rounded-md py-2 bg-[#3d372b] border border-[#3d372b] text-primary hover:bg-[#25211a] font-medium text-sm">Logout</button>
         </form>
     </div>

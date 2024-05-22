@@ -2,7 +2,7 @@
 
 @section('admin-content')
 <div class="admin-container">
-    <p class="text-2xl font-semibold">Customer Order</p>
+    <p class="text-2xl font-semibold">Transaksi</p>
     <div class="">
         <table id="order-table" class="w-full text-secondary font-sans">
             <thead class="">

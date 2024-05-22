@@ -14,7 +14,7 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-2 bg-white w-[360px] p-4 rounded-md">
+            <a href="/order-list" class="flex items-center gap-2 bg-white w-[360px] p-4 rounded-md">
                 <div class="flex items-center p-4 rounded-full text-white bg-orange-400">
                     <i class="material-icons">shopping_cart</i>
                 </div>
@@ -22,7 +22,7 @@
                     <p class="text-sm">Total Orders</p>
                     <p class="font-semibold">{{ $totalTransaksi }}</p>
                 </div>
-            </div>
+            </a>
 
             <div class="flex items-center gap-2 bg-white w-[360px] p-4 rounded-md">
                 <div class="flex items-center p-4 rounded-full text-white bg-green-400">
