@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
 
             $table->string('nama_rasa');
-            $table->integer('stock');
+            // $table->integer('stock');
             $table->timestamps();
         });
     }

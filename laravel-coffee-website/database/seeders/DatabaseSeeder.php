@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(UserSeeder::class);
         $this->call(KopiTableSeeder::class);
         $this->call(RasaKopiTableSeeder::class);
         // \App\Models\User::factory(10)->create();

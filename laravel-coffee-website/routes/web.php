@@ -51,6 +51,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/delivered/{id}', [TransaksiAdminController::class, 'delivered']);
     Route::get('/undeliver/count', [TransaksiAdminController::class, 'count_undelivered']);
 
+    Route::post('/add-rasakopi', [RasaKopiController::class, 'add']);
+    Route::put('/edit-rasakopi/{id}', [RasaKopiController::class, 'update']);
+    Route::delete('/delete_rasa/{id}', [RasaKopiController::class, 'destroy']);
+
 });
 
 // Route::middleware('auth')->group(function () {

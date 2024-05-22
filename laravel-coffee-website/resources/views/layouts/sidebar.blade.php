@@ -14,13 +14,14 @@
                 <p id="undelivered-count" class="hidden">-</p>
             </div>
         </a>
-        <details>
+        <a class="py-2 px-2 font-semibold hover:bg-[#ddc79e] @if(Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif" href="/admin-listrasakopi">List Rasa</a>
+        {{-- <details>
             <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif">Rasa Kopi</summary>
             <div class="flex flex-col">
-                <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-listrasakopi')) bg-[#ddc79e] @endif" href="/admin-listrasakopi">List Rasa</a>
+                
                 <a class="pl-6 py-1 hover:bg-[#ddc79e] @if(Request::is('admin-addrasakopi')) bg-[#ddc79e] @endif" href="/admin-addrasakopi">Add Rasa</a>
             </div>
-        </details>
+        </details> --}}
         <details>
             <summary class="cursor-pointer p-2 font-semibold hover:bg-[#ddc79e] focus:bg-[#ddc79e] @if(Request::is('admin-datakopi-add') || Request::is('admin-datakopi')) bg-[#ddc79e] @endif">Data Kopi</summary>
             <div class="flex flex-col">
@@ -72,6 +73,6 @@
         fetchData();
 
         // Auto reload data 
-        setInterval(fetchData, 1000);
+        setInterval(fetchData, 5000);
     });
 </script>

@@ -10,4 +10,9 @@ class RasaKopi extends Model
     use HasFactory;
     protected $table = 'tbl_rasa_kopi';
     protected $guarded = [];
+
+    public function kopi()
+    {
+        return $this->belongsTo(Kopi::class);
+    }
 }

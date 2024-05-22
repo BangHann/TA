@@ -63,7 +63,7 @@
         loadData();
 
         // Auto reload data 
-        setInterval(loadData, 1000);
+        setInterval(loadData, 5000);
 
         // Menambahkan fungsi generateActionButtons() di dalam $(document).ready()
         function generateActionButtons(item) {
