@@ -28,7 +28,7 @@ class KopiController extends Controller
             // get the extension
             $extension = $image->getClientOriginalExtension();
             // create a new file name
-            $new_name = time().'.'.$extension;
+            $new_name = 'kopi_'.time().'.'.$extension;
             // move file to public/images and use $new_name
             $image->move(public_path('images'), $new_name);
 
@@ -58,7 +58,7 @@ class KopiController extends Controller
             // get the extension
             $extension = $image->getClientOriginalExtension();
             // create a new file name
-            $new_name = time().'.'.$extension;
+            $new_name = 'kopi_'.time().'.'.$extension;
             // move file to public/images and use $new_name
             $image->move(public_path('images'), $new_name);
 

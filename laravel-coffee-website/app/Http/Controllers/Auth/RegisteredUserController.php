@@ -35,14 +35,36 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'password' => ['required', 'confirmed', 'string'],
+            'user_foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            ],
+            [
+                'user_foto.image' => 'File harus jpg/jpeg/png',
+                'user_foto.mimes' => 'File harus jpg/jpeg/png',
+                'user_foto.max' => 'Ukuran file harus < 2MB'
         ]);
 
-        $user = User::create([
-            'name_user' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role ?? 'user', // Default role is user
-        ]);
+        if ($request->hasFile('user_foto')) {
+            $image = $request->file('user_foto');
+            // get the extension
+            $extension = $image->getClientOriginalExtension();
+            // create a new file name
+            $new_name = $request->name.'_'.time().'.'.$extension;
+            // move file to public/images/new and use $new_name
+            $image->move(public_path('images'), $new_name);
+    
+            $user = User::create([
+                'name_user' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role ?? 'user', // Default role is user
+                'user_jenis_kelamin' => $request->jk,
+                'user_foto' => $new_name,
+                'alamat' => $request->alamat,
+                'no_hp' => $request->no_hp,
+            ]);
+        }
+
+        
 
         event(new Registered($user));
 
