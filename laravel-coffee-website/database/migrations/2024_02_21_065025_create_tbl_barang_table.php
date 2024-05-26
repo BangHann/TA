@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_barang', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_barang');
-            $table->text('desc_barang');
-            $table->string('foto_barang');
-            $table->float('harga_barang');
-            $table->unsignedBigInteger('id_category');
-            $table->foreign('id_category')->references('id')->on('tbl_category')->onDelete('cascade');
-            $table->timestamps();
-        });
+        // Schema::create('tbl_barang', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name_barang');
+        //     $table->text('desc_barang');
+        //     $table->string('foto_barang');
+        //     $table->float('harga_barang');
+        //     $table->unsignedBigInteger('id_category');
+        //     $table->foreign('id_category')->references('id')->on('tbl_category')->onDelete('cascade');
+        //     $table->timestamps();
+        // });
     }
 
     /**

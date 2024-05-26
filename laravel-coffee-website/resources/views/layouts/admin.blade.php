@@ -17,7 +17,7 @@
 <body class="bg-[#f3f3f3]">
     <div class="flex gap-1">
         @include('layouts.sidebar')
-        <div class="flex-1 overflow-x-auto">
+        <div class="ml-[220px] flex-1 overflow-x-auto overflow-y-auto">
             @yield('admin-content')
         </div>
     </div>

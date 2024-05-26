@@ -11,21 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_review', function (Blueprint $table) {
-            $table->id();
+        // Schema::create('tbl_review', function (Blueprint $table) {
+        //     $table->id();
 
-            // Foreign key ke tabel kopi
-            $table->unsignedBigInteger('kopi_id');
-            $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
+        //     // Foreign key ke tabel kopi
+        //     $table->unsignedBigInteger('kopi_id');
+        //     $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
 
-            // Foreign key ke tabel user
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        //     // Foreign key ke tabel user
+        //     $table->unsignedBigInteger('user_id');
+        //     $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->integer('bintang');
-            $table->string('deskripsi');
-            $table->timestamps();
-        });
+        //     $table->integer('bintang');
+        //     $table->string('deskripsi');
+        //     $table->timestamps();
+        // });
     }
 
     /**

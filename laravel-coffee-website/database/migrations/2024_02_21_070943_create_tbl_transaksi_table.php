@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('tbl_transaksi', function (Blueprint $table) {
             $table->id();
-            // $table->integer('no_transaksi');
-            // $table->date('tgl_transaksi');
             $table->string('name');
             $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
@@ -24,13 +22,16 @@ return new class extends Migration
             $table->string('bukti_payment')->nullable();
             $table->enum('dine_in', ['yes', 'no'])->nullable();
             $table->integer('no_meja')->nullable();
-            // $table->enum('order_telah_diantar', ['yes', 'no'])->nullable();
+            
             $table->enum('order_telah_diantar', ['Belum diantar', 'Sudah diantar'])->default('Belum Diantar')->nullable();
-
-            $table->enum('status_transaksi', ['Unpaid', 'Paid'])->nullable();
-            $table->text('address')->nullable();
-            $table->bigInteger('phone')->nullable();
-            $table->integer('qty')->nullable();
+            
+            // $table->enum('order_telah_diantar', ['yes', 'no'])->nullable();
+            // $table->integer('no_transaksi');
+            // $table->date('tgl_transaksi');
+            // $table->enum('status_transaksi', ['Unpaid', 'Paid'])->nullable();
+            // $table->text('address')->nullable();
+            // $table->bigInteger('phone')->nullable();
+            // $table->integer('qty')->nullable();
             $table->timestamps();
         });
     }

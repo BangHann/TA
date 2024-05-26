@@ -1,4 +1,4 @@
-<div class="w-[220px] h-screen bg-[#FFE5B6]">
+<div class="w-[220px] h-screen bg-[#FFE5B6] fixed top-0 left-0 overflow-y-auto">
     <div class="flex items-center gap-2 p-2">
         <img class="w-14 pl-2" src="{{ asset('images/logo_icon_black.png') }}" alt="logo seteguk kopi">
         <p class="text-xl font-bold">Admin</p>
@@ -60,7 +60,7 @@
                 },
                 error: function(xhr, status, error){
                     console.error(error);
-                    $('#undelivered-count').text('Failed to fetch data.');
+                    $('#undelivered-count').text('-');
                 }
             });
         }

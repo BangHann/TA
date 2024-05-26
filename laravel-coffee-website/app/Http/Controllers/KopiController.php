@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class KopiController extends Controller
 {
@@ -86,12 +87,47 @@ class KopiController extends Controller
 
     public function dashboard()
     {
-        // $kopi = Kopi::all();
         $totalPrice = Transaksi::sum('total_price');
         $totalTransaksi = Transaksi::count();
         $totalUsers = User::count();
 
-        return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers'));
+        // Mengambil data kopi yang telah terorder
+        $kopiOrders = Cart::with('kopi')->whereNotNull('transaksi_id')
+        ->whereHas('transaksi', function ($query) {
+            $query->whereNotNull('bukti_payment');
+        })->selectRaw('kopi_id, SUM(quantity) as total_quantity')
+        ->groupBy('kopi_id')->get();
+
+        // Menyiapkan data untuk pie chart
+        $kopiLabels = $kopiOrders->pluck('kopi.jenis_kopi');
+        $kopiQuantities = $kopiOrders->pluck('total_quantity');
+
+        // Mengambil data pesanan kopi per hari
+        $ordersPerDay = Cart::select(
+            DB::raw('DATE(tbl_transaksi.created_at) as date'),
+            'kopi_id',
+            DB::raw('SUM(quantity) as total_quantity')
+        )
+        ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
+        ->whereNotNull('tbl_cart.transaksi_id')
+        ->whereNotNull('tbl_transaksi.bukti_payment')
+        ->groupBy('date', 'kopi_id')
+        ->orderBy('date')
+        ->get();
+
+        // Format data untuk chart
+        $formattedData = [];
+        foreach ($ordersPerDay as $order) {
+            $formattedData[$order->kopi_id]['dates'][] = $order->date;
+            $formattedData[$order->kopi_id]['quantities'][] = $order->total_quantity;
+        }
+
+        // Mengambil jenis kopi untuk label
+        $kopiNames = Kopi::whereIn('id', $kopiOrders->pluck('kopi_id'))->pluck('jenis_kopi', 'id');
+
+        return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames'));
+
+        // return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities'));
     }
 
     public function datakopiadmin()

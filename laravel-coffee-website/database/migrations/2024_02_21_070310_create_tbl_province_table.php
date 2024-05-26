@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_province', function (Blueprint $table) {
-            $table->id();
-            $table->string('name_province');
-            $table->integer('id_province_auto');
-            $table->timestamps();
-        });
+        // Schema::create('tbl_province', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->string('name_province');
+        //     $table->integer('id_province_auto');
+        //     $table->timestamps();
+        // });
     }
 
     /**

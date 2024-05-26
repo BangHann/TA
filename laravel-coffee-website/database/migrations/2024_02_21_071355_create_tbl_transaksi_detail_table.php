@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_transaksi_detail', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_transaksi');
-            $table->foreign('id_transaksi')->references('id')->on('tbl_transaksi')->onDelete('cascade');
+        // Schema::create('tbl_transaksi_detail', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger('id_transaksi');
+        //     $table->foreign('id_transaksi')->references('id')->on('tbl_transaksi')->onDelete('cascade');
             
-            $table->unsignedBigInteger('id_barang');
-            $table->foreign('id_barang')->references('id')->on('tbl_barang')->onDelete('cascade');
-            $table->float('harga_transaksi');
-            $table->integer('jumlah_transaksi');
-            $table->timestamps();
-        });
+        //     $table->unsignedBigInteger('id_barang');
+        //     $table->foreign('id_barang')->references('id')->on('tbl_barang')->onDelete('cascade');
+        //     $table->float('harga_transaksi');
+        //     $table->integer('jumlah_transaksi');
+        //     $table->timestamps();
+        // });
     }
 
     /**

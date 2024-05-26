@@ -10,4 +10,10 @@ class Transaksi extends Model
     use HasFactory;
     protected $table = 'tbl_transaksi';
     protected $guarded = [];
+
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }
