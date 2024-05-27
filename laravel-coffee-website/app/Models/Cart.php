@@ -16,6 +16,11 @@ class Cart extends Model
         return $this->belongsTo(Kopi::class);
     }
 
+    public function rasakopi()
+    {
+        return $this->belongsTo(RasaKopi::class, 'rasa_kopi_id');
+    }
+
     public function transaksi()
     {
         return $this->belongsTo(Transaksi::class, 'transaksi_id');

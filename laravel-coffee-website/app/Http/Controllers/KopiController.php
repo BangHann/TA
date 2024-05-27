@@ -141,7 +141,7 @@ class KopiController extends Controller
     {
         $detail_kopi = Kopi::find($id);
         // $cartCount = Cart::where('id_user', auth()->id())->count();
-        $data_rasa = RasaKopi::where('kopi_id', $id)->pluck('nama_rasa');
+        $data_rasa = RasaKopi::where('kopi_id', $id)->get();
 
         // dd($data_rasa);
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();

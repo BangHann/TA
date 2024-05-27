@@ -39,9 +39,19 @@
                 <div class="flex flex-row mx-2 mb-2 gap-4 items-start">
                     <img class="w-[81px] h-[84px] gap-0 opacity-[0px] rounded-xl object-cover" src="{{ asset('images/' . $cart->kopi->foto) }}" alt="foto pesanan">
                     <div class="flex flex-col">
-                        <p class="text-[12px]">{{ $cart->kopi->jenis_kopi }}</p>
-                        <p class="font-bold text-[12px]">Rp. {{ $cart->kopi->harga }}</p>
-                        <input class="rounded-[4px] w-[60px] h-[30px] border border-solid border-[#D9D9D9]" type="number" placeholder="{{ $cart->quantity }}" value="">
+                        <p class="text-sm">{{ $cart->kopi->jenis_kopi }}</p>
+                        @if ($cart->rasakopi && $cart->rasakopi->nama_rasa)
+                            <p class="rasa-button mr-1 text-xs text-secondary">Rasa - {{ $cart->rasakopi->nama_rasa }}</p>
+                        @endif
+                        {{-- <p class="font-bold text-[12px]">Rp. {{ $cart->jumlah }}</p> --}}
+                        <p class="font-bold text-[12px]"><span>{{ $cart->quantity }} x </span> Rp. {{ $cart->kopi->harga }}</p>
+                        <p class="font-medium text-[12px]"></p>
+                        {{-- <div class="flex items-center">
+                            <button id="decrease-qty" class="bg-primary text-secondary text-sm font-medium px-[9px] py-1 rounded-3xl">-</button>
+                            <input type="text" id="quantity" name="quantity" value="{{ $cart->quantity }}" class="font-medium w-12 h-8 text-center border-none" readonly>
+                            <button id="increase-qty" class="bg-secondary text-primary text-sm font-medium px-[8px] py-1 rounded-3xl">+</button>
+                        </div> --}}
+                        {{-- <input class="rounded-[4px] w-[60px] h-[30px] border border-solid border-[#D9D9D9]" type="number" placeholder="{{ $cart->quantity }}" value=""> --}}
                     </div>
                     
                 </div>

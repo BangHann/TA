@@ -15,4 +15,9 @@ class RasaKopi extends Model
     {
         return $this->belongsTo(Kopi::class);
     }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

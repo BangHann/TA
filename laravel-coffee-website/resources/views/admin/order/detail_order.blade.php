@@ -22,8 +22,8 @@
         
     </div>
     
-    <div class="flex justify-center">
-        <table class="font-sans w-4/5">
+    <div class="">
+        <table class="font-sans w-full">
             <thead>
                 <tr class="bg-primary">
                     <th class="w-1">No</th>
@@ -40,13 +40,16 @@
                             <img class="w-20 h-20 object-cover rounded-md" src="{{ asset('images/' . $item->kopi->foto) }}" alt="coffe image">
                             <div class="flex flex-col">
                                 <p class="font-medium">{{ $item->kopi->jenis_kopi }}</p>
-                                <p class="text-xs text-secondary">Note: </p>
+                                {{-- <p class="text-xs text-secondary">Note: </p> --}}
+                                @if ($item->rasakopi && $item->rasakopi->nama_rasa)
+                                    <p class="rasa-button mr-1 text-xs text-secondary">Rasa - {{ $item->rasakopi->nama_rasa }}</p>
+                                @endif
                             </div>
                             
                         </div>
                     </td>
                     <td class="w-24">
-                        <div class="flex justify-center">
+                        <div class="flex justify-center font-semibold">
                             {{ $item->quantity }}
                         </div>
                     </td>
