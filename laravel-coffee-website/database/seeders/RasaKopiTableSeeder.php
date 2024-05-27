@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 use App\Models\RasaKopi;
 
 class RasaKopiTableSeeder extends Seeder
@@ -40,5 +41,14 @@ class RasaKopiTableSeeder extends Seeder
             'nama_rasa' => 'Vanilla',            
             // 'stock' => 10,
         ]);
+
+
+        $faker = Faker::create();
+        for ($i = 0; $i < 11; $i++) {
+            RasaKopi::create([ 
+                'kopi_id' => rand(1, 4),
+                'nama_rasa' => $faker->randomElement(['Vanila', 'Cocopandan', 'Caramel', 'Gula Aren']), 
+            ]);
+        }
     }
 }

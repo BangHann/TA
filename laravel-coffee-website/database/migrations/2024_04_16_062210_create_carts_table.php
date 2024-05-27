@@ -21,6 +21,9 @@ return new class extends Migration
             $table->unsignedBigInteger('kopi_id');
             $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
 
+            $table->unsignedBigInteger('rasa_kopi_id')->nullable();
+            $table->foreign('rasa_kopi_id')->references('id')->on('tbl_rasa_kopi')->onDelete('cascade');
+
             $table->unsignedBigInteger('transaksi_id')->nullable();
             $table->foreign('transaksi_id')->references('id')->on('tbl_transaksi')->onDelete('cascade')->nullable();
 

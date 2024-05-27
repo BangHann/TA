@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('foto');
             $table->float('harga');
             $table->integer('stok');
+            $table->integer('diskon')->nullable();
             $table->string('deskripsi');
             $table->timestamps();
         });
