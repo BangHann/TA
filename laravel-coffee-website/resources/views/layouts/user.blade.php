@@ -18,6 +18,9 @@
     <meta name="theme-color" content="#6777ef"/>
     <link rel="apple-touch-icon" href="{{ asset('images/logo1.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
+
+    {{-- Ngrok --}}
+    {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
 </head>
 <body>
     @include('layouts.nav_user')
