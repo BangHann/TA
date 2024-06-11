@@ -21,8 +21,6 @@
         <link rel="apple-touch-icon" href="{{ asset('images/logo1.png') }}">
         <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
-        {{-- Ngrok --}}
-        {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
