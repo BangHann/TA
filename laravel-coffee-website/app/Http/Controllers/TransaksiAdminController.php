@@ -14,11 +14,11 @@ class TransaksiAdminController extends Controller
     public function orderlist_admin()
     {
         $transaksi_data = Transaksi::all();
+        return view('admin.order.index', ['transaksi_data' => $transaksi_data]);
+
         // if(request()->expectsJson()) {
         //     return response()->json(['transaksi_data' => $transaksi_data]);
         // }
-        return view('admin.order.index', ['transaksi_data' => $transaksi_data]);
-
         
         // return view('admin.order.index', compact('transaksi_data'));
         // Mengembalikan data dalam format JSON
@@ -26,6 +26,12 @@ class TransaksiAdminController extends Controller
 
     public function data_order_admin(){
         $transaksi_data = Transaksi::all();
+    //     $transaksi_data = Transaksi::orderByRaw("
+    //     CASE 
+    //         WHEN bukti_payment IS NOT NULL AND order_telah_diantar = 'Belum diantar' THEN 1
+    //         ELSE 2
+    //     END
+    // ")->get();
         return response()->json(['transaksi_data' => $transaksi_data]);
     }
 
