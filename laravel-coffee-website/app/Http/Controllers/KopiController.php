@@ -112,15 +112,32 @@ class KopiController extends Controller
         ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
         ->whereNotNull('tbl_cart.transaksi_id')
         ->whereNotNull('tbl_transaksi.bukti_payment')
+        ->where('tbl_transaksi.created_at', '>=', now()->subDays(30)) //30 hari
         ->groupBy('date', 'kopi_id')
         ->orderBy('date')
         ->get();
 
+        // Inisialisasi array tanggal untuk 30 hari terakhir
+        $dates = [];
+        for ($i = 29; $i >= 0; $i--) {
+            $dates[now()->subDays($i)->format('Y-m-d')] = 0;
+        }
+
         // Format data untuk chart
         $formattedData = [];
-        foreach ($ordersPerDay as $order) {
-            $formattedData[$order->kopi_id]['dates'][] = $order->date;
-            $formattedData[$order->kopi_id]['quantities'][] = $order->total_quantity;
+        // foreach ($ordersPerDay as $order) {
+        //     $formattedData[$order->kopi_id]['dates'][] = $order->date;
+        //     $formattedData[$order->kopi_id]['quantities'][] = $order->total_quantity;
+        // }
+        foreach ($kopiOrders as $kopiOrder) {
+            $kopiId = $kopiOrder->kopi_id;
+            $formattedData[$kopiId] = ['dates' => array_keys($dates), 'quantities' => array_values($dates)];
+    
+            foreach ($ordersPerDay as $order) {
+                if ($order->kopi_id == $kopiId) {
+                    $formattedData[$kopiId]['quantities'][array_search($order->date, $formattedData[$kopiId]['dates'])] = $order->total_quantity;
+                }
+            }
         }
 
         // Mengambil jenis kopi untuk label

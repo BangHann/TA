@@ -25,14 +25,24 @@ class TransaksiAdminController extends Controller
     }
 
     public function data_order_admin(){
-        $transaksi_data = Transaksi::all();
-    //     $transaksi_data = Transaksi::orderByRaw("
+
+        // $transaksi_data = Transaksi::all()->map(function ($transaksi) {
+        //     $transaksi->created_at = $transaksi->created_at->format('Y-m-d'); // Memformat tanggal menjadi hanya tanggal
+        //     return $transaksi;
+        // });
+    
+        // return response()->json(['transaksi_data' => $transaksi_data]);
+
+        // $transaksi_data = Transaksi::all();
+        $transaksi_data = Transaksi::orderBy('created_at', 'desc')->get();
+        return response()->json(['transaksi_data' => $transaksi_data]);
+
+        //     $transaksi_data = Transaksi::orderByRaw("
     //     CASE 
     //         WHEN bukti_payment IS NOT NULL AND order_telah_diantar = 'Belum diantar' THEN 1
     //         ELSE 2
     //     END
     // ")->get();
-        return response()->json(['transaksi_data' => $transaksi_data]);
     }
 
     public function detail($id)

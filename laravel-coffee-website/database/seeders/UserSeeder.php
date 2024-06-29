@@ -36,7 +36,7 @@ class UserSeeder extends Seeder
             'user_jenis_kelamin' => 'Laki-Laki',
             'user_foto' => 'paran.jpg',
             // 'user_status' => 1,
-            'alamat' => 'RT.006/RW.038, Bojong Rawalumbu, Kec. Rawalumbu, Kota Bekasi, Jawa Barat 17116',
+            'alamat' => 'Indonesia',
             'no_hp' => '1234567890',
             'email' => 'seeder@mail.com',
             'email_verified_at' => now(),

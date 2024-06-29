@@ -47,7 +47,7 @@
                 <canvas id="ordersPerDayChart"></canvas>
             </div>
         </div>
-
+        
         
     </div> 
     

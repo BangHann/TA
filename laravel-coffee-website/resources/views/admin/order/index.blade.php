@@ -14,7 +14,8 @@
                     <th>No. Meja</th> --}}
                     <th>Status Order</th>
                     <th>Bukti Bayar</th>
-                    <th>Acton</th>
+                    <th>Tanggal</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody class="bg-white">
@@ -49,7 +50,9 @@
                                     '<p class="text-lime-600 font-semibold">' + item.order_telah_diantar + '</p>') + '</td>';
                         tableRows += '<td>' + (item.bukti_payment ? '<img class="w-20" src="/images/bukti_bayar/' + item.bukti_payment + '" alt="gambar kopi">' : 
                                         '<p class="text-red-600 font-semibold">Belum Bayar</p>') + '</td>';
+                        tableRows += '<td>' + new Date(item.created_at).toLocaleDateString() + '</td>'; // Mengubah tanggal menjadi hanya tanggal
                         tableRows += '<td class="w-[211px]">' + generateActionButtons(item) + '</td>'; // Menggunakan fungsi generateActionButtons()
+                        
                         tableRows += '</tr>';
                     });
                     $('#order-table tbody').html(tableRows);
