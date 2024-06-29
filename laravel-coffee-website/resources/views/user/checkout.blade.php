@@ -13,7 +13,7 @@
     </div>
     <form action="/checkout_order" method="post" enctype="multipart/form-data">
         @csrf
-        <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-2">
+        {{-- <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-2">
             <p class="text-sm font-semibold ">{{ Auth::user()->name_user }}</p>
             <div class="flex flex-col gap-1">
                 <select class="p-1 text-xs rounded-md mb-1" name="order" id="orderSelect" onchange="toggleTableInput()" required>
@@ -26,7 +26,7 @@
                     <input class="p-1 text-xs rounded-md " type="number" name="nomor_meja" placeholder="" id="tableNumberInput" min="1" max="50">
                 </div>
             </div>
-        </div>
+        </div> --}}
     
         @foreach ($cart_data as $cart)
             <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-1">

@@ -21,9 +21,9 @@ class TransaksiSeeder extends Seeder
                 'name' => 'User Seeder', // Diganti dengan name_user yang sesuai
                 'id_user' => rand(1, 2), // Sesuaikan dengan jumlah data users yang ada
                 'total_price' => $faker->numberBetween(10000, 100000),
-                'bukti_payment' => $faker->randomElement(['1716733695.png', null]),
-                'dine_in' => $faker->randomElement(['yes', 'no']),
-                'no_meja' => $faker->numberBetween(1, 20),
+                'bukti_payment' => $faker->randomElement(['1716714624.jpeg', null]),
+                // 'dine_in' => $faker->randomElement(['yes', 'no']),
+                // 'no_meja' => $faker->numberBetween(1, 20),
                 'order_telah_diantar' => $faker->randomElement(['Belum diantar', 'Sudah diantar']),
                 // 'status_transaksi' => $faker->randomElement(['Unpaid', 'Paid']),
                 // 'address' => $faker->address,
