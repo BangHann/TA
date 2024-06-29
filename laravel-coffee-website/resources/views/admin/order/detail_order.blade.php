@@ -4,7 +4,7 @@
 <div class="admin-container">
     <p class="text-2xl font-semibold">Customer Order</p>
     <p class="text-lg font-bold">{{ $transaksi_detail->name }} Order Detail </p>
-    <div class="flex flex-col text-sm">
+    {{-- <div class="flex flex-col text-sm">
         @if ($transaksi_detail->dine_in == 'no')
             <p class="font-medium">Takeaway</p>
         @else
@@ -20,7 +20,7 @@
             </div>
         @endif
         
-    </div>
+    </div> --}}
     
     <div class="">
         <table class="font-sans w-full">
