@@ -9,6 +9,7 @@ use App\Http\Controllers\RasaKopiController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiAdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +43,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     // Route::get('/admin-datakopi-add', function () {
     //     return view('admin/datakopi/add');
     // });
-    Route::get('/admin-keuangan', function () {
-        return view('admin/keuangan/index');
-    });
+    Route::get('/users', [UserController::class, 'index']);
     Route::get('/admin-listrasakopi', [RasaKopiController::class, 'index']);
     // Route::get('/admin-addrasakopi', function () {
     //     return view('admin/rasakopi/add_rasa');

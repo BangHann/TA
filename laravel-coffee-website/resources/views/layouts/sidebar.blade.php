@@ -31,7 +31,7 @@
             </div>
         </details> --}}
         {{-- <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-keuangan')) bg-primary_hover @endif" href="/admin-keuangan">Laporan Keuangan</a> --}}
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-keuangan')) bg-primary_hover @endif" href="/admin-keuangan">Users</a>
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('users')) bg-primary_hover @endif" href="/users">Users</a>
         <form method="POST" action="{{ route('logout') }}" class="py-2 px-2 font-semibold">
             @csrf
             <button type="submit" class="w-full rounded-md py-2 bg-[#3d372b] border border-[#3d372b] text-primary hover:bg-[#25211a] font-medium text-sm">Logout</button>
