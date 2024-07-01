@@ -10,10 +10,11 @@
                     <tr class="bg-primary">
                         <th class="w-5">No</th>
                         <th>Nama User</th>
-                        <th>Jenis Kelamin</th>
-                        <th class="w-[360px]">Alamat</th>
-                        <th>No Hp</th>
+                        <th>Role</th>
                         <th>Email</th>
+                        <th>Jenis Kelamin</th>
+                        <th>No Hp</th>
+                        <th class="w-[360px]">Alamat</th>
                         {{-- <th>Action</th> --}}
                     </tr>
                 </thead>
@@ -22,10 +23,11 @@
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
                         <td>{{ $item->name_user }}</td>
-                        <td>{{ $item->user_jenis_kelamin }}</td>
-                        <td>{{ $item->alamat }}</td>
-                        <td>{{ $item->no_hp }}</td>
+                        <td>{{ $item->role }}</td>
                         <td>{{ $item->email }}</td>
+                        <td>{{ $item->user_jenis_kelamin }}</td>
+                        <td>{{ $item->no_hp }}</td>
+                        <td class="text-xs">{{ $item->alamat }}</td>
 
                         {{-- <td class="w-8">
                             <div>

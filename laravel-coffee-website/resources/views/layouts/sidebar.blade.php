@@ -16,6 +16,7 @@
         </a>
         <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-listrasakopi')) bg-primary_hover @endif" href="/admin-listrasakopi">List Rasa Kopi</a>
         <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-datakopi')) bg-primary_hover @endif" href="/admin-datakopi">List Kopi</a>
+        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('payment_method')) bg-primary_hover @endif" href="/payment_method">Payment Method</a>
         {{-- <details>
             <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-primary_hover @endif">Rasa Kopi</summary>
             <div class="flex flex-col">

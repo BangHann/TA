@@ -113,11 +113,11 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="flex justify-end">
-                    <div>
-                        <a href="#" id="closeEditModalButton" class="bg-secondary text-primary px-4 py-2 rounded-md hover:bg-secondary_hover">Batal</a>
+                <div class="flex justify-end gap-2">
+                    {{-- <div> --}}
+                        <button id="closeEditModalButton" class="bg-secondary text-primary px-4 py-2 rounded-md hover:bg-secondary_hover">Batal</button>
                         <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded-md hover:bg-[#ddc79e]">Update</button>
-                    </div>
+                    {{-- </div> --}}
                 </div>
             </form>
         </div>

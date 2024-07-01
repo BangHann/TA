@@ -67,12 +67,12 @@
         <div class=" text-xs mb-4 flex flex-col gap-1">
             <p class="font-semibold">Pilih Metode Pembayaran</p>
             <div class="flex flex-row gap-3">
-                @foreach ($payment_method as $item)
+                {{-- @foreach ($payment_method as $item)
                     <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="{{ $item->jenis }}">{{ $item->jenis }}</div>
-                @endforeach
-                {{-- <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Qris">Qris</div> --}}
-                {{-- <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Bank">Bank</div>
-                <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="E-Wallet">E-Wallet</div> --}}
+                @endforeach --}}
+                <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Qris">Qris</div>
+                <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Bank">Bank</div>
+                <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="E-Wallet">E-Wallet</div>
             </div>
         </div>
 

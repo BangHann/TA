@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     use HasFactory;
+    protected $table = 'tbl_payment_method';
     protected $guarded = [];
 }

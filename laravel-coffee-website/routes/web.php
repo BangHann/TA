@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PaymentMethodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/edit-rasakopi/{id}', [RasaKopiController::class, 'update']);
     Route::delete('/delete_rasa/{id}', [RasaKopiController::class, 'destroy']);
 
+    Route::get('/payment_method', [PaymentMethodController::class, 'index']);
+    Route::post('/add-payment_method', [PaymentMethodController::class, 'tambah']);
+    Route::put('/edit-payment_method/{id}', [PaymentMethodController::class, 'update']);
+    Route::delete('/delete_metode/{id}', [PaymentMethodController::class, 'destroy']);
 });
 
 // Route::middleware('auth')->group(function () {
