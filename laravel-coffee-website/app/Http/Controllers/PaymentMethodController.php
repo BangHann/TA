@@ -33,7 +33,8 @@ class PaymentMethodController extends Controller
             ]);
 
             
-        } else {
+        } 
+        else {
             PaymentMethod::create([
                 'jenis' => $request->jenis_payment,
                 'nama' => $request->nama,

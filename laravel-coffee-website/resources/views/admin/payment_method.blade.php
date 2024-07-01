@@ -19,7 +19,7 @@
                         <th>Nama</th>
                         <th>Atas Nama</th>
                         <th>No Rek/Hp</th>
-                        <th>Foto</th>
+                        <th class=" w-[160px]">Foto</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -31,7 +31,16 @@
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->atas_nama }}</td>
                         <td>{{ $item->nomor }}</td>
-                        <td>{{ $item->foto }}</td>
+                        <td class=" ">
+                            <center>
+                                @if ($item->foto)
+                                    <img class="" src="{{ asset('images/' . $item->foto) }}" alt="foto qris">
+                                @else
+                                    -
+                                @endif
+                            </center>
+                            
+                        </td>
 
                         <td class="w-8">
                             <div>
@@ -43,7 +52,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="rounded-md text-white text-xs bg-red-500 p-2" 
-                                                onclick="return confirm('Anda yakin akan menghapus Rasa {{ $item->nama_rasa }}?')">
+                                                onclick="return confirm('Anda yakin akan menghapus metode {{ $item->nama }}?')">
                                             Delete
                                         </button>
                                     </form>
@@ -70,7 +79,7 @@
                 </button>
             </div>
             
-            <form action="/add-payment_method" method="POST">
+            <form action="/add-payment_method" method="POST" enctype="multipart/form-data"  >
                 @csrf
                 <div class="mb-4">
                     <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Jenis Payment</label>
@@ -99,7 +108,7 @@
 
                 <div id="input_qris" class="mb-4 hidden">
                     <label for="foto_qris" class="block text-sm font-medium text-gray-700">Foto Qris</label>
-                    <input type="file" name="foto_qris" id="foto_qris" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                    <input type="file" name="foto_qris" id="input_foto_qris" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                 </div>
                 
                 <div class="flex justify-end gap-2">
@@ -224,12 +233,14 @@
             
             if (pilih_jenis.value === "Qris") {
                 input_qris.classList.remove('hidden');
+                document.getElementById("input_foto_qris").required = true;
                 document.getElementById("input_nomor").classList.add('hidden');
                 document.getElementById("create_nomor").required = false;
                 // input_qris.classList.add('flex', 'flex-row', 'items-center', 'gap-2');
             } 
             else {
                 input_qris.classList.add('hidden');
+                document.getElementById("input_foto_qris").required = false;
                 document.getElementById("input_nomor").classList.remove('hidden');
                 document.getElementById("create_nomor").required = true;
                 // input_qris.classList.remove('flex', 'flex-row', 'items-center', 'gap-2');
