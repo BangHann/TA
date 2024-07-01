@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RasaKopiTableSeeder::class);
         $this->call(TransaksiSeeder::class);
         $this->call(CartSeeder::class);
+        $this->call(PaymentMethodSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

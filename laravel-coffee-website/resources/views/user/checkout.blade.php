@@ -67,35 +67,61 @@
         <div class=" text-xs mb-4 flex flex-col gap-1">
             <p class="font-semibold">Pilih Metode Pembayaran</p>
             <div class="flex flex-row gap-3">
-                <button class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs">Qris</button>
-                <button class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs">Bank</button>
-                <button class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs">E-Wallet</button>
+                @foreach ($payment_method as $item)
+                    <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="{{ $item->jenis }}">{{ $item->jenis }}</div>
+                @endforeach
+                {{-- <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Qris">Qris</div> --}}
+                {{-- <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Bank">Bank</div>
+                <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="E-Wallet">E-Wallet</div> --}}
             </div>
         </div>
 
-        <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
+        <div id="payment-methods-container" class="hidden">
+            @foreach ($payment_method as $data)
+                <div class="payment-method" data-jenis="{{ $data->jenis }}">
+                    @if ($data->jenis=='Qris')
+                        <div class="text-xs border rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3">
+                            <div>
+                                <p class="font-semibold">QRIS</p>
+                                <p class="">{{ $data->atas_nama }}</p>
+                            </div>
+                            <img src="{{ asset('images/'.$data->foto) }}" alt="qris">
+                        </div>
+                    @else
+                        <div class="text-xs border rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
+                            <div>
+                                <p class="font-semibold">{{ $data->nama }}</p>
+                                <p class="">{{ $data->atas_nama }}</p>
+                            </div>
+                            <p>{{ $data->nomor }}</p>
+                        </div>
+                    @endif
+                </div>
+            @endforeach
+        </div>
+        {{-- <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
             <div>
                 <p class="font-semibold">Bank BCA</p>
                 <p class="">Farhan Hibatullah</p>
             </div>
             <p>5681404032</p>
-        </div>
+        </div> --}}
 
-        <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
+        {{-- <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
             <div>
                 <p class="font-semibold">GoPay</p>
                 <p class="">Farhan Hibatullah</p>
             </div>
             <p>081384487598</p>
-        </div>
+        </div> --}}
 
-        <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 ">
+        {{-- <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 ">
             <div>
                 <p class="font-semibold">QRIS</p>
                 <p class="">Farhan Hibatullah</p>
             </div>
             <img src="{{ asset('images/qris-try.png') }}" alt="qris">
-        </div>
+        </div> --}}
 
         {{-- kirim bukti pembayaran --}}
         <label for="fileInput" class="text-xs">
@@ -116,7 +142,25 @@
     
 </div>
 
+
+{{-- Payment Method --}}
 <script>
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const jenis = this.getAttribute('data-jenis');
+            document.querySelectorAll('.payment-method').forEach(method => {
+                if (method.getAttribute('data-jenis') === jenis) {
+                    document.getElementById("payment-methods-container").classList.remove('hidden')
+                    method.style.display = 'block';
+                } else {
+                    method.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+{{-- <script>
     function toggleTableInput() {
         var orderSelect = document.getElementById("orderSelect");
         var tableNumberInput = document.getElementById("tableNumberInput");
@@ -131,7 +175,7 @@
             tableNumberInput.classList.remove('flex', 'flex-row', 'items-center', 'gap-2');
         }
     }
-</script>
+</script> --}}
 
 
 

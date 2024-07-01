@@ -9,14 +9,22 @@ use Illuminate\Http\Request;
 use App\Models\Kopi;
 use App\Models\Cart;
 use App\Models\Transaksi;
+use App\Models\PaymentMethod;
 
 class TransaksiController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         if(Auth::id()){
             $kopi = Kopi::all();
             $cart_data = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->get();
+            // $payment_method = PaymentMethod::all();
+            $jenis = $request->input('jenis'); // Mendapatkan parameter filter dari request
+            if($jenis) {
+                $payment_method = PaymentMethod::where('jenis', $jenis)->get();
+            } else {
+                $payment_method = PaymentMethod::all();
+            }
     
             // Menghitung total pembelian untuk setiap pengguna
             $cart_total = Cart::select('id_user', DB::raw('SUM(jumlah) as total_amount'))
@@ -33,7 +41,7 @@ class TransaksiController extends Controller
             $transaksi = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
             if($transaksi)
             {
-                return view('user.checkout', compact('kopi', 'cart_data', 'total_amount', 'cartCount', 'transaksi'));
+                return view('user.checkout', compact('kopi', 'cart_data','payment_method' , 'total_amount', 'cartCount', 'transaksi'));
             }
             else{
                 return redirect('/');
