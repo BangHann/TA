@@ -18,7 +18,7 @@
                         <th>Jenis Kopi</th>
                         <th>Stok</th>
                         <th>Harga</th>
-                        <th>Gambar</th>
+                        <th class="w-[140px]">Gambar</th>
                         <th class="w-[300px]">Deskripsi</th>
                         <th class="w-8">Action</th>
                     </tr>
@@ -30,7 +30,9 @@
                         <td>{{ $item->jenis_kopi }}</td>
                         <td>{{ $item->stok }}</td>
                         <td>Rp. {{ number_format($item->harga , 2) }}</td>
-                        <td><img class="w-20" src="{{ asset('images/' . $item->foto) }}" alt="gambar kopi"></td>
+                        <td>
+                            <img class="" src="{{ asset('images/' . $item->foto) }}" alt="gambar kopi">
+                        </td>
                         <td class="text-xs">{{ $item->deskripsi }}</td>
                         <td>
                             <div>

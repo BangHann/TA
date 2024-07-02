@@ -56,8 +56,8 @@ class PaymentMethodController extends Controller
         //     'nama_kopi' => 'required|exists:kopi,id',
         // ]);
 
-        if ($request->hasFile('gambar_kopi')) {
-            $image = $request->file('gambar_kopi');
+        if ($request->hasFile('foto_qris')) {
+            $image = $request->file('foto_qris');
             // get the extension
             $extension = $image->getClientOriginalExtension();
             // create a new file name
@@ -65,21 +65,20 @@ class PaymentMethodController extends Controller
             // move file to public/images and use $new_name
             $image->move(public_path('images'), $new_name);
 
-            $kopi = PaymentMethod::findOrFail($id);
-            $kopi->jenis_kopi = $request->jenis_kopi;
-            $kopi->stok = $request->stok_kopi;
-            $kopi->harga = $request->harga_kopi;
-            $kopi->deskripsi = $request->deskripsi ? $request->deskripsi : $kopi->deskripsi;
-            $kopi->foto = $new_name;
-            $kopi->save();
+            $metode_payment = PaymentMethod::findOrFail($id);
+            $metode_payment->jenis = $request->jenis_payment;
+            $metode_payment->nama = $request->nama;
+            $metode_payment->atas_nama = $request->atas_nama;
+            $metode_payment->nomor = $request->nomor;
+            $metode_payment->foto = $new_name;
+            $metode_payment->save();
         } else{
-            $kopi = PaymentMethod::findOrFail($id);
-            $kopi->jenis_kopi = $request->jenis_kopi;
-            $kopi->stok = $request->stok_kopi;
-            $kopi->harga = $request->harga_kopi;
-            $kopi->deskripsi = $request->deskripsi ? $request->deskripsi : $kopi->deskripsi;
-            // $kopi->foto = $kopi->foto;
-            $kopi->save();
+            $metode_payment = PaymentMethod::findOrFail($id);
+            $metode_payment->jenis = $request->jenis_payment ? $request->jenis_payment: $metode_payment->jenis;
+            $metode_payment->nama = $request->nama ? $request->nama: $metode_payment->nama;
+            $metode_payment->atas_nama = $request->atas_nama ?$request->atas_nama: $metode_payment->atas_nama;
+            $metode_payment->nomor = $request->nomor ?$request->nomor: $metode_payment->nomor;
+            $metode_payment->save();
         }
 
         return redirect()->back()->with('success', 'Data rasa kopi berhasil diupdate.');

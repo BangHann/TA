@@ -45,7 +45,10 @@
                         <td class="w-8">
                             <div>
                                 <div class="flex gap-2">
-                                    <a class="rounded-md text-white text-xs bg-yellow-500 p-2 px-4 open_modal_edit_payment" href="" data-id="{{ $item->id }}" data-nama="" data-kopi="">
+                                    <a class="rounded-md text-white text-xs bg-yellow-500 p-2 px-4 open_modal_edit_payment" href="" 
+                                    data-id="{{ $item->id }}" data-nama="{{ $item->jenis }}" 
+                                    data-an="{{ $item->atas_nama }}" data-no='{{ $item->nomor }}'
+                                    data-foto='{{ $item->foto }}' data-jenis="{{ $item->jenis }}">
                                         Edit
                                     </a>
                                     <form action="/delete_metode/{{ $item->id }}" method="POST">
@@ -68,7 +71,7 @@
     
 
 
-    <!-- Modal Create Metode Payment-->
+<!-- Modal Create Metode Payment-->
     <div id="myModal" class="hidden" enctype="multipart/form-data">
         
         <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
@@ -82,7 +85,7 @@
             <form action="/add-payment_method" method="POST" enctype="multipart/form-data"  >
                 @csrf
                 <div class="mb-4">
-                    <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Jenis Payment</label>
+                    <label for="jenis_payment" class="block text-sm font-medium text-gray-700">Jenis Payment</label>
                     <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis_payment" id="pilih_jenis" onchange="toggleTableInput()" required>
                         <option value="" disabled selected hidden>Pilih Jenis</option>
                         <option value="Bank">Bank</option>
@@ -137,33 +140,36 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
-                    <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Jenis Payment</label>
-                    <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis_payment" id="pilih_jenis" onchange="toggleTableInput()">
+                    <label for="jenis_payment" class="block text-sm font-medium text-gray-700">Jenis Payment</label>
+                    <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis_payment" id="edit_jenis" onchange="toggleTableInput()">
                         <option value="" disabled selected hidden>Pilih Jenis</option>
-                        @foreach ($datas as $data)
+                        <option value="Bank">Bank</option>
+                        <option value="E-Wallet">E-Wallet</option>
+                        <option value="Qris">Qris</option>
+                        {{-- @foreach ($datas as $data)
                             <option value="{{ $data->jenis }}">{{ $data->jenis }}</option>
-                        @endforeach
+                        @endforeach --}}
                     </select>
                 </div>
 
                 <div class="mb-4">
                     <label for="nama" class="block text-sm font-medium text-gray-700">Nama Bank/E-Wallet/Qris</label>
-                    <input type="text" name="nama" id="nama" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" name="nama" id="edit_nama" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div class="mb-4">
                     <label for="atas_nama" class="block text-sm font-medium text-gray-700">Atas Nama</label>
-                    <input type="text" name="atas_nama" id="atas_nama" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" name="atas_nama" id="edit_atas_nama" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
-                <div class="mb-4">
+                <div id='input_edit_nomor' class="mb-4 hidden">
                     <label for="nomor" class="block text-sm font-medium text-gray-700">Nomor Rekening/HP</label>
-                    <input type="text" name="nomor" id="nomor" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="text" name="nomor" id="edit_nomor" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
-                <div id="input_qris" class="mb-4 hidden">
+                <div id="input_edit_qris" class="mb-4 hidden">
                     <label for="foto_qris" class="block text-sm font-medium text-gray-700">Foto Qris</label>
-                    <input type="file" name="foto_qris" id="foto_qris" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                    <input type="file" name="foto_qris" id="edit_foto_qris" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                 </div>
 
                 <div class="flex justify-end gap-2">
@@ -177,7 +183,7 @@
     </div>
 
 
-
+{{-- JavaScript Area --}}
     <script>
         // Open modal when button clicked
         document.getElementById('open_modal_create_payment').addEventListener('click', function() {
@@ -199,11 +205,19 @@
             button.addEventListener('click', function(event) {
                 event.preventDefault();
                 const id = this.getAttribute('data-id');
+                const jenis = this.getAttribute('data-jenis');
                 const nama = this.getAttribute('data-nama');
-                const kopiId = this.getAttribute('data-kopi');
-                document.getElementById('edit_rasa').value = nama;
-                document.getElementById('edit_nama_kopi').value = kopiId;
+                const no = this.getAttribute('data-no');
+                const foto = this.getAttribute('data-foto');
+                const an = this.getAttribute('data-an');
+
                 document.getElementById('edit_metode_pembayaran_form').setAttribute('action', '/edit-payment_method/' + id);
+                document.getElementById('edit_jenis').value = jenis;
+                document.getElementById('edit_nama').value = nama;
+                document.getElementById('edit_atas_nama').value = an;
+                document.getElementById('edit_foto_qris').placeholder = foto;
+                document.getElementById('edit_nomor').value = no;
+
                 document.getElementById('editModal').classList.remove('hidden');
                 document.getElementById('editModal').classList.add('bg-[#0000006f]', 'fixed', 'top-0', 'left-0', 'w-full', 'h-full', 'flex', 'items-center', 'justify-center');
             });
@@ -226,6 +240,7 @@
         }
     </script>
 
+{{-- Buka form untuk input qris atau no rek/hp --}}
     <script>
         function toggleTableInput() {
             var pilih_jenis = document.getElementById("pilih_jenis");
@@ -243,6 +258,22 @@
                 document.getElementById("input_foto_qris").required = false;
                 document.getElementById("input_nomor").classList.remove('hidden');
                 document.getElementById("create_nomor").required = true;
+                // input_qris.classList.remove('flex', 'flex-row', 'items-center', 'gap-2');
+            }
+        }
+
+        function toggleTableInput() {
+            var edit_jenis = document.getElementById("edit_jenis");
+            var input_edit_qris = document.getElementById("input_edit_qris");
+            
+            if (edit_jenis.value === "Qris") {
+                input_edit_qris.classList.remove('hidden');
+                document.getElementById("input_edit_nomor").classList.add('hidden');
+                // input_qris.classList.add('flex', 'flex-row', 'items-center', 'gap-2');
+            } 
+            else {
+                input_edit_qris.classList.add('hidden');
+                document.getElementById("input_edit_nomor").classList.remove('hidden');
                 // input_qris.classList.remove('flex', 'flex-row', 'items-center', 'gap-2');
             }
         }

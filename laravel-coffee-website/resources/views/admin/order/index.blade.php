@@ -13,7 +13,7 @@
                     {{-- <th>Dine In</th>
                     <th>No. Meja</th> --}}
                     <th>Status Order</th>
-                    <th>Bukti Bayar</th>
+                    <th class="w-[140px]">Bukti Bayar</th>
                     <th>Tanggal</th>
                     <th>Action</th>
                 </tr>
@@ -48,7 +48,7 @@
                         // tableRows += '<td>' + (item.no_meja ? item.no_meja : '-') + '</td>';
                         tableRows += '<td>' + (item.order_telah_diantar == 'Belum diantar' ? '<p class="text-red-600 font-semibold">'+ item.order_telah_diantar +'</p>':
                                     '<p class="text-lime-600 font-semibold">' + item.order_telah_diantar + '</p>') + '</td>';
-                        tableRows += '<td>' + (item.bukti_payment ? '<img class="w-20" src="/images/bukti_bayar/' + item.bukti_payment + '" alt="gambar kopi">' : 
+                        tableRows += '<td>' + (item.bukti_payment ? '<img class="" src="/images/bukti_bayar/' + item.bukti_payment + '" alt="gambar kopi">' : 
                                         '<p class="text-red-600 font-semibold">Belum Bayar</p>') + '</td>';
                         tableRows += '<td>' + new Date(item.created_at).toLocaleDateString() + '</td>'; // Mengubah tanggal menjadi hanya tanggal
                         tableRows += '<td class="w-[211px]">' + generateActionButtons(item) + '</td>'; // Menggunakan fungsi generateActionButtons()
