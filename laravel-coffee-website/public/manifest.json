@@ -1,10 +1,12 @@
 {
-    "name": "Seteguk Kopi",
-    "short_name": "LPT",
-    "start_url": "/index.php",
+    "name": "Seteguk Kopi App",
+    "short_name": "Seteguk Kopi",
+    "start_url": "/",
     "background_color": "#6777ef",
     "description": "Seteguk Kopi PWA Web",
-    "display": "fullscreen",
+    
+    "display": "standalone",
+    "orientation": "portrait",
     "theme_color": "#6777ef",
     "icons": [
         {

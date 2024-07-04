@@ -18,51 +18,51 @@ class KopiTableSeeder extends Seeder
 
         // Tambahkan data kopi
         Kopi::create([
-            'jenis_kopi' => 'Arabika',
-            'foto' => 'Arabica.jpg',
+            'jenis_kopi' => 'Caramel',
+            'foto' => 'kopi_caramel.jpg',
             'harga' => 15000,
-            'stok' => 45,
-            'deskripsi' => 'Biji kopi arabika memiliki ciri-ciri ukuran biji yang lebih kecil dibandingkan biji kopi jenis robusta, selain itu, kandungannya kafeinnya lebih rendah, rasa dan aromanya juga lebih nikmat.'
+            // 'stok' => 45,
+            'deskripsi' => 'Terbuat dari campuran espresso segar dan sirup karamel, minuman ini menawarkan perpaduan sempurna antara pahitnya kopi dan manisnya karamel.'
         ]);
 
         Kopi::create([
-            'jenis_kopi' => 'Robusta',
-            'foto' => 'Robusta.jpg',
+            'jenis_kopi' => 'Gula Aren',
+            'foto' => 'kopi_gula-aren.jpg',
             'harga' => 12000,
-            'stok' => 30,
-            'deskripsi' => 'Biji kopi robusta berbentuk agak bulat, melengkung, dan lebih tebal jika dibandingkan kopi arabika. Kopi robusta memiliki warna yang kuat dan lebih kental ketika dibuat kopi.'
+            // 'stok' => 30,
+            'deskripsi' => 'Gula aren memberikan sentuhan manis yang lembut dan karamel, berbeda dengan gula putih biasa, menambah dimensi rasa yang unik pada kopi.'
         ]);
 
         Kopi::create([
-            'jenis_kopi' => 'Liberika atau Exelsa',
-            'foto' => 'logo1.png',
+            'jenis_kopi' => 'Hazelnut',
+            'foto' => 'kopi_hazelnut.jpg',
             'harga' => 17000,
-            'stok' => 25,
-            'deskripsi' => 'Biji kopi liberika berbentuk seperti biji buah kurma, agak lonjong dan berukuran lebih besar. Kopi ini memiliki karakteristik rasa yang sedikit asam dan mirip seperti buah.'
+            // 'stok' => 25,
+            'deskripsi' => 'Minuman kopi yang memanjakan dengan aroma kacang hazelnut yang kaya dan rasa yang lembut.'
         ]);
 
         Kopi::create([
-            'jenis_kopi' => 'Matcha Latte',
-            'foto' => 'MatchaLatte.jpg',
+            'jenis_kopi' => 'Pandan',
+            'foto' => 'kopi_pandan.jpg',
             'harga' => 12000,
-            'stok' => 30,
-            'deskripsi' => 'Minuman yang terbuat dari campuran bubuk matcha (teh hijau bubuk) dengan susu dan air panas. Matcha latte memiliki rasa yang unik dan menyegarkan, dengan kombinasi rasa ringan dan sedikit pahit dari matcha yang diselaraskan dengan manisnya susu.'
+            // 'stok' => 30,
+            'deskripsi' => 'Minuman kopi unik yang menggabungkan kelezatan kopi dengan aroma dan rasa khas daun pandan.'
         ]);
 
         Kopi::create([
-            'jenis_kopi' => 'Thai Tea',
-            'foto' => 'ThaiTea.jpg',
+            'jenis_kopi' => 'Vanilla',
+            'foto' => 'kopi_vanilla.jpg',
             'harga' => 17000,
-            'stok' => 25,
-            'deskripsi' => 'Minuman teh yang berasal dari Thailand dan populer di seluruh dunia. Minuman ini dikenal karena warnanya yang unik, yaitu oranye cerah, dan rasanya yang manis dengan sedikit rasa teh yang kuat.'
+            // 'stok' => 25,
+            'deskripsi' => 'Terbuat dari campuran espresso berkualitas dan sirup vanila, minuman ini menawarkan keseimbangan sempurna antara kekuatan kopi dan kelembutan rasa vanila yang lembut dan aromatik.'
         ]);
 
-        Kopi::create([
-            'jenis_kopi' => 'Red Velvet',
-            'foto' => 'RedVelvet.png',
-            'harga' => 15000,
-            'stok' => 45,
-            'deskripsi' => 'Terinspirasi dari kue Red Velvet. Minuman ini biasanya terdiri dari campuran berbagai bahan, termasuk susu, sirup vanila, pewarna merah (untuk memberikan warna merah yang khas).'
-        ]);
+        // Kopi::create([
+        //     'jenis_kopi' => 'Red Velvet',
+        //     'foto' => 'RedVelvet.png',
+        //     'harga' => 15000,
+        //     // 'stok' => 45,
+        //     'deskripsi' => 'Terinspirasi dari kue Red Velvet. Minuman ini biasanya terdiri dari campuran berbagai bahan, termasuk susu, sirup vanila, pewarna merah (untuk memberikan warna merah yang khas).'
+        // ]);
     }
 }
