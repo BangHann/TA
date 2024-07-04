@@ -2,7 +2,7 @@
 
 @section('admin-content')
     <div class="admin-container">
-        <p class="text-2xl font-semibold">Data Kopi</p>
+        <p class="text-2xl font-semibold">Manajemen Rasa Kopi</p>
 
         <div class="flex justify-end">
             <button id="openModalButton" class="rounded-md text-secondary border-secondary border font-medium text-xs bg-primary p-2 px-4 hover:bg-[#ddc79e]">
@@ -15,8 +15,8 @@
                 <thead>
                     <tr class="bg-primary">
                         <th class="w-5">No</th>
-                        <th>Jenis Kopi</th>
-                        <th>Stok</th>
+                        <th>Rasa Kopi</th>
+                        {{-- <th>Stok</th> --}}
                         <th>Harga</th>
                         <th class="w-[140px]">Gambar</th>
                         <th class="w-[300px]">Deskripsi</th>
@@ -28,7 +28,7 @@
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
                         <td>{{ $item->jenis_kopi }}</td>
-                        <td>{{ $item->stok }}</td>
+                        {{-- <td>{{ $item->stok }}</td> --}}
                         <td>Rp. {{ number_format($item->harga , 2) }}</td>
                         <td>
                             <img class="" src="{{ asset('images/' . $item->foto) }}" alt="gambar kopi">
