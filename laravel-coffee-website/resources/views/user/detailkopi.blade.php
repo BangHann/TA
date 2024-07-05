@@ -18,7 +18,7 @@
                 <p>Stock {{ $detail_kopi->stok }}</p>
             </div> --}}
             @if($data_rasa->isNotEmpty())
-                <p class="font-semibold pt-4">Rasa</p>
+                <p class="font-semibold pt-4">Jenis Kopi</p>
                 <div class="">
                     @foreach ($data_rasa as $item)
                         <button type="button" class="rasa-button mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary" data-id="{{ $item->id }}">
