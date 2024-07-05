@@ -57,12 +57,28 @@ class KopiTableSeeder extends Seeder
             'deskripsi' => 'Terbuat dari campuran espresso berkualitas dan sirup vanila, minuman ini menawarkan keseimbangan sempurna antara kekuatan kopi dan kelembutan rasa vanila yang lembut dan aromatik.'
         ]);
 
-        // Kopi::create([
-        //     'jenis_kopi' => 'Red Velvet',
-        //     'foto' => 'RedVelvet.png',
-        //     'harga' => 15000,
-        //     // 'stok' => 45,
-        //     'deskripsi' => 'Terinspirasi dari kue Red Velvet. Minuman ini biasanya terdiri dari campuran berbagai bahan, termasuk susu, sirup vanila, pewarna merah (untuk memberikan warna merah yang khas).'
-        // ]);
+        Kopi::create([
+            'jenis_kopi' => 'Matcha Latte',
+            'foto' => 'MatchaLatte.jpg',
+            'harga' => 12000,
+            // 'stok' => 30,
+            'deskripsi' => 'Minuman yang terbuat dari campuran bubuk matcha (teh hijau bubuk) dengan susu dan air panas. Matcha latte memiliki rasa yang unik dan menyegarkan, dengan kombinasi rasa ringan dan sedikit pahit dari matcha yang diselaraskan dengan manisnya susu.'
+        ]);
+
+        Kopi::create([
+            'jenis_kopi' => 'Thai Tea',
+            'foto' => 'ThaiTea.jpg',
+            'harga' => 17000,
+            // 'stok' => 25,
+            'deskripsi' => 'Minuman teh yang berasal dari Thailand dan populer di seluruh dunia. Minuman ini dikenal karena warnanya yang unik, yaitu oranye cerah, dan rasanya yang manis dengan sedikit rasa teh yang kuat.'
+        ]);
+
+        Kopi::create([
+            'jenis_kopi' => 'Red Velvet',
+            'foto' => 'RedVelvet.png',
+            'harga' => 15000,
+            // 'stok' => 45,
+            'deskripsi' => 'Terinspirasi dari kue Red Velvet. Minuman ini biasanya terdiri dari campuran berbagai bahan, termasuk susu, sirup vanila, pewarna merah (untuk memberikan warna merah yang khas).'
+        ]);
     }
 }
