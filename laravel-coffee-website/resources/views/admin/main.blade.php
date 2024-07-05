@@ -43,7 +43,23 @@
             </div>
     
             <div class="mt-8 bg-white w-[750px] h-[420px] rounded-md p-2 pb-8">
-                <p class="font-semibold">Total Order per Hari</p>
+                {{-- <p class="font-semibold">Total Order per Hari</p>
+                <canvas id="ordersPerDayChart"></canvas> --}}
+                <div class="flex justify-between items-center mb-4">
+                    <p class="font-semibold">Total Order per Hari</p>
+                    <div class="flex gap-2">
+                        <select id="bulan" class="border border-gray-300 rounded-md p-2">
+                            @foreach ($months as $key => $month)
+                                <option value="{{ $key }}" {{ $bulan == $key ? 'selected' : '' }}>{{ $month }}</option>
+                            @endforeach
+                        </select>
+                        <select id="tahun" class="border border-gray-300 rounded-md p-2 w-[80px]">
+                            @foreach ($years as $year)
+                                <option value="{{ $year }}" {{ $tahun == $year ? 'selected' : '' }}>{{ $year }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
                 <canvas id="ordersPerDayChart"></canvas>
             </div>
         </div>
@@ -159,6 +175,19 @@
                 }
                 return color;
             }
+
+            // Event listener untuk dropdown bulan dan tahun
+            document.getElementById('bulan').addEventListener('change', function() {
+                const selectedMonth = this.value;
+                const selectedYear = document.getElementById('tahun').value;
+                window.location.href = `?bulan=${selectedMonth}&tahun=${selectedYear}`;
+            });
+
+            document.getElementById('tahun').addEventListener('change', function() {
+                const selectedYear = this.value;
+                const selectedMonth = document.getElementById('bulan').value;
+                window.location.href = `?bulan=${selectedMonth}&tahun=${selectedYear}`;
+            });
         });
     </script>
 @endsection

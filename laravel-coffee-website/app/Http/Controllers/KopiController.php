@@ -86,7 +86,7 @@ class KopiController extends Controller
         return redirect()->back()->with('success', 'Data rasa kopi berhasil diupdate.');
     }
 
-    public function dashboard()
+    public function dashboard(Request $request)
     {
         $totalPrice = Transaksi::sum('total_price');
         $totalTransaksi = Transaksi::count();
@@ -103,7 +103,11 @@ class KopiController extends Controller
         $kopiLabels = $kopiOrders->pluck('kopi.jenis_kopi');
         $kopiQuantities = $kopiOrders->pluck('total_quantity');
 
-        // Mengambil data pesanan kopi per hari
+        // Mendapatkan bulan dan tahun dari request atau menggunakan default
+        $bulan = $request->input('bulan', now()->format('m'));
+        $tahun = $request->input('tahun', now()->format('Y'));
+
+        // Mengambil data pesanan kopi per hari berdasarkan bulan dan tahun
         $ordersPerDay = Cart::select(
             DB::raw('DATE(tbl_transaksi.created_at) as date'),
             'kopi_id',
@@ -112,15 +116,18 @@ class KopiController extends Controller
         ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
         ->whereNotNull('tbl_cart.transaksi_id')
         ->whereNotNull('tbl_transaksi.bukti_payment')
-        ->where('tbl_transaksi.created_at', '>=', now()->subDays(30)) //30 hari
-        ->groupBy('date', 'kopi_id')
-        ->orderBy('date')
+        ->whereYear('tbl_transaksi.created_at', $tahun)
+        ->whereMonth('tbl_transaksi.created_at', $bulan)
+        ->groupBy('date', 'kopi_id')->orderBy('date')
         ->get();
 
-        // Inisialisasi array tanggal untuk 30 hari terakhir
+        // Inisialisasi array tanggal untuk bulan yang dipilih
         $dates = [];
-        for ($i = 29; $i >= 0; $i--) {
-            $dates[now()->subDays($i)->format('Y-m-d')] = 0;
+        $startOfMonth = now()->setDate($tahun, $bulan, 1)->startOfMonth();
+        $endOfMonth = now()->setDate($tahun, $bulan, 1)->endOfMonth();
+
+        for ($date = $startOfMonth; $date <= $endOfMonth; $date->addDay()) {
+            $dates[$date->format('Y-m-d')] = 0;
         }
 
         // Format data untuk chart
@@ -143,7 +150,16 @@ class KopiController extends Controller
         // Mengambil jenis kopi untuk label
         $kopiNames = Kopi::whereIn('id', $kopiOrders->pluck('kopi_id'))->pluck('jenis_kopi', 'id');
 
-        return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames'));
+        // Mengambil semua bulan dan tahun untuk dropdown
+        $months = [
+            '01' => 'January', '02' => 'February', '03' => 'March', '04' => 'April',
+            '05' => 'May', '06' => 'June', '07' => 'July', '08' => 'August',
+            '09' => 'September', '10' => 'October', '11' => 'November', '12' => 'December'
+        ];
+
+        $years = range(now()->year - 5, now()->year); // Mengambil 5 tahun terakhir
+
+        return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years'));
 
         // return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities'));
     }
