@@ -54,6 +54,16 @@ nav{
 @media screen and (min-width: 500px) {
     .grid-card {
         width: 85%;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .card{
+        /* padding: 10px; */
+        border-radius: 8px;
+        /* width: 100%; */
+        width: 200px; /* Maksimum lebar kartu */
+        height: auto; /* Kartu akan menyesuaikan tinggi gambar */
+        background: #ececec;
     }
 }
 /* Media query untuk menambahkan margin 28px pada tampilan mobile */

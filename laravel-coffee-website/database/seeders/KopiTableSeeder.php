@@ -80,5 +80,21 @@ class KopiTableSeeder extends Seeder
             // 'stok' => 45,
             'deskripsi' => 'Terinspirasi dari kue Red Velvet. Minuman ini biasanya terdiri dari campuran berbagai bahan, termasuk susu, sirup vanila, pewarna merah (untuk memberikan warna merah yang khas).'
         ]);
+
+        Kopi::create([
+            'jenis_kopi' => 'Americano',
+            'foto' => 'kopi_americano.jpg',
+            'harga' => 15000,
+            // 'stok' => 45,
+            'deskripsi' => 'minuman kopi yang terdiri dari espresso yang ditambahkan dengan air panas, menciptakan minuman yang lebih ringan dan lebih encer dibandingkan dengan espresso murni'
+        ]);
+
+        Kopi::create([
+            'jenis_kopi' => 'Dark Choco',
+            'foto' => 'dark_choco.jpg',
+            'harga' => 13000,
+            // 'stok' => 45,
+            'deskripsi' => 'Dark choco, atau cokelat hitam, adalah jenis cokelat yang mengandung persentase kakao yang tinggi, biasanya antara 50-90%, dan sedikit atau tanpa tambahan susu.'
+        ]);
     }
 }
