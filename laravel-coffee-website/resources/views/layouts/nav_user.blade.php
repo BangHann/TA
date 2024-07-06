@@ -1,4 +1,4 @@
-<nav class="">
+<nav class="fixed w-full z-[9999] shadow-[0_4px_6px_rgba(0,0,0,0.1)] top-0">
     <div class="p-2 flex justify-between items-center">
         <a href="/" class="flex items-center gap-2">
             <img class="w-14 pl-2" src="{{ asset('images/logo_icon_black.png') }}" alt="logo seteguk kopi">
