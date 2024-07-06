@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 
 class GatewayController extends Controller
 {
-    public function door()
+    public function door(Request $request)
     {
         if(Auth::check())
         {
@@ -29,40 +29,116 @@ class GatewayController extends Controller
                 $totalPrice = Transaksi::sum('total_price');
                 $totalTransaksi = Transaksi::count();
                 $totalUsers = User::count();
-
+        
                 // Mengambil data kopi yang telah terorder
                 $kopiOrders = Cart::with('kopi')->whereNotNull('transaksi_id')
                 ->whereHas('transaksi', function ($query) {
                     $query->whereNotNull('bukti_payment');
                 })->selectRaw('kopi_id, SUM(quantity) as total_quantity')
                 ->groupBy('kopi_id')->get();
-
+        
                 // Menyiapkan data untuk pie chart
                 $kopiLabels = $kopiOrders->pluck('kopi.jenis_kopi');
                 $kopiQuantities = $kopiOrders->pluck('total_quantity');
-
-                // Mengambil data pesanan kopi per hari
+        
+                // Mendapatkan bulan dan tahun dari request atau menggunakan default
+                $bulan = $request->input('bulan', now()->format('m'));
+                $tahun = $request->input('tahun', now()->format('Y'));
+        
+                // Mengambil data pesanan kopi per hari berdasarkan bulan dan tahun
                 $ordersPerDay = Cart::select(
                     DB::raw('DATE(tbl_transaksi.created_at) as date'),
                     'kopi_id',
                     DB::raw('SUM(quantity) as total_quantity')
                 )
                 ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
-                ->whereNotNull('tbl_cart.transaksi_id')->whereNotNull('tbl_transaksi.bukti_payment')
-                ->groupBy('date', 'kopi_id')->orderBy('date')->get();
-
+                ->whereNotNull('tbl_cart.transaksi_id')
+                ->whereNotNull('tbl_transaksi.bukti_payment')
+                ->whereYear('tbl_transaksi.created_at', $tahun)
+                ->whereMonth('tbl_transaksi.created_at', $bulan)
+                ->groupBy('date', 'kopi_id')->orderBy('date')
+                ->get();
+        
+                // Inisialisasi array tanggal untuk bulan yang dipilih
+                $dates = [];
+                $startOfMonth = now()->setDate($tahun, $bulan, 1)->startOfMonth();
+                $endOfMonth = now()->setDate($tahun, $bulan, 1)->endOfMonth();
+        
+                for ($date = $startOfMonth; $date <= $endOfMonth; $date->addDay()) {
+                    $dates[$date->format('Y-m-d')] = 0;
+                }
+        
                 // Format data untuk chart
                 $formattedData = [];
-                foreach ($ordersPerDay as $order) {
-                    $formattedData[$order->kopi_id]['dates'][] = $order->date;
-                    $formattedData[$order->kopi_id]['quantities'][] = $order->total_quantity;
+                // foreach ($ordersPerDay as $order) {
+                //     $formattedData[$order->kopi_id]['dates'][] = $order->date;
+                //     $formattedData[$order->kopi_id]['quantities'][] = $order->total_quantity;
+                // }
+                foreach ($kopiOrders as $kopiOrder) {
+                    $kopiId = $kopiOrder->kopi_id;
+                    $formattedData[$kopiId] = ['dates' => array_keys($dates), 'quantities' => array_values($dates)];
+            
+                    foreach ($ordersPerDay as $order) {
+                        if ($order->kopi_id == $kopiId) {
+                            $formattedData[$kopiId]['quantities'][array_search($order->date, $formattedData[$kopiId]['dates'])] = $order->total_quantity;
+                        }
+                    }
                 }
-
+        
                 // Mengambil jenis kopi untuk label
                 $kopiNames = Kopi::whereIn('id', $kopiOrders->pluck('kopi_id'))->pluck('jenis_kopi', 'id');
-
-                return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames'));
+        
+                // Mengambil semua bulan dan tahun untuk dropdown
+                $months = [
+                    '01' => 'January', '02' => 'February', '03' => 'March', '04' => 'April',
+                    '05' => 'May', '06' => 'June', '07' => 'July', '08' => 'August',
+                    '09' => 'September', '10' => 'October', '11' => 'November', '12' => 'December'
+                ];
+        
+                $years = range(now()->year - 5, now()->year); // Mengambil 5 tahun terakhir
+        
+                return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years'));
+        
+                // return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities'));
             }
+            // {
+            //     $totalPrice = Transaksi::sum('total_price');
+            //     $totalTransaksi = Transaksi::count();
+            //     $totalUsers = User::count();
+
+            //     // Mengambil data kopi yang telah terorder
+            //     $kopiOrders = Cart::with('kopi')->whereNotNull('transaksi_id')
+            //     ->whereHas('transaksi', function ($query) {
+            //         $query->whereNotNull('bukti_payment');
+            //     })->selectRaw('kopi_id, SUM(quantity) as total_quantity')
+            //     ->groupBy('kopi_id')->get();
+
+            //     // Menyiapkan data untuk pie chart
+            //     $kopiLabels = $kopiOrders->pluck('kopi.jenis_kopi');
+            //     $kopiQuantities = $kopiOrders->pluck('total_quantity');
+
+            //     // Mengambil data pesanan kopi per hari
+            //     $ordersPerDay = Cart::select(
+            //         DB::raw('DATE(tbl_transaksi.created_at) as date'),
+            //         'kopi_id',
+            //         DB::raw('SUM(quantity) as total_quantity')
+            //     )
+            //     ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
+            //     ->whereNotNull('tbl_cart.transaksi_id')->whereNotNull('tbl_transaksi.bukti_payment')
+            //     ->groupBy('date', 'kopi_id')->orderBy('date')->get();
+
+            //     // Format data untuk chart
+            //     $formattedData = [];
+            //     foreach ($ordersPerDay as $order) {
+            //         $formattedData[$order->kopi_id]['dates'][] = $order->date;
+            //         $formattedData[$order->kopi_id]['quantities'][] = $order->total_quantity;
+            //     }
+
+            //     // Mengambil jenis kopi untuk label
+            //     $kopiNames = Kopi::whereIn('id', $kopiOrders->pluck('kopi_id'))->pluck('jenis_kopi', 'id');
+
+            //     return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames'));
+            // }
             else
             {
                 return redirect()->back()->with('error', 'Invalid user role');
