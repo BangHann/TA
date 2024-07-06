@@ -24,7 +24,20 @@ class TransaksiAdminController extends Controller
         // Mengembalikan data dalam format JSON
     }
 
-    public function data_order_admin(){
+    public function data_order_admin(Request $request){
+        $filter = $request->input('filter');
+        $transaksi_data = Transaksi::orderByRaw("bukti_payment IS NOT NULL DESC")
+        ->orderByRaw("FIELD(order_telah_diantar, 'Belum diantar') DESC")
+        ->orderBy('created_at', 'desc')->get();
+        // if ($filter == 'belum_diantar') {
+        //     $transaksi_data = Transaksi::where('order_telah_diantar', 'Belum diantar')
+        //                                 ->whereNotNull('bukti_payment')
+        //                                 ->get();
+        // } else {
+        //     $transaksi_data = Transaksi::all();
+        // }
+
+        return response()->json(['transaksi_data' => $transaksi_data]);
 
         // $transaksi_data = Transaksi::all()->map(function ($transaksi) {
         //     $transaksi->created_at = $transaksi->created_at->format('Y-m-d'); // Memformat tanggal menjadi hanya tanggal
@@ -34,8 +47,8 @@ class TransaksiAdminController extends Controller
         // return response()->json(['transaksi_data' => $transaksi_data]);
 
         // $transaksi_data = Transaksi::all();
-        $transaksi_data = Transaksi::orderBy('created_at', 'desc')->get();
-        return response()->json(['transaksi_data' => $transaksi_data]);
+        // $transaksi_data = Transaksi::orderBy('created_at', 'desc')->get();
+        // return response()->json(['transaksi_data' => $transaksi_data]);
 
         //     $transaksi_data = Transaksi::orderByRaw("
     //     CASE 

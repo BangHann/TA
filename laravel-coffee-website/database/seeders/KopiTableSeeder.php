@@ -96,5 +96,6 @@ class KopiTableSeeder extends Seeder
             // 'stok' => 45,
             'deskripsi' => 'Dark choco, atau cokelat hitam, adalah jenis cokelat yang mengandung persentase kakao yang tinggi, biasanya antara 50-90%, dan sedikit atau tanpa tambahan susu.'
         ]);
+
     }
 }
