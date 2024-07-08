@@ -45,7 +45,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     //     return view('admin/datakopi/add');
     // });
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/admin-listrasakopi', [RasaKopiController::class, 'index']);
+    Route::get('/admin-jeniskopi', [RasaKopiController::class, 'index']);
     // Route::get('/admin-addrasakopi', function () {
     //     return view('admin/rasakopi/add_rasa');
     // });

@@ -6,7 +6,7 @@
 
         <div class="flex justify-end">
             <button id="openModalButton" class="rounded-md text-secondary border-secondary border font-medium text-xs bg-primary p-2 px-4 hover:bg-[#ddc79e]">
-                + Tambah Rasa
+                + Tambah Jenis Kopi
             </button>
         </div>
         
@@ -54,7 +54,7 @@
     <div id="myModal" class="hidden">
         <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
             <div class="flex justify-between items-center">
-                <h1 class="text-lg font-semibold mb-4">Tambah Rasa Kopi</h1>
+                <h1 class="text-lg font-semibold mb-4">Tambah Jenis Kopi</h1>
                 <button id="closeModalButton" class="p-2">
                     <h1 class="text-lg font-semibold mb-4">x</h1>
                 </button>
@@ -63,13 +63,13 @@
             <form action="/add-rasakopi" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="rasa" class="block text-sm font-medium text-gray-700">Nama Rasa</label>
+                    <label for="rasa" class="block text-sm font-medium text-gray-700">Nama Jenis Kopi</label>
                     <input type="text" name="rasa" id="rasa" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
-                    <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Nama Kopi</label>
+                    <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Nama Rasa Kopi</label>
                     <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="nama_kopi" id="nama_kopi" onchange="toggleTableInput()" required>
-                        <option value="" disabled selected hidden>Pilih Kopi</option>
+                        <option value="" disabled selected hidden>Pilih Rasa Kopi</option>
                         @foreach ($kopi as $data)
                             <option value="{{ $data->id }}">{{ $data->jenis_kopi }}</option>
                         @endforeach
@@ -101,13 +101,13 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
-                    <label for="edit_rasa" class="block text-sm font-medium text-gray-700">Nama Rasa</label>
+                    <label for="edit_rasa" class="block text-sm font-medium text-gray-700">Nama Jenis Kopi</label>
                     <input type="text" name="rasa" id="edit_rasa" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
-                    <label for="edit_nama_kopi" class="block text-sm font-medium text-gray-700">Nama Kopi</label>
+                    <label for="edit_nama_kopi" class="block text-sm font-medium text-gray-700">Nama Rasa Kopi</label>
                     <select class="mt-1 w-full text-sm font-medium shadow-sm sm:text-sm border-gray-300 rounded-md" name="nama_kopi" id="edit_nama_kopi" required>
-                        <option value="" disabled selected hidden>Pilih Kopi</option>
+                        <option value="" disabled selected hidden>Pilih Rasa Kopi</option>
                         @foreach ($kopi as $data)
                             <option value="{{ $data->id }}">{{ $data->jenis_kopi }}</option>
                         @endforeach
