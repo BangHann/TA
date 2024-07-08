@@ -164,7 +164,7 @@
 
                 <div id='input_edit_nomor' class="mb-4 hidden">
                     <label for="nomor" class="block text-sm font-medium text-gray-700">Nomor Rekening/HP</label>
-                    <input type="text" name="nomor" id="edit_nomor" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input type="number" name="nomor" id="edit_nomor" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div id="input_edit_qris" class="mb-4 hidden">

@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('name_user');
             $table->enum('role', ['admin', 'user'])->default('user')->nullable();
             $table->string('password');
-            $table->string('username')->nullable();
+            // $table->string('username')->nullable();
             $table->string('user_jenis_kelamin')->nullable();
             $table->string('user_foto')->nullable();
-            $table->tinyInteger('user_status')->nullable();
+            // $table->tinyInteger('user_status')->nullable();
             $table->text('alamat')->nullable();
             $table->bigInteger('no_hp')->nullable();
             $table->string('email')->unique();
