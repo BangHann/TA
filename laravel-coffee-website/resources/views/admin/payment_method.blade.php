@@ -46,7 +46,7 @@
                             <div>
                                 <div class="flex gap-2">
                                     <a class="rounded-md text-white text-xs bg-yellow-500 p-2 px-4 open_modal_edit_payment" href="" 
-                                    data-id="{{ $item->id }}" data-nama="{{ $item->jenis }}" 
+                                    data-id="{{ $item->id }}" data-nama="{{ $item->nama }}" 
                                     data-an="{{ $item->atas_nama }}" data-no='{{ $item->nomor }}'
                                     data-foto='{{ $item->foto }}' data-jenis="{{ $item->jenis }}">
                                         Edit
