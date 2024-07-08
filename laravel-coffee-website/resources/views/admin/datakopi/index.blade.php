@@ -46,7 +46,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="rounded-md text-white text-xs bg-red-500 p-2" 
-                                                onclick="return confirm('Anda yakin akan menghapus Kopi {{ $item->jenis_kopi }}?')">
+                                                onclick="return confirm('Anda yakin akan menghapus Kopi Rasa{{ $item->jenis_kopi }}?')">
                                             Delete
                                         </button>
                                     </form>
