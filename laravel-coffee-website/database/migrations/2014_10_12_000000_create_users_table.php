@@ -22,6 +22,7 @@ return new class extends Migration
             // $table->tinyInteger('user_status')->nullable();
             $table->text('alamat')->nullable();
             $table->bigInteger('no_hp')->nullable();
+            // $table->integer('no_hp')->length(15)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             // $table->tinyInteger('level');
