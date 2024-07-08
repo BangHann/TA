@@ -6,7 +6,7 @@
 
         <div class="flex justify-end">
             <button id="openModalButton" class="rounded-md text-secondary border-secondary border font-medium text-xs bg-primary p-2 px-4 hover:bg-[#ddc79e]">
-                + Tambah Kopi
+                + Tambah Rasa Kopi
             </button>
         </div>
 
@@ -64,7 +64,7 @@
     <div id="myModal" class="hidden">
         <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
             <div class="flex justify-between items-center">
-                <h1 class="text-lg font-semibold mb-4">Tambah Kopi</h1>
+                <h1 class="text-lg font-semibold mb-4">Tambah Rasa Kopi</h1>
                 <button id="closeModalButton" class="p-2">
                     <h1 class="text-lg font-semibold mb-4">x</h1>
                 </button>
@@ -73,15 +73,15 @@
             <form action="/add_kopi" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Jenis/Nama Kopi</label>
+                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Rasa Kopi</label>
                     <input type="text" name="jenis_kopi" id="jenis_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Stok Kopi</label>
                     <input type="number" name="stok_kopi" id="stok_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                </div>
+                </div> --}}
                 <div class="mb-4">
-                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Kopi</label>
+                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Rasa Kopi</label>
                     <input type="number" name="harga_kopi" id="harga_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
@@ -89,7 +89,7 @@
                     <textarea name="deskripsi" id="deskripsi" id="" cols="43" rows="1" class="focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea>
                 </div>
                 <div class="mb-4">
-                    <label for="gambar_kopi" class="block text-sm font-medium text-gray-700">Gambar Kopi</label>
+                    <label for="gambar_kopi" class="block text-sm font-medium text-gray-700">Gambar Minuman</label>
                     <input type="file" name="gambar_kopi" id="gambar_kopi" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                 </div>
 
@@ -119,23 +119,23 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Jenis/Nama Kopi</label>
+                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Rasa Kopi</label>
                     <input type="text" name="jenis_kopi" id="jenis_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Stok Kopi</label>
                     <input type="number" name="stok_kopi" id="stok_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                </div>
+                </div> --}}
                 <div class="mb-4">
-                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Kopi</label>
+                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Rasa Kopi</label>
                     <input type="number" name="harga_kopi" id="harga_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                    <textarea name="deskripsi" id="deskripsi_edit" id="" cols="43" rows="1" class="focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea>
+                    <textarea name="deskripsi" id="deskripsi_edit" id="" cols="43" rows="4" class="focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md"></textarea>
                 </div>
                 <div class="mb-4">
-                    <label for="gambar_kopi" class="block text-sm font-medium text-gray-700">Gambar Kopi</label>
+                    <label for="gambar_kopi" class="block text-sm font-medium text-gray-700">Gambar Minuman</label>
                     <input type="file" name="gambar_kopi" id="gambar_edit" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                 </div>
                 
@@ -174,12 +174,12 @@
                 const stok = this.getAttribute('data-stok');
                 const harga = this.getAttribute('data-harga');
                 const gambar = this.getAttribute('data-gambar');
-                const desk = this.getAttribute('data-desk');
+                const desk = this.getAttribute('data-deskripsi');
                 document.getElementById('jenis_edit').value = jenis_kopi;
-                document.getElementById('stok_edit').value = stok;
+                //document.getElementById('stok_edit').value = stok;
                 document.getElementById('harga_edit').value =harga;
                 document.getElementById('gambar_edit').placeholder = gambar;
-                document.getElementById('deskripsi_edit').textarea = desk;
+                document.getElementById('deskripsi_edit').value = desk;
 
                 document.getElementById('form_edit_kopi').setAttribute('action', '/update_kopi/' + id);
                 document.getElementById('modal_edit').classList.remove('hidden');

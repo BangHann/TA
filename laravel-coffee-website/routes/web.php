@@ -36,7 +36,7 @@ Route::get('/home', [GatewayController::class, 'door']);
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
-    Route::get('/admin-datakopi', [KopiController::class, 'datakopiadmin']);
+    Route::get('/admin-rasakopi', [KopiController::class, 'datakopiadmin']);
     Route::post('/add_kopi', [KopiController::class, 'tambah']);
     Route::put('/update_kopi/{id}', [KopiController::class, 'update']);
     Route::delete('/delete_kopi/{id}', [KopiController::class, 'hapus']);
