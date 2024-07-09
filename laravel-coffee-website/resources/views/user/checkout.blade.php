@@ -40,8 +40,8 @@
                     <img class="w-[81px] h-[84px] gap-0 opacity-[0px] rounded-xl object-cover" src="{{ asset('images/' . $cart->kopi->foto) }}" alt="foto pesanan">
                     <div class="flex flex-col">
                         <p class="text-sm">{{ $cart->kopi->jenis_kopi }}</p>
-                        @if ($cart->rasakopi && $cart->rasakopi->nama_rasa)
-                            <p class="rasa-button mr-1 text-xs text-secondary">Rasa - {{ $cart->rasakopi->nama_rasa }}</p>
+                        @if ($cart->jeniskopi && $cart->jeniskopi->nama_jenis)
+                            <p class="mr-1 text-xs text-secondary">Jenis Kopi - {{ $cart->jeniskopi->nama_jenis }}</p>
                         @endif
                         {{-- <p class="font-bold text-[12px]">Rp. {{ $cart->jumlah }}</p> --}}
                         <p class="font-bold text-[12px]"><span>{{ $cart->quantity }} x </span> Rp. {{ $cart->kopi->harga }}</p>

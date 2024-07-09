@@ -21,8 +21,8 @@
                         <img class="w-[81px] h-[84px] gap-0 opacity-[0px] rounded-xl object-cover" src="{{ asset('images/' . $cart->kopi->foto) }}" alt="foto pesanan">
                         <div class="flex flex-col">
                             <p class="text-sm">{{ $cart->kopi->jenis_kopi }}</p>
-                            @if ($cart->rasakopi && $cart->rasakopi->nama_rasa)
-                                <p class="rasa-button mr-1 text-xs text-secondary">Rasa - {{ $cart->rasakopi->nama_rasa }}</p>
+                            @if ($cart->jeniskopi && $cart->jeniskopi->nama_jenis)
+                                <p class="jenis-button mr-1 text-xs text-secondary">Jenis Kopi - {{ $cart->jeniskopi->nama_jenis }}</p>
                             @endif
                             {{-- <p class="font-bold text-[12px]">Rp. {{ $cart->jumlah }}</p> --}}
                             <p class="font-bold text-[12px]">Rp. <span id="total-price">{{ $cart->jumlah }}</span></p>
@@ -68,21 +68,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.rasa-button').click(function() {
-                var rasaId = $(this).data('id');
-                $('#rasakopi').val(rasaId);
-                $('#rasakopi-cart').val(rasaId);
-                $('.rasa-button').removeClass('active border border-secondary font-semibold'); // Remove the active class from all buttons
+            $('.jenis-button').click(function() {
+                var jenisId = $(this).data('id');
+                $('#jeniskopi').val(jenisId);
+                $('#jeniskopi-cart').val(jenisId);
+                $('.jenis-button').removeClass('active border border-secondary font-semibold'); // Remove the active class from all buttons
                 $(this).addClass('active border border-secondary font-semibold'); // Add the active class to the clicked button
-                $('#rasa-error').addClass('hidden');
+                $('#jenis-error').addClass('hidden');
             });
 
-            $('#order-form, #cart-form').submit(function(e) {
-                if (!$('#rasakopi').val() && !$('#rasakopi-cart').val()) {
-                    e.preventDefault();
-                    $('#rasa-error').removeClass('hidden');
-                }
-            });
+            // $('#order-form, #cart-form').submit(function(e) {
+            //     if (!$('#jeniskopi').val() && !$('#jeniskopi-cart').val()) {
+            //         e.preventDefault();
+            //         $('#jenis-error').removeClass('hidden');
+            //     }
+            // });
 
 
             var pricePerUnit = 0; // Inisialisasi harga per unit dengan nilai default

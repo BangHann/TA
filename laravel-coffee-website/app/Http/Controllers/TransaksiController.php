@@ -114,7 +114,7 @@ class TransaksiController extends Controller
             Cart::create([
                 'id_user' => Auth::id(),
                 'kopi_id' => $request->kopi_id,
-                'rasa_kopi_id' => $request->rasakopi,
+                'jenis_kopi_id' => $request->jeniskopi,
                 'quantity' => $request->quantity,
                 'jumlah' => $request->total,
             ]);

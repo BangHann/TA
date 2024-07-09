@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GatewayController;
 
 use App\Http\Controllers\KopiController;
-use App\Http\Controllers\RasaKopiController;
+// use App\Http\Controllers\RasaKopiController;
+use App\Http\Controllers\JenisKopiController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiAdminController;
@@ -37,6 +38,7 @@ Route::get('/home', [GatewayController::class, 'door']);
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
     Route::get('/admin-rasakopi', [KopiController::class, 'datakopiadmin']);
+    // Route::get('/admin-jeniskopi', [KopiController::class, 'datakopiadmin']);
     Route::post('/add_kopi', [KopiController::class, 'tambah']);
     Route::put('/update_kopi/{id}', [KopiController::class, 'update']);
     Route::delete('/delete_kopi/{id}', [KopiController::class, 'hapus']);
@@ -45,7 +47,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     //     return view('admin/datakopi/add');
     // });
     Route::get('/users', [UserController::class, 'index']);
-    Route::get('/admin-jeniskopi', [RasaKopiController::class, 'index']);
+    Route::get('/admin-jeniskopi', [JenisKopiController::class, 'index']);
+    // Route::get('/admin-jeniskopi', [RasaKopiController::class, 'index']);
     // Route::get('/admin-addrasakopi', function () {
     //     return view('admin/rasakopi/add_rasa');
     // });
@@ -55,9 +58,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/delivered/{id}', [TransaksiAdminController::class, 'delivered']);
     Route::get('/undeliver/count', [TransaksiAdminController::class, 'count_undelivered']);
 
-    Route::post('/add-rasakopi', [RasaKopiController::class, 'add']);
-    Route::put('/edit-rasakopi/{id}', [RasaKopiController::class, 'update']);
-    Route::delete('/delete_rasa/{id}', [RasaKopiController::class, 'destroy']);
+    Route::post('/add-jeniskopi', [JenisKopiController::class, 'add']);
+    Route::put('/edit-jeniskopi/{id}', [JenisKopiController::class, 'update']);
+    Route::delete('/delete_jenis/{id}', [JenisKopiController::class, 'destroy']);
+
+    // Route::post('/add-rasakopi', [RasaKopiController::class, 'add']);
+    // Route::put('/edit-rasakopi/{id}', [RasaKopiController::class, 'update']);
+    // Route::delete('/delete_rasa/{id}', [RasaKopiController::class, 'destroy']);
 
     Route::get('/payment_method', [PaymentMethodController::class, 'index']);
     Route::post('/add-payment_method', [PaymentMethodController::class, 'tambah']);

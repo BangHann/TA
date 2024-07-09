@@ -17,16 +17,16 @@
             {{-- <div class="flex text-xs items-center gap-1 mt-2">
                 <p>Stock {{ $detail_kopi->stok }}</p>
             </div> --}}
-            @if($data_rasa->isNotEmpty())
+            @if($data_jeniskopi->isNotEmpty())
                 <p class="font-semibold pt-4">Jenis Kopi</p>
                 <div class="">
-                    @foreach ($data_rasa as $item)
-                        <button type="button" class="rasa-button mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary" data-id="{{ $item->id }}">
-                            {{ $item->nama_rasa }}
+                    @foreach ($data_jeniskopi as $item)
+                        <button data-id="{{ $item->id }}" type="button" class="jenis-button mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary">
+                            {{ $item->nama_jenis }}
                         </button>
                     @endforeach
                 </div>
-                <p id="rasa-error" class="text-red-500 text-sm hidden">Silakan pilih rasa kopi</p>
+                <p id="jenis-error" class="text-red-500 text-sm hidden">Silakan pilih jenis kopi</p>
             @endif
             
             <p class="font-semibold pt-4">Deskripsi Produk</p>
@@ -42,7 +42,7 @@
                 <div class="w-[40%]">
                     <form id="order-form" action="/addOrder_deletedItem" method="post">
                         @csrf
-                        <input type="hidden" name="rasakopi" id="rasakopi" value="">
+                        <input type="hidden" name="jeniskopi" id="jeniskopi" value="">
                         <input type="hidden" name="quantity" id="order-quantity" value="1">
                         <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga }}">
                         <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}">
@@ -55,7 +55,7 @@
                 <div class="w-[40%]">
                     <form id="add-to-cart-form" action="/add_order" method="post">
                         @csrf
-                        <input type="hidden" name="rasakopi" id="rasakopi" value="">
+                        <input type="hidden" name="jeniskopi" id="jeniskopi" value="">
                         <input type="hidden" name="quantity" id="order-quantity" value="1">
                         <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga }}">
                         <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}">
@@ -69,7 +69,7 @@
             <div class="w-[40%]">
                 <form id="cart-form" action="/add_cart" method="post">
                     @csrf
-                    <input type="hidden" name="rasakopi" id="rasakopi-cart" value="">
+                    <input type="hidden" name="jeniskopi" id="jeniskopi-cart" value="">
                     <input type="hidden" name="quantity" id="cart-quantity" value="1">
                     <input type="hidden" name="total" id="cart-total" value="{{ $detail_kopi->harga }}">
                     <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}">
@@ -84,20 +84,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.rasa-button').click(function() {
-                var rasaId = $(this).data('id');
-                $('#rasakopi').val(rasaId);
-                $('#rasakopi-cart').val(rasaId);
-                $('.rasa-button').removeClass('active border border-secondary font-semibold'); // Remove the active class from all buttons
+            $('.jenis-button').click(function() {
+                var jenisKopiId = $(this).data('id');
+                $('#jeniskopi').val(jenisKopiId);
+                $('#jeniskopi-cart').val(jenisKopiId);
+                $('.jenis-button').removeClass('active border border-secondary font-semibold'); // Remove the active class from all buttons
                 $(this).addClass('active border border-secondary font-semibold'); // Add the active class to the clicked button
-                $('#rasa-error').addClass('hidden');
+                $('#jenis-error').addClass('hidden');
             });
 
-            @if($data_rasa->isNotEmpty())
-                $('#order-form, #cart-form').submit(function(e) {
-                    if (!$('#rasakopi').val() && !$('#rasakopi-cart').val()) {
+            @if($data_jeniskopi->isNotEmpty())
+                $('#order-form, #cart-form, #add-to-cart-form').submit(function(e) {
+                    if (!$('#jeniskopi').val() && !$('#jeniskopi-cart').val()) {
                         e.preventDefault();
-                        $('#rasa-error').removeClass('hidden');
+                        $('#jenis-error').removeClass('hidden');
                     }
                 });
             @endif

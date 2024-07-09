@@ -21,22 +21,22 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    @foreach ($rasakopi as $index => $item)
+                    @foreach ($jeniskopi as $index => $item)
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
-                        <td>{{ $item->nama_rasa }}</td>
+                        <td>{{ $item->nama_jenis }}</td>
                         <td>{{ $item->kopi->jenis_kopi }}</td>
                         <td class="w-8">
                             <div>
                                 <div class="flex gap-2">
-                                    <a class="rounded-md text-white text-xs bg-yellow-500 p-2 px-4 edit-button" href="" data-id="{{ $item->id }}" data-nama="{{ $item->nama_rasa }}" data-kopi="{{ $item->kopi->id }}">
+                                    <a class="rounded-md text-white text-xs bg-yellow-500 p-2 px-4 edit-button" href="" data-id="{{ $item->id }}" data-nama="{{ $item->nama_jenis }}" data-kopi="{{ $item->kopi->id }}">
                                         Edit
                                     </a>
-                                    <form action="/delete_rasa/{{ $item->id }}" method="POST">
+                                    <form action="/delete_jenis/{{ $item->id }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button class="rounded-md text-white text-xs bg-red-500 p-2" 
-                                                onclick="return confirm('Anda yakin akan menghapus Jenis Kopi {{ $item->nama_rasa }}?')">
+                                                onclick="return confirm('Anda yakin akan menghapus Jenis Kopi {{ $item->nama_jenis }} pada Rasa {{ $item->kopi->jenis_kopi }}?')">
                                             Delete
                                         </button>
                                     </form>
@@ -60,11 +60,11 @@
                 </button>
             </div>
             
-            <form action="/add-rasakopi" method="POST">
+            <form action="/add-jeniskopi" method="POST">
                 @csrf
                 <div class="mb-4">
-                    <label for="rasa" class="block text-sm font-medium text-gray-700">Nama Jenis Kopi</label>
-                    <input type="text" name="rasa" id="rasa" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <label for="jenis" class="block text-sm font-medium text-gray-700">Nama Jenis Kopi</label>
+                    <input type="text" name="jenis" id="jenis" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
                     <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Nama Rasa Kopi</label>
@@ -91,18 +91,18 @@
     <div id="editModal" class="hidden">
         <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
             <div class="flex justify-between items-center">
-                <h1 class="text-lg font-semibold mb-4">Edit Rasa Kopi</h1>
+                <h1 class="text-lg font-semibold mb-4">Edit Jenis Kopi</h1>
                 <button id="closeEditModalButton" class="p-2">
                     <h1 class="text-lg font-semibold mb-4">x</h1>
                 </button>
             </div>
             
-            <form id="editRasaForm" method="POST">
+            <form id="editJenisForm" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
-                    <label for="edit_rasa" class="block text-sm font-medium text-gray-700">Nama Jenis Kopi</label>
-                    <input type="text" name="rasa" id="edit_rasa" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <label for="edit_jenis" class="block text-sm font-medium text-gray-700">Nama Jenis Kopi</label>
+                    <input type="text" name="jenis" id="edit_jenis" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
                     <label for="edit_nama_kopi" class="block text-sm font-medium text-gray-700">Nama Rasa Kopi</label>
@@ -148,9 +148,9 @@
                 const id = this.getAttribute('data-id');
                 const nama = this.getAttribute('data-nama');
                 const kopiId = this.getAttribute('data-kopi');
-                document.getElementById('edit_rasa').value = nama;
+                document.getElementById('edit_jenis').value = nama;
                 document.getElementById('edit_nama_kopi').value = kopiId;
-                document.getElementById('editRasaForm').setAttribute('action', '/edit-rasakopi/' + id);
+                document.getElementById('editJenisForm').setAttribute('action', '/edit-jeniskopi/' + id);
                 document.getElementById('editModal').classList.remove('hidden');
                 document.getElementById('editModal').classList.add('bg-[#0000006f]', 'fixed', 'top-0', 'left-0', 'w-full', 'h-full', 'flex', 'items-center', 'justify-center');
             });

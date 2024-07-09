@@ -16,8 +16,13 @@ class Kopi extends Model
         return $this->hasMany(Cart::class);
     }
 
-    public function rasakopi()
+    public function jeniskopi()
     {
-        return $this->hasMany(RasaKopi::class);
+        return $this->hasMany(JenisKopi::class);
     }
+
+    // public function rasakopi()
+    // {
+    //     return $this->hasMany(RasaKopi::class);
+    // }
 }
