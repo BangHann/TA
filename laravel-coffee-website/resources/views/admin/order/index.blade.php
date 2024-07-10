@@ -51,7 +51,7 @@
                         tableRows += '<td>' + (item.bukti_payment ? '<img class="" src="/images/bukti_bayar/' + item.bukti_payment + '" alt="gambar kopi">' : 
                                         '<p class="text-red-600 font-semibold">Belum Bayar</p>') + '</td>';
                         tableRows += '<td>' + new Date(item.created_at).toLocaleDateString() + '</td>'; // Mengubah tanggal menjadi hanya tanggal
-                        tableRows += '<td class="w-[211px]">' + generateActionButtons(item) + '</td>'; // Menggunakan fungsi generateActionButtons()
+                        tableRows += '<td class="w-[214px]">' + generateActionButtons(item) + '</td>'; // Menggunakan fungsi generateActionButtons()
                         
                         tableRows += '</tr>';
                     });
@@ -66,17 +66,17 @@
         loadData();
 
         // Auto reload data 
-        setInterval(loadData, 10000);
+        setInterval(loadData, 15000);
 
         // Menambahkan fungsi generateActionButtons() di dalam $(document).ready()
         function generateActionButtons(item) {
-            var actionButtons = '<div class="flex gap-2">';
+            var actionButtons = '<div class="flex justify-between gap-2">';
             if (item.bukti_payment) {
-                actionButtons += '<a class="p-2 bg-primary rounded-md text-sm text-secondary" href="/order-detail/' + item.id + '">Detail Order</a>';
+                actionButtons += '<a class="py-2 px-3 bg-primary rounded-md text-xs text-secondary" href="/order-detail/' + item.id + '">Detail Order</a>';
                 if (item.order_telah_diantar == 'Belum diantar') {
                     actionButtons += '<form action="/delivered/' + item.id + '" method="POST">';
                     actionButtons += '@csrf';
-                    actionButtons += '<button class=" text-sm rounded-md p-2 bg-secondary border border-secondary text-primary hover:bg-[#25211a]" type="submit" onclick="return confirm(\'Pesanan sudah lengkap?\')">Delivered ?</button>';
+                    actionButtons += '<button class=" text-xs rounded-md py-2 px-3 bg-secondary border border-secondary text-primary hover:bg-[#25211a]" type="submit" onclick="return confirm(\'Pesanan sudah lengkap?\')">Delivered ?</button>';
                     actionButtons += '</form>';
                 }
             } else {

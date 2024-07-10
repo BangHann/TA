@@ -25,7 +25,13 @@
                     <div class="card-body m-2">
                         <h3 class="card-title text-sm leading-5">{{ $item->jenis_kopi }}</h3>
                         {{-- <p class="card-text" style="text-align: justify">{{ $item->deskripsi }}</p> --}}
-                        <b><p class="card-text text-sm">Rp {{ number_format($item->harga, 2) }}</p></b>
+                        {{-- <b><p class="card-text text-sm">Rp {{ number_format($item->harga, 2) }}</p></b> --}}
+                        @if($item->diskon > 0)
+                            <s class="text-xs">Rp. {{ number_format($item->harga, 0, ',', '.') }}</s>
+                            <b><p class="card-text text-sm">  Rp. {{ number_format($item->harga * (1 - $item->diskon / 100), 0, ',', '.') }}</p></b>
+                        @else
+                            <b><p class="card-text text-sm"> Rp. {{ number_format($item->harga, 0, ',', '.') }}</p></b>
+                        @endif
                         {{-- <p class="card-text text-[10px]">Stok: {{ $item->stok }}</p> --}}
                         <!-- Tambahan informasi lainnya sesuai kebutuhan -->
 

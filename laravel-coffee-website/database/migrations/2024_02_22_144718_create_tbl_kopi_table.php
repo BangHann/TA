@@ -18,12 +18,11 @@ return new class extends Migration
             $table->float('harga');
             $table->integer('diskon')->nullable();
             $table->string('deskripsi');
+            $table->integer('stok')->nullable();
             $table->timestamps();
-
             // Foreign key ke tabel rasa kopi
             // $table->unsignedBigInteger('rasa_id');
             // $table->foreign('rasa_id')->references('id')->on('tbl_rasa_kopi')->onDelete('cascade');
-            $table->integer('stok')->nullable();
         });
     }
 

@@ -6,7 +6,15 @@
             <img class="rounded-lg h-[300px] object-cover" src="{{ asset('images/' . $detail_kopi->foto) }}" alt="foto kopi">
             <p class="pt-2 text-md">{{ $detail_kopi->jenis_kopi }}</p>
             <div class="flex items-center justify-between">
-                <p class="font-semibold text-xl">Rp. <span id="total-price">{{ $detail_kopi->harga }}</span></p>
+                <p class="font-semibold text-xl">
+                    {{-- Rp. <span id="total-price">{{ $detail_kopi->harga }}</span> --}}
+                    @if($detail_kopi->diskon > 0)
+                        <s class="text-xs">Rp. {{ number_format($detail_kopi->harga, 0, ',', '.') }}</s>
+                        Rp. {{ number_format($detail_kopi->harga * (1 - $detail_kopi->diskon / 100), 0, ',', '.') }}
+                    @else
+                        Rp. {{ number_format($detail_kopi->harga, 0, ',', '.') }}
+                    @endif
+                </p>
                 <div class="flex items-center ml-4">
                     <button id="decrease-qty" class="bg-primary text-secondary text-sm font-medium px-[9px] py-1 rounded-3xl">-</button>
                     <input type="text" id="quantity" name="quantity" value="1" class="font-medium w-12 h-8 text-center border-none" readonly>
@@ -14,9 +22,9 @@
                 </div>
             </div>
             
-            {{-- <div class="flex text-xs items-center gap-1 mt-2">
+            <div class="flex text-xs items-center gap-1 mt-2">
                 <p>Stock {{ $detail_kopi->stok }}</p>
-            </div> --}}
+            </div>
             @if($data_jeniskopi->isNotEmpty())
                 <p class="font-semibold pt-4">Jenis Kopi</p>
                 <div class="">

@@ -16,7 +16,7 @@
                     <tr class="bg-primary">
                         <th class="w-5">No</th>
                         <th>Jenis Kopi</th>
-                        <th>Rasa Kopi</th>
+                        <th>Menu Kopi</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -36,7 +36,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="rounded-md text-white text-xs bg-red-500 p-2" 
-                                                onclick="return confirm('Anda yakin akan menghapus Jenis Kopi {{ $item->nama_jenis }} pada Rasa {{ $item->kopi->jenis_kopi }}?')">
+                                                onclick="return confirm('Anda yakin akan menghapus Jenis Kopi {{ $item->nama_jenis }} pada Menu {{ $item->kopi->jenis_kopi }}?')">
                                             Delete
                                         </button>
                                     </form>
@@ -67,9 +67,9 @@
                     <input type="text" name="jenis" id="jenis" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
-                    <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Nama Rasa Kopi</label>
+                    <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
                     <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="nama_kopi" id="nama_kopi" onchange="toggleTableInput()" required>
-                        <option value="" disabled selected hidden>Pilih Rasa Kopi</option>
+                        <option value="" disabled selected hidden>Pilih Menu Kopi</option>
                         @foreach ($kopi as $data)
                             <option value="{{ $data->id }}">{{ $data->jenis_kopi }}</option>
                         @endforeach
@@ -105,9 +105,9 @@
                     <input type="text" name="jenis" id="edit_jenis" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
-                    <label for="edit_nama_kopi" class="block text-sm font-medium text-gray-700">Nama Rasa Kopi</label>
+                    <label for="edit_nama_kopi" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
                     <select class="mt-1 w-full text-sm font-medium shadow-sm sm:text-sm border-gray-300 rounded-md" name="nama_kopi" id="edit_nama_kopi" required>
-                        <option value="" disabled selected hidden>Pilih Rasa Kopi</option>
+                        <option value="" disabled selected hidden>Pilih Menu Kopi</option>
                         @foreach ($kopi as $data)
                             <option value="{{ $data->id }}">{{ $data->jenis_kopi }}</option>
                         @endforeach

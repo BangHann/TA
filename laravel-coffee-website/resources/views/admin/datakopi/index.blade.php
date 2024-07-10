@@ -2,11 +2,11 @@
 
 @section('admin-content')
     <div class="admin-container">
-        <p class="text-2xl font-semibold">Manajemen Rasa Kopi</p>
+        <p class="text-2xl font-semibold">Manajemen Menu Kopi</p>
 
         <div class="flex justify-end">
             <button id="openModalButton" class="rounded-md text-secondary border-secondary border font-medium text-xs bg-primary p-2 px-4 hover:bg-[#ddc79e]">
-                + Tambah Rasa Kopi
+                + Tambah Menu Kopi
             </button>
         </div>
 
@@ -15,11 +15,12 @@
                 <thead>
                     <tr class="bg-primary">
                         <th class="w-5">No</th>
-                        <th>Rasa Kopi</th>
-                        {{-- <th>Stok</th> --}}
-                        <th>Harga</th>
+                        <th class="w-[140px]">Menu Kopi</th>
+                        <th class="w-[80px]">Stok</th>
+                        <th class="w-[140px]">Harga</th>
+                        <th class="w-[80px]">Diskon</th>
                         <th class="w-[140px]">Gambar</th>
-                        <th class="w-[300px]">Deskripsi</th>
+                        <th class="">Deskripsi</th>
                         <th class="w-8">Action</th>
                     </tr>
                 </thead>
@@ -28,8 +29,23 @@
                     <tr>
                         <td class="text-center">{{ $index + 1 }}</td>
                         <td>{{ $item->jenis_kopi }}</td>
-                        {{-- <td>{{ $item->stok }}</td> --}}
-                        <td>Rp. {{ number_format($item->harga , 2) }}</td>
+                        <td class="">{{ $item->stok }}</td>
+                        <td>
+                            @if($item->diskon > 0)
+                                <s class="text-xs">Rp. {{ number_format($item->harga, 0, ',', '.') }}</s><br>
+                                Rp. {{ number_format($item->harga * (1 - $item->diskon / 100), 0, ',', '.') }}
+                            @else
+                                Rp. {{ number_format($item->harga, 0, ',', '.') }}
+                            @endif
+                        </td>
+                        <td>
+                            @if($item->diskon > 0)
+                                {{$item->diskon}} %
+                            @else
+                                -
+                            @endif
+                        </td>
+                        
                         <td>
                             <img class="" src="{{ asset('images/' . $item->foto) }}" alt="gambar kopi">
                         </td>
@@ -46,7 +62,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="rounded-md text-white text-xs bg-red-500 p-2" 
-                                                onclick="return confirm('Anda yakin akan menghapus Kopi Rasa{{ $item->jenis_kopi }}?')">
+                                                onclick="return confirm('Anda yakin akan menghapus Menu{{ $item->jenis_kopi }}?')">
                                             Delete
                                         </button>
                                     </form>
@@ -64,7 +80,7 @@
     <div id="myModal" class="hidden">
         <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
             <div class="flex justify-between items-center">
-                <h1 class="text-lg font-semibold mb-4">Tambah Rasa Kopi</h1>
+                <h1 class="text-lg font-semibold mb-4">Tambah Menu Kopi</h1>
                 <button id="closeModalButton" class="p-2">
                     <h1 class="text-lg font-semibold mb-4">x</h1>
                 </button>
@@ -73,7 +89,7 @@
             <form action="/add_kopi" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Rasa Kopi</label>
+                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
                     <input type="text" name="jenis_kopi" id="jenis_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 {{-- <div class="mb-4">
@@ -81,7 +97,7 @@
                     <input type="number" name="stok_kopi" id="stok_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div> --}}
                 <div class="mb-4">
-                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Rasa Kopi</label>
+                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Menu Kopi</label>
                     <input type="number" name="harga_kopi" id="harga_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
@@ -109,7 +125,7 @@
     <div id="modal_edit" class="hidden">
         <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
             <div class="flex justify-between items-center">
-                <h1 class="text-lg font-semibold mb-4">Edit Rasa Kopi</h1>
+                <h1 class="text-lg font-semibold mb-4">Edit Menu Kopi</h1>
                 <button id="closeEditModalButton" class="p-2">
                     <h1 class="text-lg font-semibold mb-4">x</h1>
                 </button>
@@ -119,7 +135,7 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Rasa Kopi</label>
+                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
                     <input type="text" name="jenis_kopi" id="jenis_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 {{-- <div class="mb-4">
@@ -127,7 +143,7 @@
                     <input type="number" name="stok_kopi" id="stok_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div> --}}
                 <div class="mb-4">
-                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Rasa Kopi</label>
+                    <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Menu Kopi</label>
                     <input type="number" name="harga_kopi" id="harga_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
