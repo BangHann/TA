@@ -21,7 +21,7 @@
     <link rel="manifest" crossorigin="use-credentials" href="{{ asset('/manifest.json') }}">
 
 </head>
-<body>
+<body class="bg-[#ececec]">
     @include('layouts.nav_user')
     
     <div class="mt-[80px]">

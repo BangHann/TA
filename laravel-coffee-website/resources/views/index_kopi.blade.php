@@ -23,12 +23,24 @@
                 <a class="card" href="/kopi/{{ $item->id }}">
                     <img src="{{ asset('images/' . $item->foto) }}" class="card-img-kopi rounded-t-lg" alt="{{ $item->jenis_kopi }}">
                     <div class="card-body m-2">
-                        <h3 class="card-title text-sm leading-5">{{ $item->jenis_kopi }}</h3>
+                        <div class="flex items-center gap-2">
+                            @if ($item->diskon > 0)
+                                <h3 class="card-title text-sm leading-5">{{ $item->jenis_kopi }}</h3>
+                                <p class="text-xs font-bold text-red-500">{{ $item->diskon }}%</p>
+                            @else
+                                <h3 class="card-title text-sm leading-5">{{ $item->jenis_kopi }}</h3>
+                            @endif
+                        </div>
+                        
                         {{-- <p class="card-text" style="text-align: justify">{{ $item->deskripsi }}</p> --}}
                         {{-- <b><p class="card-text text-sm">Rp {{ number_format($item->harga, 2) }}</p></b> --}}
                         @if($item->diskon > 0)
-                            <s class="text-xs">Rp. {{ number_format($item->harga, 0, ',', '.') }}</s>
-                            <b><p class="card-text text-sm">  Rp. {{ number_format($item->harga * (1 - $item->diskon / 100), 0, ',', '.') }}</p></b>
+                            <div class="flex items-center gap-1">
+                                <p class="card-text text-sm font-bold">
+                                    Rp. {{ number_format($item->harga * (1 - $item->diskon / 100), 0, ',', '.') }}
+                                </p>
+                                <s class="text-xs text-gray-400">Rp. {{ number_format($item->harga, 0, ',', '.') }}</s>
+                            </div>
                         @else
                             <b><p class="card-text text-sm"> Rp. {{ number_format($item->harga, 0, ',', '.') }}</p></b>
                         @endif
