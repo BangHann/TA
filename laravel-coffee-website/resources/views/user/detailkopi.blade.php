@@ -1,20 +1,34 @@
 @extends('layouts.user')
 @section('judul', $detail_kopi->jenis_kopi)
 @section('content')
-    <div class="my-4 lg:flex justify-center h-screen">
+    <div class="my-4 lg:flex justify-center h-screen pt-[80px] bg-white">
         <div class="mx-6 flex flex-col">
             <img class="rounded-lg h-[300px] object-cover" src="{{ asset('images/' . $detail_kopi->foto) }}" alt="foto kopi">
-            <p class="pt-2 text-md">{{ $detail_kopi->jenis_kopi }}</p>
+            {{-- <p class="pt-2 text-md">{{ $detail_kopi->jenis_kopi }}</p> --}}
+            <div class="flex items-center gap-2 pt-2 ">
+                @if ($detail_kopi->diskon > 0)
+                    <p class="text-md">{{ $detail_kopi->jenis_kopi }}</p>
+                    <p class="text-xs font-bold text-red-500">-{{ $detail_kopi->diskon }}%</p>
+                @else
+                    <p class="text-md">{{ $detail_kopi->jenis_kopi }}</p>
+                @endif
+            </div>
             <div class="flex items-center justify-between">
-                <p class="font-semibold text-xl">
+                <div class="flex items-center gap-2">
                     {{-- Rp. <span id="total-price">{{ $detail_kopi->harga }}</span> --}}
                     @if($detail_kopi->diskon > 0)
-                        <s class="text-xs">Rp. {{ number_format($detail_kopi->harga, 0, ',', '.') }}</s>
-                        Rp. {{ number_format($detail_kopi->harga * (1 - $detail_kopi->diskon / 100), 0, ',', '.') }}
+                        <p class="font-semibold text-xl ">
+                            Rp. {{ number_format($detail_kopi->harga * (1 - $detail_kopi->diskon / 100), 0, ',', '.') }}
+                        </p>
+                        <s class="text-xs text-gray-400">
+                            Rp. {{ number_format($detail_kopi->harga, 0, ',', '.') }}
+                        </s>
                     @else
-                        Rp. {{ number_format($detail_kopi->harga, 0, ',', '.') }}
+                        <p class="font-semibold text-xl ">
+                            Rp. {{ number_format($detail_kopi->harga, 0, ',', '.') }}
+                        </p>
                     @endif
-                </p>
+                </div>
                 <div class="flex items-center ml-4">
                     <button id="decrease-qty" class="bg-primary text-secondary text-sm font-medium px-[9px] py-1 rounded-3xl">-</button>
                     <input type="text" id="quantity" name="quantity" value="1" class="font-medium w-12 h-8 text-center border-none" readonly>
@@ -23,7 +37,7 @@
             </div>
             
             <div class="flex text-xs items-center gap-1 mt-2">
-                <p>Stock {{ $detail_kopi->stok }}</p>
+                <p>Stok {{ $detail_kopi->stok }}</p>
             </div>
             @if($data_jeniskopi->isNotEmpty())
                 <p class="font-semibold pt-4">Jenis Kopi</p>

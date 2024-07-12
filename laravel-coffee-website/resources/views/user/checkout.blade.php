@@ -2,7 +2,7 @@
 @section('judul', 'Checkout')
 @section('content')
 
-<div class="my-4 mx-6 flex flex-col">
+<div class="pt-[80px] mx-6 flex flex-col">
     <div class="mb-4">
         <p class="text-xl font-semibold">Checkout</p>
         <div class="flex flex-row justify-between">
@@ -29,7 +29,7 @@
         </div> --}}
     
         @foreach ($cart_data as $cart)
-            <div class=" border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-1">
+            <div class="bg-white border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-col gap-1">
                 <div class="flex justify-end mr-2">
                     <a class="font-semibold text-[12px] text-red-500" href="/delete_cart/{{ $cart->id }}" onclick="return confirm('Anda yakin akan menghapus pesanan?')">
                     Hapus
@@ -57,7 +57,7 @@
                 </div>
             </div>
         @endforeach
-        <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between">
+        <div class="bg-white text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between">
             <p class="font-semibold">Total Harga</p>
             <p>{{ $total_amount }}</p>
             <input type="hidden" name="total_amount" value="{{ $total_amount }}">
@@ -80,7 +80,7 @@
             @foreach ($payment_method as $data)
                 <div class="payment-method" data-jenis="{{ $data->jenis }}">
                     @if ($data->jenis=='Qris')
-                        <div class="text-xs border rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3">
+                        <div class="bg-white text-xs border rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3">
                             <div>
                                 <p class="font-semibold">QRIS</p>
                                 <p class="">{{ $data->atas_nama }}</p>
@@ -88,7 +88,7 @@
                             <img src="{{ asset('images/'.$data->foto) }}" alt="qris">
                         </div>
                     @else
-                        <div class="text-xs border rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
+                        <div class="bg-white text-xs border rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
                             <div>
                                 <p class="font-semibold">{{ $data->nama }}</p>
                                 <p class="">{{ $data->atas_nama }}</p>
@@ -126,7 +126,7 @@
         {{-- kirim bukti pembayaran --}}
         <label for="fileInput" class="text-xs">
             <p class="font-semibold">Bukti Pembayaran</p>
-            <input id="fileInput" type="file" name='bukti_bayar' class="p-1 text-xs rounded-md border border-[#D9D9D9]">
+            <input id="fileInput" type="file" name='bukti_bayar' class="bg-white p-1 text-xs rounded-md border border-[#D9D9D9]">
         </label>
         @if ($errors->has('bukti_bayar'))
             <div class="text-red-600 text-xs my-1">

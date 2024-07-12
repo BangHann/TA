@@ -6,11 +6,11 @@
             {{ session('success') }}
         </div>
     @endif --}}
-    <div class="flex flex-col items-center lg:flex lg:justify-center h-screen my-4">
+    <div class="pt-[80px] flex flex-col items-center lg:flex lg:justify-center h-screen my-4">
         
         @if ($cart_data->count() > 0)
             @foreach ($cart_data as $cart)
-                <div class="cart-item mb-4">
+                <div class="cart-item mb-4 bg-white">
                     <div class="flex justify-end m-1 mr-2">
                         <a class="font-semibold text-[12px] text-red-500" href="/delete_cart/{{ $cart->id }}" onclick="return confirm('Anda yakin akan menghapus pesanan?')">
                         Hapus

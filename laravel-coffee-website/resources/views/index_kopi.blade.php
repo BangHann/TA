@@ -17,16 +17,16 @@
         <p class="text-2xl font-bold my-4">Seteguk Kopi</p>
     </center> --}}
     
-    <div class="my-4 sm:flex justify-center">
+    <div class="my-4 sm:flex justify-center pt-[80px]">
         <div class="grid-card mx-3 sm:mx-7 gap-4">
             @foreach ($kopi as $item)
                 <a class="card" href="/kopi/{{ $item->id }}">
                     <img src="{{ asset('images/' . $item->foto) }}" class="card-img-kopi rounded-t-lg" alt="{{ $item->jenis_kopi }}">
                     <div class="card-body m-2">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-1">
                             @if ($item->diskon > 0)
                                 <h3 class="card-title text-sm leading-5">{{ $item->jenis_kopi }}</h3>
-                                <p class="text-xs font-bold text-red-500">{{ $item->diskon }}%</p>
+                                <p class="text-xs font-bold text-red-500">-{{ $item->diskon }}%</p>
                             @else
                                 <h3 class="card-title text-sm leading-5">{{ $item->jenis_kopi }}</h3>
                             @endif

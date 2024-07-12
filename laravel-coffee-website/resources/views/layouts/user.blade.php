@@ -24,7 +24,7 @@
 <body class="bg-[#ececec]">
     @include('layouts.nav_user')
     
-    <div class="mt-[80px]">
+    <div class="">
         {{-- <h2>Layout User</h2> --}}
         @yield('content')
     </div>

@@ -1,7 +1,7 @@
 <nav class="fixed w-full z-[9999] shadow-[0_4px_6px_rgba(0,0,0,0.1)] top-0">
     <div class="p-2 flex justify-between items-center">
         <a href="/" class="flex items-center gap-2">
-            <img class="w-14 pl-2" src="{{ asset('images/logo_icon_black.png') }}" alt="logo seteguk kopi">
+            <img class="w-10" src="{{ asset('images/logo_icon_black.png') }}" alt="logo seteguk kopi">
             <p class="text-lg font-semibold">Seteguk Kopi</p>
         </a>
         <div class="flex items-center gap-2">
@@ -21,7 +21,7 @@
                         {{-- <p id="cartCount">{{ $cartCount }}</p> --}}
                     </div>
                 </a>
-                <div class="bg-[#00000050] w-0.5 h-6 mx-3"></div>
+                <div class="bg-[#00000050] w-0.5 h-6 mx-1"></div>
                 <a href="/profile" class="flex items-center gap-2 sm:hidden">
                     <img class="h-9 w-9 object-cover rounded-[50%]" src="{{ asset('images/'. Auth::user()->user_foto) }}" alt="">
                     {{-- <p class="hidden sm:block">Hello, {{ Auth::user()->name_user }}</p> --}}
