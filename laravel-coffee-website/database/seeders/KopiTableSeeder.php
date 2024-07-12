@@ -49,7 +49,7 @@ class KopiTableSeeder extends Seeder
             'foto' => 'kopi_pandan.jpg',
             'harga' => 12000,
             'diskon' => 0,
-            'stok' => 30,
+            'stok' => 0,
             'deskripsi' => 'Minuman kopi unik yang menggabungkan kelezatan kopi dengan aroma dan rasa khas daun pandan.'
         ]);
 
