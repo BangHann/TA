@@ -40,6 +40,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->back();
         } else if($role === 'admin'){
             return redirect('/admin-dashboard');
+        }else if($role === 'pegawai'){
+            return redirect('/order-list');
         }else{
             return redirect()->back();
         }

@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Auth;
 
-class UserMiddleware
+class PegawaiMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,10 +16,11 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth()->user()->role=='user' || Auth()->user()->role=='admin')
-        {
+        // Assuming your User model has a 'role' attribute
+        if (Auth::check() && (Auth::user()->role == 'pegawai' || Auth::user()->role == 'admin')) {
             return $next($request);
         }
         abort(401);
+        // return redirect('/'); // Redirect to home or any other page if not authorized
     }
 }

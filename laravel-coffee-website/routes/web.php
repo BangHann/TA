@@ -72,6 +72,24 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/delete_metode/{id}', [PaymentMethodController::class, 'destroy']);
 });
 
+Route::middleware(['auth', 'pegawai'])->group(function () {
+    Route::get('/admin-menukopi', [KopiController::class, 'datakopiadmin']);
+    Route::post('/add_kopi', [KopiController::class, 'tambah']);
+    Route::put('/update_kopi/{id}', [KopiController::class, 'update']);
+    Route::delete('/delete_kopi/{id}', [KopiController::class, 'hapus']);
+    
+    Route::get('/admin-jeniskopi', [JenisKopiController::class, 'index']);
+    Route::get('/order-list', [TransaksiAdminController::class, 'orderlist_admin']);
+    Route::get('/data-order-admin', [TransaksiAdminController::class, 'data_order_admin']);
+    Route::get('/order-detail/{id}', [TransaksiAdminController::class, 'detail']);
+    Route::post('/delivered/{id}', [TransaksiAdminController::class, 'delivered']);
+    Route::get('/undeliver/count', [TransaksiAdminController::class, 'count_undelivered']);
+
+    Route::post('/add-jeniskopi', [JenisKopiController::class, 'add']);
+    Route::put('/edit-jeniskopi/{id}', [JenisKopiController::class, 'update']);
+    Route::delete('/delete_jenis/{id}', [JenisKopiController::class, 'destroy']);
+});
+
 // Route::middleware('auth')->group(function () {
 Route::middleware(['auth','user'])->group(function () {
     Route::get('/cart', [CartController::class, 'index_cart']);

@@ -33,12 +33,10 @@ class UserSeeder extends Seeder
 
         User::create([
             'name_user' => 'Seeder',
-            'role' => 'admin',
+            'role' => 'pegawai',
             'password' => Hash::make('123'), // Ganti dengan password yang diinginkan
-            // 'username' => 'admin banghan',
             'user_jenis_kelamin' => 'Laki-Laki',
             'user_foto' => 'paran.jpg',
-            // 'user_status' => 1,
             'alamat' => 'Indonesia',
             'no_hp' => '08'.$faker->numberBetween(1000000000, 9999999999),
             'email' => 'seeder@mail.com',
