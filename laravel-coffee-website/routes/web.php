@@ -35,7 +35,7 @@ Route::get('/dashboard', function () {
 Route::get('/home', [GatewayController::class, 'door']);
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'pemilik'])->group(function () {
     Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
     Route::get('/admin-menukopi', [KopiController::class, 'datakopiadmin']);
     // Route::get('/admin-jeniskopi', [KopiController::class, 'datakopiadmin']);
@@ -72,7 +72,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/delete_metode/{id}', [PaymentMethodController::class, 'destroy']);
 });
 
-Route::middleware(['auth', 'pegawai'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin-menukopi', [KopiController::class, 'datakopiadmin']);
     Route::post('/add_kopi', [KopiController::class, 'tambah']);
     Route::put('/update_kopi/{id}', [KopiController::class, 'update']);

@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name_user' => 'Banghan',
-            'role' => 'admin',
+            'role' => 'pemilik',
             'password' => Hash::make('123'), // Ganti dengan password yang diinginkan
             // 'username' => 'admin banghan',
             'user_jenis_kelamin' => 'Laki-Laki',
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name_user' => 'Seeder',
-            'role' => 'pegawai',
+            'role' => 'admin',
             'password' => Hash::make('123'), // Ganti dengan password yang diinginkan
             'user_jenis_kelamin' => 'Laki-Laki',
             'user_foto' => 'paran.jpg',

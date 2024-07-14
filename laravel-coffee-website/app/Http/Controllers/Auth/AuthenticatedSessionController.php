@@ -38,9 +38,9 @@ class AuthenticatedSessionController extends Controller
             // return redirect('/'); // Redirect ke dashboard admin jika peran adalah admin
             // return redirect()->intended('/');
             return redirect()->back();
-        } else if($role === 'admin'){
+        } else if($role === 'pemilik'){
             return redirect('/admin-dashboard');
-        }else if($role === 'pegawai'){
+        }else if($role === 'admin'){
             return redirect('/order-list');
         }else{
             return redirect()->back();

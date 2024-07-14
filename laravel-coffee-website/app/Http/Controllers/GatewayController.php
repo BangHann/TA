@@ -24,7 +24,7 @@ class GatewayController extends Controller
                 $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
                 return view('index_kopi', compact('kopi', 'cartCount'));
             }
-            else if($role=='admin')
+            else if($role=='pemilik')
             {
                 $totalPrice = Transaksi::sum('total_price');
                 $totalTransaksi = Transaksi::count();
