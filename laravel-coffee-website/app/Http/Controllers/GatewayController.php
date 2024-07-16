@@ -97,9 +97,16 @@ class GatewayController extends Controller
         
                 $years = range(now()->year - 5, now()->year); // Mengambil 5 tahun terakhir
         
-                return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years'));
-        
-                // return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities'));
+                // Data stok kopi
+                $kopiStocks = Kopi::select('jenis_kopi', 'stok')->get();
+                $kopiStockLabels = $kopiStocks->pluck('jenis_kopi');
+                $kopiStockQuantities = $kopiStocks->pluck('stok');
+
+                return view('admin.main', compact(
+                    'totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 
+                    'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years',
+                    'kopiStockLabels', 'kopiStockQuantities'
+                ));
             }
             // {
             //     $totalPrice = Transaksi::sum('total_price');

@@ -1,42 +1,40 @@
 <div class="w-[220px] h-screen bg-[#FFE5B6] fixed top-0 left-0 overflow-y-auto">
     <div class="flex items-center gap-2 p-2">
         <img class="w-14 pl-2" src="{{ asset('images/logo_icon_black.png') }}" alt="logo seteguk kopi">
-        <p class="text-xl font-bold">Admin</p>
+        <p class="text-xl font-bold">{{ ucwords(Auth::user()->role) }}</p>
     </div>
 
     <div class="h-[1px] bg-black my-1 mx-2"></div>
 
     <div class="flex flex-col gap-1">
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-dashboard')) bg-primary_hover @endif" href="/admin-dashboard">Dashboard</a>
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('/order-list')) bg-primary_hover @endif" href="/order-list">
-            <div class="flex items-center gap-2">
-                <p>Transaksi</p>
-                <p id="undelivered-count" class="hidden">-</p>
-            </div>
-        </a>
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-menukopi')) bg-primary_hover @endif" href="/admin-menukopi">Menu Kopi</a>
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-jeniskopi')) bg-primary_hover @endif" href="/admin-jeniskopi">Jenis Kopi</a>
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('payment_method')) bg-primary_hover @endif" href="/payment_method">Payment Method</a>
-        {{-- <details>
-            <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('p') || Request::is('admin-listrasakopi')) bg-primary_hover @endif">Rasa Kopi</summary>
-            <div class="flex flex-col">
-                
-                <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-addrasakopi')) bg-primary_hover @endif" href="/admin-addrasakopi">Add Rasa</a>
-            </div>
-        </details> --}}
-        {{-- <details>
-            <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('admin-datakopi-add') || Request::is('admin-datakopi')) bg-primary_hover @endif">Data Kopi</summary>
-            <div class="flex flex-col">
-                <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-datakopi')) bg-primary_hover @endif" href="/admin-datakopi">List Kopi</a>
-                <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-datakopi-add')) bg-primary_hover @endif" href="/admin-datakopi-add">Add Kopi</a>
-            </div>
-        </details> --}}
-        {{-- <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-keuangan')) bg-primary_hover @endif" href="/admin-keuangan">Laporan Keuangan</a> --}}
-        <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('users')) bg-primary_hover @endif" href="/users">Users</a>
+        @if (Auth::user()->role == 'pemilik')
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-dashboard')) bg-primary_hover @endif" href="/admin-dashboard">Dashboard</a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('/order-list')) bg-primary_hover @endif" href="/order-list">
+                <div class="flex items-center gap-2">
+                    <p>Transaksi</p>
+                    <p id="undelivered-count" class="hidden">-</p>
+                </div>
+            </a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-menukopi')) bg-primary_hover @endif" href="/admin-menukopi">Menu Kopi</a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-jeniskopi')) bg-primary_hover @endif" href="/admin-jeniskopi">Jenis Kopi</a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('payment_method')) bg-primary_hover @endif" href="/payment_method">Payment Method</a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('users')) bg-primary_hover @endif" href="/users">Users</a>
+        @elseif(Auth::user()->role == 'admin')
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('order-list')) bg-primary_hover @endif" href="/order-list">
+                <div class="flex items-center gap-2">
+                    <p>Transaksi</p>
+                    <p id="undelivered-count" class="hidden">-</p>
+                </div>
+            </a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-menukopi')) bg-primary_hover @endif" href="/admin-menukopi">Menu Kopi</a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-jeniskopi')) bg-primary_hover @endif" href="/admin-jeniskopi">Jenis Kopi</a>
+        @endif
+        
         <form method="POST" action="{{ route('logout') }}" class="py-2 px-2 font-semibold">
             @csrf
             <button type="submit" class="w-full rounded-md py-2 bg-[#3d372b] border border-[#3d372b] text-primary hover:bg-[#25211a] font-medium text-sm">Logout</button>
         </form>
+        {{-- <a class="pl-6 py-1 hover:bg-primary_hover @if(Request::is('admin-addrasakopi')) bg-primary_hover @endif" href="/admin-addrasakopi">Add Rasa</a> --}}
     </div>
 </div>
 
@@ -70,6 +68,6 @@
         fetchData();
 
         // Auto reload data 
-        setInterval(fetchData, 5000);
+        setInterval(fetchData, 15000);
     });
 </script>

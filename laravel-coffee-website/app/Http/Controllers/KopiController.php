@@ -133,10 +133,6 @@ class KopiController extends Controller
 
         // Format data untuk chart
         $formattedData = [];
-        // foreach ($ordersPerDay as $order) {
-        //     $formattedData[$order->kopi_id]['dates'][] = $order->date;
-        //     $formattedData[$order->kopi_id]['quantities'][] = $order->total_quantity;
-        // }
         foreach ($kopiOrders as $kopiOrder) {
             $kopiId = $kopiOrder->kopi_id;
             $formattedData[$kopiId] = ['dates' => array_keys($dates), 'quantities' => array_values($dates)];
@@ -160,7 +156,16 @@ class KopiController extends Controller
 
         $years = range(now()->year - 5, now()->year); // Mengambil 5 tahun terakhir
 
-        return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years'));
+        // Data stok kopi
+        $kopiStocks = Kopi::select('jenis_kopi', 'stok')->get();
+        $kopiStockLabels = $kopiStocks->pluck('jenis_kopi');
+        $kopiStockQuantities = $kopiStocks->pluck('stok');
+
+        return view('admin.main', compact(
+            'totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 
+            'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years',
+            'kopiStockLabels', 'kopiStockQuantities'
+        ));
 
         // return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities'));
     }

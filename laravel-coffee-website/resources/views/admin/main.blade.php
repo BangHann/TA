@@ -42,29 +42,36 @@
                 <canvas id="kopiOrdersChart" class=""></canvas>
             </div>
     
-            <div class="mt-8 bg-white w-[750px] h-[420px] rounded-md p-2 pb-8">
-                {{-- <p class="font-semibold">Total Order per Hari</p>
-                <canvas id="ordersPerDayChart"></canvas> --}}
-                <div class="flex justify-between items-center mb-4">
-                    <p class="font-semibold">Total Order per Hari</p>
-                    <div class="flex gap-2">
-                        <select id="bulan" class="border border-gray-300 rounded-md p-2">
-                            @foreach ($months as $key => $month)
-                                <option value="{{ $key }}" {{ $bulan == $key ? 'selected' : '' }}>{{ $month }}</option>
-                            @endforeach
-                        </select>
-                        <select id="tahun" class="border border-gray-300 rounded-md p-2 w-[80px]">
-                            @foreach ($years as $year)
-                                <option value="{{ $year }}" {{ $tahun == $year ? 'selected' : '' }}>{{ $year }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <canvas id="ordersPerDayChart"></canvas>
+            <!-- Bar Chart for Kopi Stock -->
+            <div class="mt-8 bg-white w-[780px] h-[420px] rounded-md p-2">
+                <p class="font-semibold">Stok Menu Kopi</p>
+                <canvas id="kopiStockChart"></canvas>
             </div>
+        </div>
+
+        <div class="mt-8 bg-white h-[420px] rounded-md p-2 pb-16">
+            {{-- <p class="font-semibold">Total Order per Hari</p>
+            <canvas id="ordersPerDayChart"></canvas> --}}
+            <div class="flex justify-between items-center mb-4">
+                <p class="font-semibold">Total Order per Hari</p>
+                <div class="flex gap-2">
+                    <select id="bulan" class="border border-gray-300 rounded-md p-2">
+                        @foreach ($months as $key => $month)
+                            <option value="{{ $key }}" {{ $bulan == $key ? 'selected' : '' }}>{{ $month }}</option>
+                        @endforeach
+                    </select>
+                    <select id="tahun" class="border border-gray-300 rounded-md p-2 w-[80px]">
+                        @foreach ($years as $year)
+                            <option value="{{ $year }}" {{ $tahun == $year ? 'selected' : '' }}>{{ $year }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <canvas id="ordersPerDayChart"></canvas>
         </div>
         
         
+
     </div> 
     
 
@@ -72,6 +79,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            //PIE Chart untuk mengetahui banyak pesanan menu kopi
             const ctx = document.getElementById('kopiOrdersChart').getContext('2d');
             const data = {
                 labels: {!! json_encode($kopiLabels) !!},
@@ -116,7 +124,7 @@
             };
             new Chart(ctx, config);
 
-            // Prepare line chart data
+            // Grafik garis untuk Pendapatan dari Order per Hari // 
             const formattedData = {!! json_encode($formattedData) !!};
             const kopiNames = {!! json_encode($kopiNames) !!};
             const lineLabels = Object.values(formattedData)[0].dates; // Assuming all kopi have the same dates
@@ -129,7 +137,6 @@
                 tension: 0.1
             }));
 
-            // Grafik garis
             const ctxLine = document.getElementById('ordersPerDayChart').getContext('2d'); // Mendefinisikan ctxLine
 
             const lineData = {
@@ -164,8 +171,36 @@
                     }
                 },
             };
-
             new Chart(ctxLine, lineConfig);
+
+            // Bar Chart for Kopi Stock
+            const ctxBar = document.getElementById('kopiStockChart').getContext('2d');
+            const barData = {
+                labels: {!! json_encode($kopiStockLabels) !!},
+                datasets: [{
+                    label: 'Stok Menu Kopi',
+                    data: {!! json_encode($kopiStockQuantities) !!},
+                    backgroundColor: '#e6aa3a', 
+                    // borderColor: '#36A2EB',
+                    borderWidth: 1
+                }]
+            };
+            const barConfig = {
+                type: 'bar',
+                data: barData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+            new Chart(ctxBar, barConfig);
 
             function getRandomColor() {
                 const letters = '0123456789ABCDEF';
