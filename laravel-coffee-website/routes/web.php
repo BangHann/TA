@@ -102,7 +102,7 @@ Route::middleware(['auth','user'])->group(function () {
     Route::get('/checkout', [TransaksiController::class, 'index']);
     Route::post('/checkout_order', [TransaksiController::class, 'checkout_order']);
 
-
+    Route::get('/history-pembelian', [TransaksiController::class, 'history_pembelian']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

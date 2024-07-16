@@ -10,6 +10,7 @@ use App\Models\Kopi;
 use App\Models\Cart;
 use App\Models\Transaksi;
 use App\Models\PaymentMethod;
+use Carbon\Carbon;
 
 class TransaksiController extends Controller
 {
@@ -51,8 +52,8 @@ class TransaksiController extends Controller
         else{
             return redirect('/login');
         }
-        
     }
+
 
     public function add_order(Request $request)
     {
@@ -71,6 +72,7 @@ class TransaksiController extends Controller
             Cart::create([
                 'id_user' => Auth::id(), 
                 'kopi_id' => $request->kopi_id,
+                'jenis_kopi_id' => $request->jeniskopi,
                 'quantity' => $quantity, 
                 'jumlah' => $total
             ]);
@@ -91,6 +93,7 @@ class TransaksiController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
     }
+
 
     public function addOrder_deletedItem(Request $request)
     {
@@ -127,6 +130,7 @@ class TransaksiController extends Controller
         }
     }
 
+
     public function cart_order(Request $request)
     {
         if(Auth::id()){
@@ -143,11 +147,10 @@ class TransaksiController extends Controller
         }
     }
 
+
     public function checkout_order(Request $request)
     {
         if(Auth::id()){
-            
-            
             // Validasi request
             $request->validate([
                 // 'kopi_id' => 'required|exists:tbl_kopi,id',
@@ -195,8 +198,6 @@ class TransaksiController extends Controller
         else{
             return redirect('/login');
         }
-
-
         // Transaksi::update([
             //     'bukti_paymet' => $request->bukti_bayar,
             //     // 'bukti_paymet' =>'pakbos1.jpg',
@@ -209,5 +210,22 @@ class TransaksiController extends Controller
             
             // $existingCart = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')
             // ->where('kopi_id', $request->kopi_id)->first();
+    }
+
+    public function history_pembelian(Request $request)
+    {
+        // $transaksi_data = Cart::where('id_user', Auth::id())->get();
+        // $kopi = Kopi::all();
+        $transaksi_data = Cart::where('tbl_cart.id_user', Auth::id())
+                        ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
+                        ->select('tbl_cart.*', 'tbl_transaksi.bukti_payment', 'tbl_transaksi.created_at as transaksi_created_at', 'tbl_transaksi.order_telah_diantar')
+                        ->orderBy('tbl_transaksi.created_at', 'desc') // Mengurutkan berdasarkan transaksi_created_at terbaru
+                        ->get();
+
+         // Format the dates
+        $transaksi_data->each(function($item) {
+            $item->transaksi_created_at = Carbon::parse($item->transaksi_created_at)->format('d M Y');
+        });
+        return view('user.history_pembelian', compact('transaksi_data'));
     }
 }

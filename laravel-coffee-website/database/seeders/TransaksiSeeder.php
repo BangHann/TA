@@ -19,7 +19,8 @@ class TransaksiSeeder extends Seeder
         for ($i = 0; $i < 30; $i++) {
             Transaksi::create([
                 'name' => 'User Seeder', // Diganti dengan name_user yang sesuai
-                'id_user' => rand(1, 2), // Sesuaikan dengan jumlah data users yang ada
+                'id_user' => $faker->numberBetween(1, 4),
+                // 'id_user' => rand(1, 2, 3, 4), // Sesuaikan dengan jumlah data users yang ada
                 'total_price' => $faker->numberBetween(10000, 100000),
                 'bukti_payment' => $faker->randomElement(['1716714624.jpeg', null]),
                 'order_telah_diantar' => $faker->randomElement(['Belum diantar', 'Sudah diantar']),

@@ -34,11 +34,19 @@
                 
                 
             </div>
+
+            <div class="pt-2 px-2 font-semibold ">
+                <a href="/history-pembelian" class="w-full flex justify-center p-2 bg-primary hover:bg-[#82755d] hover:text-[#FFE5B6] text-secondary rounded-md">
+                    History Pembelian
+                </a>
+            </div>
             
 
-            <form method="POST" action="{{ route('logout') }}" class="py-2 px-2 font-semibold ">
+            <form method="POST" action="{{ route('logout') }}" class="mt-1 px-2 font-semibold ">
                 @csrf
-                <button type="submit" class="w-full py-2 bg-[#baa785] hover:bg-[#82755d] hover:text-[#FFE5B6] rounded-md">Logout</button>
+                <button type="submit" class="w-full py-2 bg-[#baa785] hover:bg-[#82755d] hover:text-[#FFE5B6] rounded-md">
+                    Logout
+                </button>
             </form>
 
             <div class="p-4 sm:p-8 bg-white  shadow sm:rounded-lg">
