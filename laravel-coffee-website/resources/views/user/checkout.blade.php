@@ -2,7 +2,7 @@
 @section('judul', 'Checkout')
 @section('content')
 
-<div class="pt-[80px] mx-6 flex flex-col">
+<div class="pt-[80px] mb-5 mx-6 flex flex-col">
     <div class="mb-4">
         <p class="text-xl font-semibold">Checkout</p>
         <div class="flex flex-row justify-between">
@@ -43,8 +43,15 @@
                         @if ($cart->jeniskopi && $cart->jeniskopi->nama_jenis)
                             <p class="mr-1 text-xs text-secondary">Jenis Kopi - {{ $cart->jeniskopi->nama_jenis }}</p>
                         @endif
-                        {{-- <p class="font-bold text-[12px]">Rp. {{ $cart->jumlah }}</p> --}}
-                        <p class="font-bold text-[12px]"><span>{{ $cart->quantity }} x </span> Rp. {{ $cart->kopi->harga }}</p>
+                        <p class="font-bold text-[12px]">
+                            @if ($cart->kopi->diskon > 0)
+                                <span>{{ $cart->quantity }} x </span> Rp. {{ $cart->kopi->harga_diskon }}
+                            @else
+                                <span>{{ $cart->quantity }} x </span> Rp. {{ $cart->kopi->harga }}
+                            @endif
+                            
+                        </p>
+                        {{-- <p class="font-bold text-[12px]"><span>{{ $cart->quantity }} x </span> Rp. {{ $cart->kopi->harga }}</p> --}}
                         <p class="font-medium text-[12px]"></p>
                         {{-- <div class="flex items-center">
                             <button id="decrease-qty" class="bg-primary text-secondary text-sm font-medium px-[9px] py-1 rounded-3xl">-</button>

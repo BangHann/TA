@@ -66,7 +66,12 @@
                         @csrf
                         <input type="hidden" name="jeniskopi" id="jeniskopi" value="">
                         <input type="hidden" name="quantity" id="order-quantity" value="1">
-                        <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga }}">
+                        @if ($detail_kopi->diskon > 0)
+                            <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga_diskon }}">
+                        @else
+                            <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga }}">
+                        @endif
+                        {{-- <input type="hidden" name="total" id="order-total" value=""> --}}
                         <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}">
                         <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
                             Order
@@ -79,7 +84,12 @@
                         @csrf
                         <input type="hidden" name="jeniskopi" id="jeniskopi" value="">
                         <input type="hidden" name="quantity" id="order-quantity" value="1">
-                        <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga }}">
+                        @if ($detail_kopi->diskon > 0)
+                            <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga_diskon }}">
+                        @else
+                            <input type="hidden" name="total" id="order-total" value="{{ $detail_kopi->harga }}">
+                        @endif
+                        {{-- <input type="hidden" name="total" id="order-total" value=""> --}}
                         <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}">
                         <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
                             Order
@@ -93,7 +103,12 @@
                     @csrf
                     <input type="hidden" name="jeniskopi" id="jeniskopi-cart" value="">
                     <input type="hidden" name="quantity" id="cart-quantity" value="1">
-                    <input type="hidden" name="total" id="cart-total" value="{{ $detail_kopi->harga }}">
+                    @if ($detail_kopi->diskon > 0)
+                        <input type="hidden" name="total" id="cart-total" value="{{ $detail_kopi->harga_diskon }}">
+                    @else
+                        <input type="hidden" name="total" id="cart-total" value="{{ $detail_kopi->harga }}">
+                    @endif
+                    {{-- <input type="hidden" name="total" id="cart-total" value=""> --}}
                     <input type="hidden" name="kopi_id" value="{{ $detail_kopi->id }}">
                     <button type="submit" class="w-full rounded-md py-3 border border-black text-black hover:bg-[#dcc69e] text-sm">
                         Add to Cart
@@ -123,9 +138,11 @@
                     }
                 });
             @endif
+            
+            var pricePerUnit = {{ $detail_kopi->diskon > 0 ? $detail_kopi->harga_diskon : $detail_kopi->harga }};
+            // var pricePerUnit = {{ $detail_kopi->harga_diskon }};
+            console.log(pricePerUnit);
 
-
-            var pricePerUnit = {{ $detail_kopi->harga }};
             function updateQuantities(qty) {
                 $('#quantity').val(qty);
                 $('#order-quantity').val(qty);

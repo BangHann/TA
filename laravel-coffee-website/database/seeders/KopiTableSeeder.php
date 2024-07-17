@@ -31,6 +31,7 @@ class KopiTableSeeder extends Seeder
             'foto' => 'kopi_gula-aren.jpg',
             'harga' => 12000,
             'diskon' => 50,
+            'harga_diskon' => 6000,
             'stok' => 30,
             'deskripsi' => 'Gula aren memberikan sentuhan manis yang lembut dan karamel, berbeda dengan gula putih biasa, menambah dimensi rasa yang unik pada kopi.'
         ]);
@@ -40,6 +41,7 @@ class KopiTableSeeder extends Seeder
             'foto' => 'kopi_hazelnut.jpg',
             'harga' => 17000,
             'diskon' => 10,
+            'harga_diskon' => 15300,
             'stok' => 25,
             'deskripsi' => 'Minuman kopi yang memanjakan dengan aroma kacang hazelnut yang kaya dan rasa yang lembut.'
         ]);
