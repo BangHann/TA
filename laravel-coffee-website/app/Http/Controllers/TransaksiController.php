@@ -204,6 +204,17 @@ class TransaksiController extends Controller
                 ]);
             }
 
+            $cartItems = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')->get();
+            foreach ($cartItems as $cart) {
+                $kopi = Kopi::find($cart->kopi_id);
+                if ($kopi->stok >= $cart->quantity) {
+                    $kopi->stok -= $cart->quantity;
+                    $kopi->save();
+                } else {
+                    return redirect('/')->with('error', 'Stok kopi tidak mencukupi untuk pesanan Anda.');
+                }
+            }
+
             Cart::where('id_user', Auth::id())->whereNull('transaksi_id')
             ->update(['transaksi_id' => $transaksi->id]);
             

@@ -52,7 +52,6 @@
                             
                         </p>
                         {{-- <p class="font-bold text-[12px]"><span>{{ $cart->quantity }} x </span> Rp. {{ $cart->kopi->harga }}</p> --}}
-                        <p class="font-medium text-[12px]"></p>
                         {{-- <div class="flex items-center">
                             <button id="decrease-qty" class="bg-primary text-secondary text-sm font-medium px-[9px] py-1 rounded-3xl">-</button>
                             <input type="text" id="quantity" name="quantity" value="{{ $cart->quantity }}" class="font-medium w-12 h-8 text-center border-none" readonly>
@@ -77,9 +76,6 @@
                 @foreach ($unique_payment_methods as $item)
                     <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="{{ $item->jenis }}">{{ $item->jenis }}</div>
                 @endforeach
-                {{-- <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Qris">Qris</div>
-                <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="Bank">Bank</div>
-                <div class="font-medium rounded-md p-2 bg-[#FFE5B6] border border-[#dcc69e] text-[#3d372b] hover:bg-[#dcc69e] text-xs filter-btn" data-jenis="E-Wallet">E-Wallet</div> --}}
             </div>
         </div>
 
@@ -106,6 +102,23 @@
                 </div>
             @endforeach
         </div>
+        
+        {{-- kirim bukti pembayaran --}}
+        <label for="fileInput" class="text-xs">
+            <p class="font-semibold">Bukti Pembayaran</p>
+            <input id="fileInput" type="file" name='bukti_bayar' class="bg-white p-1 text-xs rounded-md border border-[#D9D9D9]">
+        </label>
+        @if ($errors->has('bukti_bayar'))
+            <div class="text-red-600 text-xs my-1">
+                {{ $errors->first('bukti_bayar') }} 
+                {{-- Bukti bayar harus jpg/jpeg/png --}}
+            </div>
+        @endif
+
+        <button class="flex justify-center rounded-md p-2 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm mt-4" type="submit">
+            Kirim Bukti Pembayaran
+        </button>
+
         {{-- <div class=" text-xs border opacity-[0px] rounded-[10px] border-solid border-[#D9D9D9] mb-4 p-3 flex flex-row justify-between items-center">
             <div>
                 <p class="font-semibold">Bank BCA</p>
@@ -129,22 +142,6 @@
             </div>
             <img src="{{ asset('images/qris-try.png') }}" alt="qris">
         </div> --}}
-
-        {{-- kirim bukti pembayaran --}}
-        <label for="fileInput" class="text-xs">
-            <p class="font-semibold">Bukti Pembayaran</p>
-            <input id="fileInput" type="file" name='bukti_bayar' class="bg-white p-1 text-xs rounded-md border border-[#D9D9D9]">
-        </label>
-        @if ($errors->has('bukti_bayar'))
-            <div class="text-red-600 text-xs my-1">
-                {{ $errors->first('bukti_bayar') }} 
-                {{-- Bukti bayar harus jpg/jpeg/png --}}
-            </div>
-        @endif
-
-        <button class="flex justify-center rounded-md p-2 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm mt-4" type="submit">
-            Kirim Bukti Pembayaran
-        </button>
     </form>
     
 </div>

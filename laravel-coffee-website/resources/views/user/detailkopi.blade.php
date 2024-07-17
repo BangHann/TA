@@ -141,7 +141,7 @@
             
             var pricePerUnit = {{ $detail_kopi->diskon > 0 ? $detail_kopi->harga_diskon : $detail_kopi->harga }};
             // var pricePerUnit = {{ $detail_kopi->harga_diskon }};
-            console.log(pricePerUnit);
+            //console.log(pricePerUnit);
 
             function updateQuantities(qty) {
                 $('#quantity').val(qty);
@@ -159,7 +159,9 @@
 
             $('#increase-qty').click(function() {
                 var qty = parseInt($('#quantity').val());
-                updateQuantities(qty + 1);
+                if (qty < {{ $detail_kopi->stok }}) {
+                    updateQuantities(qty + 1);
+                }
             });
 
             $('#decrease-qty').click(function() {
