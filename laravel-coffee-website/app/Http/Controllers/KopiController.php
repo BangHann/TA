@@ -110,7 +110,6 @@ class KopiController extends Controller
     public function detail($id)
     {
         $detail_kopi = Kopi::find($id);
-        // $cartCount = Cart::where('id_user', auth()->id())->count();
         $data_jeniskopi = JenisKopi::where('kopi_id', $id)->get();
 
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
@@ -127,12 +126,9 @@ class KopiController extends Controller
     {
         if ($request->hasFile('gambar_kopi')) {
             $image = $request->file('gambar_kopi');
-            // get the extension
-            $extension = $image->getClientOriginalExtension();
-            // create a new file name
-            $new_name = 'kopi_'.time().'.'.$extension;
-            // move file to public/images and use $new_name
-            $image->move(public_path('images'), $new_name);
+            $extension = $image->getClientOriginalExtension(); // get the extension
+            $new_name = 'kopi_'.time().'.'.$extension;// create a new file name
+            $image->move(public_path('images'), $new_name);// move file to public/images and use $new_name
 
             $data = [
                 'jenis_kopi' => $request->jenis_kopi,
@@ -158,9 +154,7 @@ class KopiController extends Controller
             //     'foto' => $new_name,
             // ]);
         }
-        
-        // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
-        return redirect()->back()->with('success', 'Item added to cart');
+        return redirect()->back()->with('success', 'Menu Kopi Berhasil ditambah');
     }
 
     // Method untuk mengupdate datakopi

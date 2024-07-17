@@ -34,7 +34,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', [GatewayController::class, 'door']);
 
-
 Route::middleware(['auth', 'pemilik'])->group(function () {
     Route::get('/admin-dashboard', [KopiController::class, 'dashboard']);
     Route::get('/admin-menukopi', [KopiController::class, 'datakopiadmin']);

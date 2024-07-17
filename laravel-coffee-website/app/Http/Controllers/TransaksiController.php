@@ -121,8 +121,6 @@ class TransaksiController extends Controller
                 'quantity' => $request->quantity,
                 'jumlah' => $request->total,
             ]);
-            
-            // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
             return redirect('/checkout')->with('success', 'Item added to cart');
         }
         else{
@@ -138,8 +136,6 @@ class TransaksiController extends Controller
                 'name' => Auth::user()->name_user,
                 'id_user' => Auth::id(), 
             ]);
-            
-            // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
             return redirect('/checkout')->with('success', 'Item added to cart');
         }
         else{
@@ -151,8 +147,7 @@ class TransaksiController extends Controller
     public function checkout_order(Request $request)
     {
         if(Auth::id()){
-            // Validasi request
-            $request->validate([
+            $request->validate([ // Validasi request
                 // 'kopi_id' => 'required|exists:tbl_kopi,id',
                 // 'quantity' => 'required|integer|min:1',
                 'bukti_bayar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
@@ -165,17 +160,15 @@ class TransaksiController extends Controller
 
             $transaksi = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
             
-            // $imageName = $request->file('bukti_bayar');
             if ($request->hasFile('bukti_bayar')) {
                 $image = $request->file('bukti_bayar');
-                // get the extension
-                $extension = $image->getClientOriginalExtension();
-                // create a new file name
-                $new_name = time().'.'.$extension;
-                // move file to public/images/new and use $new_name
-                $image->move(public_path('images/bukti_bayar'), $new_name);
+                $extension = $image->getClientOriginalExtension(); // get the extension
+                $new_name = time().'.'.$extension;// create a new file name
+                $image->move(public_path('images/bukti_bayar'), $new_name); // move file to public/images/new and use $new_name
         
                 $transaksi->update([
+                    'name' => Auth::user()->name_user,
+                    'order_telah_diantar' => 'Belum diantar',
                     'bukti_payment' => $new_name,
                     'dine_in' => $request->order, 
                     'no_meja' => $request->nomor_meja, 
@@ -190,10 +183,7 @@ class TransaksiController extends Controller
             // $existingCart->update([
             //     'transaksi_id' => $transaksi->id
             // ]);
-
-            
-            // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
-            return redirect('/')->with('success', 'Item added to cart');
+            return redirect('/')->with('success', 'Pesanan anda sedang diproses');
         }
         else{
             return redirect('/login');
@@ -218,13 +208,13 @@ class TransaksiController extends Controller
         // $kopi = Kopi::all();
         $transaksi_data = Cart::where('tbl_cart.id_user', Auth::id())
                         ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
-                        ->select('tbl_cart.*', 'tbl_transaksi.bukti_payment', 'tbl_transaksi.created_at as transaksi_created_at', 'tbl_transaksi.order_telah_diantar')
-                        ->orderBy('tbl_transaksi.created_at', 'desc') // Mengurutkan berdasarkan transaksi_created_at terbaru
+                        ->select('tbl_cart.*', 'tbl_transaksi.bukti_payment', 'tbl_transaksi.updated_at as transaksi_updated_at', 'tbl_transaksi.order_telah_diantar')
+                        ->orderBy('tbl_transaksi.updated_at', 'desc') // Mengurutkan berdasarkan transaksi_updated_at terbaru
                         ->get();
 
          // Format the dates
         $transaksi_data->each(function($item) {
-            $item->transaksi_created_at = Carbon::parse($item->transaksi_created_at)->format('d M Y');
+            $item->transaksi_updated_at = Carbon::parse($item->transaksi_updated_at)->format('d M Y');
         });
         return view('user.history_pembelian', compact('transaksi_data'));
     }

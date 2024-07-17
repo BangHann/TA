@@ -17,7 +17,7 @@
                 <div class="flex flex-row mx-2 mb-2 gap-4 items-start">
                     <img class="w-[81px] h-[84px] gap-0 opacity-[0px] rounded-xl object-cover" src="{{ asset('images/' . $transaksi->kopi->foto) }}" alt="foto pesanan">
                     <div class="flex flex-col">
-                        <p class="text-xs">{{ $transaksi->transaksi_created_at }}</p>
+                        <p class="text-xs">{{ $transaksi->transaksi_updated_at }}</p>
                         <p class="text-xs font-semibold">{{ $transaksi->kopi->jenis_kopi }}</p>
                         <div class="flex flex-row gap-1">
                             <p class="text-xs">Total Belanja</p>

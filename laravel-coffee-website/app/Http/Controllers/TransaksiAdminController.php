@@ -15,7 +15,10 @@ class TransaksiAdminController extends Controller
     {
         $transaksi_data = Transaksi::all();
         return view('admin.order.index', ['transaksi_data' => $transaksi_data]);
-
+        // $transaksi_data->each(function($item) {
+        //     $item->created_at = Carbon::parse($item->created_at)->format('d M Y');
+        // });
+        // dd($transaksi_data);
         // if(request()->expectsJson()) {
         //     return response()->json(['transaksi_data' => $transaksi_data]);
         // }
@@ -25,10 +28,15 @@ class TransaksiAdminController extends Controller
     }
 
     public function data_order_admin(Request $request){
-        $filter = $request->input('filter');
+        // $filter = $request->input('filter');
         $transaksi_data = Transaksi::orderByRaw("bukti_payment IS NOT NULL DESC")
         ->orderByRaw("FIELD(order_telah_diantar, 'Belum diantar') DESC")
-        ->orderBy('created_at', 'desc')->get();
+        ->orderBy('updated_at', 'desc')->get();
+
+         // Format the dates
+        // $transaksi_data->each(function($item) {
+        //     $item->created_at = Carbon::parse($item->created_at)->format('d M Y');
+        // });
         // if ($filter == 'belum_diantar') {
         //     $transaksi_data = Transaksi::where('order_telah_diantar', 'Belum diantar')
         //                                 ->whereNotNull('bukti_payment')
@@ -36,7 +44,7 @@ class TransaksiAdminController extends Controller
         // } else {
         //     $transaksi_data = Transaksi::all();
         // }
-
+        
         return response()->json(['transaksi_data' => $transaksi_data]);
 
         // $transaksi_data = Transaksi::all()->map(function ($transaksi) {

@@ -50,7 +50,12 @@
                                     '<p class="text-lime-600 font-semibold">' + item.order_telah_diantar + '</p>') + '</td>';
                         tableRows += '<td>' + (item.bukti_payment ? '<img class="" src="/images/bukti_bayar/' + item.bukti_payment + '" alt="gambar kopi">' : 
                                         '<p class="text-red-600 font-semibold">Belum Bayar</p>') + '</td>';
-                        tableRows += '<td>' + new Date(item.created_at).toLocaleDateString() + '</td>'; // Mengubah tanggal menjadi hanya tanggal
+                        // Mengubah tanggal menjadi format 'd M Y'
+                        const formattedDate = new Date(item.updated_at).toLocaleDateString('id-ID', {
+                            day: '2-digit', month: 'short', year: 'numeric'
+                        });
+                        tableRows += '<td>' + formattedDate + '</td>';
+                        // tableRows += '<td>' + new Date(item.created_at).toLocaleDateString() + '</td>'; // Mengubah tanggal menjadi hanya tanggal
                         tableRows += '<td class="w-[214px]">' + generateActionButtons(item) + '</td>'; // Menggunakan fungsi generateActionButtons()
                         
                         tableRows += '</tr>';
