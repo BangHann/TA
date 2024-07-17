@@ -98,6 +98,7 @@ Route::middleware(['auth','user'])->group(function () {
     Route::post('/add_order', [TransaksiController::class, 'add_order']);
     Route::post('/addOrder_deletedItem', [TransaksiController::class, 'addOrder_deletedItem']);
     Route::post('/cart_order', [TransaksiController::class, 'cart_order']);
+    Route::post('/cart_update_and_order', [TransaksiController::class, 'cart_update_and_order']);
     Route::get('/checkout', [TransaksiController::class, 'index']);
     Route::post('/checkout_order', [TransaksiController::class, 'checkout_order']);
 

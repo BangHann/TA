@@ -136,7 +136,35 @@ class TransaksiController extends Controller
                 'name' => Auth::user()->name_user,
                 'id_user' => Auth::id(), 
             ]);
-            return redirect('/checkout')->with('success', 'Item added to cart');
+
+            // $cartItems = json_decode($request->cart_items, true); // Decode JSON to array
+
+            // Update each cart item
+            foreach ($cartItems as $item) {
+                Cart::where('id', $item['id'])->update([
+                    'quantity' => $item['quantity'],
+                    'jumlah' => $item['total'],
+                ]);
+            }
+            return redirect('/checkout')->with('success', 'Berhasil');
+        }
+        else{
+            return redirect('/login');
+        }
+    }
+
+    public function cart_update_and_order(Request $request)
+    {
+        if(Auth::id()){
+            $cartItems = json_decode($request->cart_items, true);
+            // Update each cart item
+            foreach ($cartItems as $item) {
+                Cart::where('id', $item['id'])->update([
+                    'quantity' => $item['quantity'],
+                    'jumlah' => $item['total'],
+                ]);
+            }
+            return redirect('/checkout')->with('success', 'Berhasil');
         }
         else{
             return redirect('/login');

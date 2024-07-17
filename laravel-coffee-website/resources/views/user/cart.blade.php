@@ -10,7 +10,7 @@
         
         @if ($cart_data->count() > 0)
             @foreach ($cart_data as $cart)
-                <div class="cart-item mb-4 bg-white">
+                <div class="cart-item mb-4 bg-white" data-cart-id="{{ $cart->id }}">
                     <div class="flex justify-end m-1 mr-2">
                         <a class="font-semibold text-[12px] text-red-500" href="/delete_cart/{{ $cart->id }}" onclick="return confirm('Anda yakin akan menghapus pesanan?')">
                         Hapus
@@ -25,11 +25,11 @@
                                 <p class="jenis-button mr-1 text-xs text-secondary">Jenis Kopi - {{ $cart->jeniskopi->nama_jenis }}</p>
                             @endif
                             {{-- <p class="font-bold text-[12px]">Rp. {{ $cart->jumlah }}</p> --}}
-                            <p class="font-bold text-[12px]">Rp. <span id="total-price">{{ $cart->jumlah }}</span></p>
+                            <p class="font-bold text-[12px]">Rp. <span class="total-price">{{ $cart->jumlah }}</span></p>
                             <div class="flex items-center">
-                                <button id="decrease-qty" class="bg-primary text-secondary text-sm font-medium px-[9px] py-1 rounded-3xl">-</button>
-                                <input type="text" id="quantity" name="quantity" value="{{ $cart->quantity }}" class="text-xs font-medium w-10 h-8 text-center border-none" readonly>
-                                <button id="increase-qty" class="bg-secondary text-primary text-sm font-medium px-[8px] py-1 rounded-3xl">+</button>
+                                <button id="" class="decrease-qty bg-primary text-secondary text-sm font-medium px-[9px] py-1 rounded-3xl">-</button>
+                                <input type="number" value="{{ $cart->quantity }}" class="quantity text-xs font-medium w-10 h-8 text-center border-none" readonly>
+                                <button id="" class="increase-qty bg-secondary text-primary text-sm font-medium px-[8px] py-1 rounded-3xl">+</button>
                             </div>
                             {{-- <input class="rounded-[4px] w-[60px] h-[30px] border border-solid border-[#D9D9D9]" type="number" placeholder="{{ $cart->quantity }}" value=""> --}}
                         </div>
@@ -42,14 +42,14 @@
             @endforeach
             
                 @if($tidakada_bukti_payment)
-                    <a class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="/checkout">
+                    <a id="order-link" class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="#">
                         Order
                     </a>
                 @else
                     <div class="w-[40%]">
                         <form action="/cart_order" method="post">
                             @csrf
-                            <input type="hidden" name="quantity" id="cart-quantity" value="1">
+                            <input type="hidden" name="cart_items" id="cart-items" value="">
                             <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
                                 Order
                             </button>
@@ -68,52 +68,56 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('.jenis-button').click(function() {
-                var jenisId = $(this).data('id');
-                $('#jeniskopi').val(jenisId);
-                $('#jeniskopi-cart').val(jenisId);
-                $('.jenis-button').removeClass('active border border-secondary font-semibold'); // Remove the active class from all buttons
-                $(this).addClass('active border border-secondary font-semibold'); // Add the active class to the clicked button
-                $('#jenis-error').addClass('hidden');
-            });
-
-            // $('#order-form, #cart-form').submit(function(e) {
-            //     if (!$('#jeniskopi').val() && !$('#jeniskopi-cart').val()) {
-            //         e.preventDefault();
-            //         $('#jenis-error').removeClass('hidden');
-            //     }
-            // });
-
-
             var pricePerUnit = 0; // Inisialisasi harga per unit dengan nilai default
-
+    
             @if(isset($cart))
                 pricePerUnit = {{ $cart->kopi->harga }}; // Tetapkan harga per unit jika $cart didefinisikan
             @endif
-            function updateQuantities(qty) {
-                $('#quantity').val(qty);
-                $('#order-quantity').val(qty);
-                $('#cart-quantity').val(qty);
-                updateTotalPrice(qty);
+    
+            function updateQuantities($item, qty) {
+                $item.find('.quantity').val(qty);
+                updateTotalPrice($item, qty);
             }
             
-            function updateTotalPrice(qty) {
+            function updateTotalPrice($item, qty) {
                 var totalPrice = qty * pricePerUnit;
-                $('#total-price').text(totalPrice);
-                $('#order-total').val(totalPrice);
-                $('#cart-total').val(totalPrice);
+                $item.find('.total-price').text(totalPrice);
             }
-
-            $('#increase-qty').click(function() {
-                var qty = parseInt($('#quantity').val());
-                updateQuantities(qty + 1);
+    
+            $('.increase-qty').click(function() {
+                var $item = $(this).closest('.cart-item');
+                var qty = parseInt($item.find('.quantity').val());
+                updateQuantities($item, qty + 1);
             });
-
-            $('#decrease-qty').click(function() {
-                var qty = parseInt($('#quantity').val());
+    
+            $('.decrease-qty').click(function() {
+                var $item = $(this).closest('.cart-item');
+                var qty = parseInt($item.find('.quantity').val());
                 if (qty > 1) {
-                    updateQuantities(qty - 1);
+                    updateQuantities($item, qty - 1);
                 }
+            });
+    
+            $('#order-link').click(function(e) {
+                e.preventDefault();
+                var cartItems = [];
+                $('.cart-item').each(function() {
+                    var id = $(this).data('cart-id');
+                    var quantity = $(this).find('.quantity').val();
+                    var total = $(this).find('.total-price').text();
+                    cartItems.push({ id: id, quantity: quantity, total: total });
+                });
+                $.ajax({
+                    url: '/cart_update_and_order',
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        cart_items: JSON.stringify(cartItems)
+                    },
+                    success: function(response) {
+                        window.location.href = '/checkout';
+                    }
+                });
             });
         });
     </script>
