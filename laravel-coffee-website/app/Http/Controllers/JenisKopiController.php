@@ -43,7 +43,7 @@ class JenisKopiController extends Controller
         $jeniskopi->kopi_id = $request->nama_kopi;
         $jeniskopi->save();
 
-        return redirect()->back()->with('success', 'Data rasa kopi berhasil diupdate.');
+        return redirect()->back()->with('success', 'Data Jenis kopi berhasil diupdate.');
     }
 
     public function destroy($id)

@@ -46,6 +46,9 @@ Route::middleware(['auth', 'pemilik'])->group(function () {
     //     return view('admin/datakopi/add');
     // });
     Route::get('/users', [UserController::class, 'index']);
+    Route::put('/edit-user/{id}', [UserController::class, 'update']);
+    Route::delete('/delete_user/{id}', [UserController::class, 'destroy']);
+
     Route::get('/admin-jeniskopi', [JenisKopiController::class, 'index']);
     // Route::get('/admin-jeniskopi', [RasaKopiController::class, 'index']);
     // Route::get('/admin-addrasakopi', function () {

@@ -70,5 +70,47 @@ class UserSeeder extends Seeder
             'email' => 'paran@mail.com',
             'email_verified_at' => now(),
         ]);
+
+        User::create([
+            'name_user' => 'Bede',
+            'role' => 'user',
+            'password' => Hash::make('123'), // Ganti dengan password yang diinginkan
+            // 'username' => 'admin banghan',
+            'user_jenis_kelamin' => 'Laki-Laki',
+            'user_foto' => 'paran.jpg',
+            // 'user_status' => 1,
+            'alamat' => 'Jagakarsa',
+            'no_hp' => '08'.$faker->numberBetween(1000000000, 9999999999),
+            'email' => 'bede@mail.com',
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name_user' => 'Angga',
+            'role' => 'user',
+            'password' => Hash::make('123'), // Ganti dengan password yang diinginkan
+            // 'username' => 'admin banghan',
+            'user_jenis_kelamin' => 'Laki-Laki',
+            'user_foto' => 'paran.jpg',
+            // 'user_status' => 1,
+            'alamat' => 'Citayam',
+            'no_hp' => '08'.$faker->numberBetween(1000000000, 9999999999),
+            'email' => 'angga@mail.com',
+            'email_verified_at' => now(),
+        ]);
+
+        User::create([
+            'name_user' => 'Al-Alaric',
+            'role' => 'user',
+            'password' => Hash::make('123'), // Ganti dengan password yang diinginkan
+            // 'username' => 'admin banghan',
+            'user_jenis_kelamin' => 'Laki-Laki',
+            'user_foto' => 'paran.jpg',
+            // 'user_status' => 1,
+            'alamat' => 'Bojong Gede',
+            'no_hp' => '08'.$faker->numberBetween(1000000000, 9999999999),
+            'email' => 'al@mail.com',
+            'email_verified_at' => now(),
+        ]);
     }
 }
