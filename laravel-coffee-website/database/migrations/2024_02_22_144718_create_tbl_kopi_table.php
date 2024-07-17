@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('foto');
             $table->float('harga');
             $table->integer('diskon')->nullable();
-            $table->string('deskripsi');
+            $table->integer('harga_diskon')->nullable();
+            $table->string('deskripsi')->nullable();
             $table->integer('stok')->nullable();
             $table->timestamps();
             // Foreign key ke tabel rasa kopi

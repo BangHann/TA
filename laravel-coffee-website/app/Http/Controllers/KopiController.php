@@ -24,69 +24,6 @@ class KopiController extends Controller
         return view('index_kopi', compact('kopi', 'cartCount'));
     }
 
-    public function tambah(Request $request)
-    {
-        if ($request->hasFile('gambar_kopi')) {
-            $image = $request->file('gambar_kopi');
-            // get the extension
-            $extension = $image->getClientOriginalExtension();
-            // create a new file name
-            $new_name = 'kopi_'.time().'.'.$extension;
-            // move file to public/images and use $new_name
-            $image->move(public_path('images'), $new_name);
-
-            Kopi::create([
-                'jenis_kopi' => $request->jenis_kopi,
-                'stok' => $request->stok_kopi,
-                'harga' => $request->harga_kopi,
-                'deskripsi' => $request->deskripsi,
-                'foto' => $new_name,
-            ]);
-        }
-        
-        // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
-        return redirect()->back()->with('success', 'Item added to cart');
-    }
-
-    // Method untuk mengupdate datakopi
-    public function update(Request $request, $id)
-    {
-        // $request->validate([
-        //     'rasa' => 'required|string|max:255',
-        //     'nama_kopi' => 'required|exists:kopi,id',
-        // ]);
-
-        if ($request->hasFile('gambar_kopi')) {
-            $image = $request->file('gambar_kopi');
-            // get the extension
-            $extension = $image->getClientOriginalExtension();
-            // create a new file name
-            $new_name = 'kopi_'.time().'.'.$extension;
-            // move file to public/images and use $new_name
-            $image->move(public_path('images'), $new_name);
-
-            $kopi = Kopi::findOrFail($id);
-            $kopi->jenis_kopi = $request->jenis_kopi;
-            $kopi->stok = $request->stok_kopi;
-            $kopi->harga = $request->harga_kopi;
-            $kopi->deskripsi = $request->deskripsi ? $request->deskripsi : $kopi->deskripsi;
-            $kopi->foto = $new_name;
-            $kopi->save();
-        } else{
-            $kopi = Kopi::findOrFail($id);
-            $kopi->jenis_kopi = $request->jenis_kopi;
-            $kopi->stok = $request->stok_kopi;
-            $kopi->harga = $request->harga_kopi;
-            $kopi->deskripsi = $request->deskripsi ? $request->deskripsi : $kopi->deskripsi;
-            // $kopi->foto = $kopi->foto;
-            $kopi->save();
-        }
-
-        
-
-        return redirect()->back()->with('success', 'Data kopi berhasil diupdate.');
-    }
-
     public function dashboard(Request $request)
     {
         $totalPrice = Transaksi::sum('total_price');
@@ -170,12 +107,6 @@ class KopiController extends Controller
         // return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities'));
     }
 
-    public function datakopiadmin()
-    {
-        $kopi = Kopi::all();
-        return view('admin/datakopi/index', compact('kopi'));
-    }
-
     public function detail($id)
     {
         $detail_kopi = Kopi::find($id);
@@ -184,6 +115,99 @@ class KopiController extends Controller
 
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
         return view('user.detailkopi', compact('detail_kopi', 'data_jeniskopi', 'tidakada_bukti_payment'));
+    }
+
+    public function datakopiadmin()
+    {
+        $kopi = Kopi::all();
+        return view('admin/datakopi/index', compact('kopi'));
+    }
+
+    public function tambah(Request $request)
+    {
+        if ($request->hasFile('gambar_kopi')) {
+            $image = $request->file('gambar_kopi');
+            // get the extension
+            $extension = $image->getClientOriginalExtension();
+            // create a new file name
+            $new_name = 'kopi_'.time().'.'.$extension;
+            // move file to public/images and use $new_name
+            $image->move(public_path('images'), $new_name);
+
+            $data = [
+                'jenis_kopi' => $request->jenis_kopi,
+                'stok' => $request->stok_kopi,
+                'diskon' => $request->diskon_kopi ?? 0, // Menggunakan null coalescing operator
+                'harga' => $request->harga_kopi,
+                'deskripsi' => $request->deskripsi,
+                'foto' => $new_name,
+            ];
+            
+            if ($request->diskon_kopi) {
+                $data['harga_diskon'] = $request->harga_kopi * (1 - $request->diskon_kopi / 100);
+            }
+            
+            Kopi::create($data);
+            
+            // Kopi::create([
+            //     'jenis_kopi' => $request->jenis_kopi,
+            //     'stok' => $request->stok_kopi,
+            //     'diskon' => $request->diskon_kopi,
+            //     'harga' => $request->harga_kopi,
+            //     'deskripsi' => $request->deskripsi,
+            //     'foto' => $new_name,
+            // ]);
+        }
+        
+        // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
+        return redirect()->back()->with('success', 'Item added to cart');
+    }
+
+    // Method untuk mengupdate datakopi
+    public function update(Request $request, $id)
+    {
+        // $request->validate([
+        //     'rasa' => 'required|string|max:255',
+        //     'nama_kopi' => 'required|exists:kopi,id',
+        // ]);
+
+        if ($request->hasFile('gambar_kopi')) {
+            $image = $request->file('gambar_kopi');
+            $extension = $image->getClientOriginalExtension(); // get the extension
+            $new_name = 'kopi_'.time().'.'.$extension; // create a new file name
+            $image->move(public_path('images'), $new_name);// move file to public/images and use $new_name
+
+        } else{
+            // Mengambil nama gambar yang sudah ada jika tidak ada gambar baru diupload
+            $new_name = Kopi::findOrFail($id)->foto;
+            // $kopi = Kopi::findOrFail($id);
+            // $kopi->jenis_kopi = $request->jenis_kopi;
+            // $kopi->stok = $request->stok_edit;
+            // $kopi->diskon = $request->diskon_edit;
+            // $kopi->harga = $request->harga_kopi;
+            // $kopi->deskripsi = $request->deskripsi ? $request->deskripsi : $kopi->deskripsi;
+            // // $kopi->foto = $kopi->foto;
+            // $kopi->save();
+        }
+
+        $kopi = Kopi::findOrFail($id);
+        $kopi->jenis_kopi = $request->jenis_kopi;
+        $kopi->stok = $request->stok_edit;
+        $kopi->diskon = $request->diskon_edit;
+        $kopi->harga = $request->harga_kopi;
+        $kopi->deskripsi = $request->deskripsi ?? $kopi->deskripsi;
+        $kopi->foto = $new_name;
+
+        // Menghitung harga diskon jika ada diskon yang diberikan
+        if ($request->diskon_edit) {
+            $kopi->harga_diskon = $request->harga_kopi * (1 - $request->diskon_edit / 100);
+        } else {
+            $kopi->harga_diskon = null; // Atur harga diskon menjadi null jika tidak ada diskon
+        }
+
+        $kopi->save();
+
+        return redirect()->back()->with('success', 'Data kopi berhasil diupdate.');
     }
 
     public function hapus($id)

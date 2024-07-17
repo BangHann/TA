@@ -55,7 +55,8 @@
                                 <div class="flex gap-2">
                                     <button class="rounded-md text-white text-xs bg-yellow-500 p-2 px-4 tombol_edit"
                                             data-id="{{ $item->id }}" data-jenis="{{ $item->jenis_kopi }}" data-stok="{{ $item->stok }}"
-                                            data-harga='{{ $item->harga }}' data-gambar='{{ $item->foto }}' data-deskripsi='{{ $item->deskripsi }}'>
+                                            data-harga='{{ $item->harga }}' data-gambar='{{ $item->foto }}' data-deskripsi='{{ $item->deskripsi }}'
+                                            data-diskon="{{ $item->diskon }}">
                                         Edit
                                     </button>
                                     <form action="/delete_kopi/{{ $item->id }}" method="POST">
@@ -89,16 +90,20 @@
             <form action="/add_kopi" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
-                    <input type="text" name="jenis_kopi" id="jenis_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <label for="jenis_kopi" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
+                    <input required type="text" name="jenis_kopi" id="jenis_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
-                {{-- <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Stok Kopi</label>
-                    <input type="number" name="stok_kopi" id="stok_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                </div> --}}
+                <div class="mb-4">
+                    <label for="stok_kopi" class="block text-sm font-medium text-gray-700">Stok Kopi</label>
+                    <input required type="number" name="stok_kopi" id="stok_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label for="diskon_kopi" class="block text-sm font-medium text-gray-700">Diskon Kopi</label>
+                    <input type="number" name="diskon_kopi" id="diskon_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
                 <div class="mb-4">
                     <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Menu Kopi</label>
-                    <input type="number" name="harga_kopi" id="harga_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input required type="number" name="harga_kopi" id="harga_kopi" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
@@ -106,7 +111,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="gambar_kopi" class="block text-sm font-medium text-gray-700">Gambar Minuman</label>
-                    <input type="file" name="gambar_kopi" id="gambar_kopi" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
+                    <input required type="file" name="gambar_kopi" id="gambar_kopi" class="mt-1 p-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border border-gray-300 rounded-md">
                 </div>
 
                 <div class="flex justify-end">
@@ -135,13 +140,17 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
+                    <label for="jenis_edit" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
                     <input type="text" name="jenis_kopi" id="jenis_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
-                {{-- <div class="mb-4">
-                    <label for="data_mcs_id" class="block text-sm font-medium text-gray-700">Stok Kopi</label>
-                    <input type="number" name="stok_kopi" id="stok_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                </div> --}}
+                <div class="mb-4">
+                    <label for="stok_kopi" class="block text-sm font-medium text-gray-700">Stok Kopi</label>
+                    <input required type="number" name="stok_edit" id="stok_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+                <div class="mb-4">
+                    <label for="diskon_kopi" class="block text-sm font-medium text-gray-700">Diskon Kopi</label>
+                    <input required type="number" name="diskon_edit" id="diskon_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
                 <div class="mb-4">
                     <label for="harga_kopi" class="block text-sm font-medium text-gray-700">Harga Menu Kopi</label>
                     <input type="number" name="harga_kopi" id="harga_edit" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
@@ -187,12 +196,14 @@
                 event.preventDefault();
                 const id = this.getAttribute('data-id')
                 const jenis_kopi = this.getAttribute('data-jenis');
+                const diskon = this.getAttribute('data-diskon');
                 const stok = this.getAttribute('data-stok');
                 const harga = this.getAttribute('data-harga');
                 const gambar = this.getAttribute('data-gambar');
                 const desk = this.getAttribute('data-deskripsi');
                 document.getElementById('jenis_edit').value = jenis_kopi;
-                //document.getElementById('stok_edit').value = stok;
+                document.getElementById('diskon_edit').value = diskon;
+                document.getElementById('stok_edit').value = stok;
                 document.getElementById('harga_edit').value =harga;
                 document.getElementById('gambar_edit').placeholder = gambar;
                 document.getElementById('deskripsi_edit').value = desk;
