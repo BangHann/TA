@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_alamat', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->string('kab_kota');
-            $table->string('kec');
-            $table->string('kel');
-            $table->BigInteger('kodepos');
-            $table->text('detail')->nullable();
-            $table->integer('harga_ongkir')->nullable();
-            $table->timestamps();
-        });
+        // Schema::create('tbl_alamat', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedBigInteger('id_user');
+        //     $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+        //     $table->string('kab_kota');
+        //     $table->string('kec');
+        //     $table->string('kel');
+        //     $table->BigInteger('kodepos');
+        //     $table->text('detail')->nullable();
+        //     $table->integer('harga_ongkir')->nullable();
+        //     $table->timestamps();
+        // });
     }
 
     /**

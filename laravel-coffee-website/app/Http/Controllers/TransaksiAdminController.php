@@ -32,38 +32,8 @@ class TransaksiAdminController extends Controller
         $transaksi_data = Transaksi::orderByRaw("bukti_payment IS NOT NULL DESC")
         ->orderByRaw("FIELD(order_telah_diantar, 'Belum diantar') DESC")
         ->orderBy('updated_at', 'desc')->get();
-
-         // Format the dates
-        // $transaksi_data->each(function($item) {
-        //     $item->created_at = Carbon::parse($item->created_at)->format('d M Y');
-        // });
-        // if ($filter == 'belum_diantar') {
-        //     $transaksi_data = Transaksi::where('order_telah_diantar', 'Belum diantar')
-        //                                 ->whereNotNull('bukti_payment')
-        //                                 ->get();
-        // } else {
-        //     $transaksi_data = Transaksi::all();
-        // }
         
         return response()->json(['transaksi_data' => $transaksi_data]);
-
-        // $transaksi_data = Transaksi::all()->map(function ($transaksi) {
-        //     $transaksi->created_at = $transaksi->created_at->format('Y-m-d'); // Memformat tanggal menjadi hanya tanggal
-        //     return $transaksi;
-        // });
-    
-        // return response()->json(['transaksi_data' => $transaksi_data]);
-
-        // $transaksi_data = Transaksi::all();
-        // $transaksi_data = Transaksi::orderBy('created_at', 'desc')->get();
-        // return response()->json(['transaksi_data' => $transaksi_data]);
-
-        //     $transaksi_data = Transaksi::orderByRaw("
-    //     CASE 
-    //         WHEN bukti_payment IS NOT NULL AND order_telah_diantar = 'Belum diantar' THEN 1
-    //         ELSE 2
-    //     END
-    // ")->get();
     }
 
     public function detail($id)

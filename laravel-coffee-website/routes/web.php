@@ -107,6 +107,7 @@ Route::middleware(['auth','user'])->group(function () {
     Route::post('/checkout_order', [TransaksiController::class, 'checkout_order']);
 
     Route::get('/history-pembelian', [TransaksiController::class, 'history_pembelian']);
+    Route::get('/detail-history-order/{id}', [TransaksiController::class, 'detail_history_pembelian']);
 
     Route::get('/alamat', [AlamatController::class, 'index']);
     Route::get('/alamat-input', [AlamatController::class, 'inputalamatpage']);

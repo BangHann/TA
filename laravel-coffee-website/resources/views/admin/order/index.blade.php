@@ -10,8 +10,8 @@
                     <th>No</th>
                     <th>Nama Pemesan</th>
                     <th>Total Tagihan</th>
-                    {{-- <th>Dine In</th>
-                    <th>No. Meja</th> --}}
+                    <th>Delivery</th>
+                    {{-- <th>No. Meja</th> --}}
                     <th>Status Order</th>
                     <th class="w-[140px]">Bukti Bayar</th>
                     <th>Tanggal</th>
@@ -44,7 +44,7 @@
                         tableRows += '<td class="text-center">' + (index + 1) + '</td>';
                         tableRows += '<td>' + item.name + '</td>';
                         tableRows += '<td> Rp. ' +(item.total_price ? parseFloat(item.total_price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '0')+ '</td>';
-                        // tableRows += '<td>' + (item.dine_in == 'no' ? 'Takeaway': item.dine_in ? item.dine_in : '-') + '</td>';
+                        tableRows += '<td>' + (item.delivery == 'no' ? 'Takeaway': 'Delivery') + '</td>';
                         // tableRows += '<td>' + (item.no_meja ? item.no_meja : '-') + '</td>';
                         tableRows += '<td>' + (item.order_telah_diantar == 'Belum diantar' ? '<p class="text-red-600 font-semibold">'+ item.order_telah_diantar +'</p>':
                                     '<p class="text-lime-600 font-semibold">' + item.order_telah_diantar + '</p>') + '</td>';

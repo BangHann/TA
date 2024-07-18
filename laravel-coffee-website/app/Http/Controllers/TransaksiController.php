@@ -10,6 +10,7 @@ use App\Models\Kopi;
 use App\Models\Cart;
 use App\Models\Transaksi;
 use App\Models\PaymentMethod;
+use App\Models\Alamat;
 use Carbon\Carbon;
 
 class TransaksiController extends Controller
@@ -19,7 +20,7 @@ class TransaksiController extends Controller
         if(Auth::id()){
             $kopi = Kopi::all();
             $cart_data = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->get();
-            // $payment_method = PaymentMethod::all();
+            $alamat = Alamat::where('id_user', Auth::id())->get();
             $jenis = $request->input('jenis'); // Mendapatkan parameter filter dari request
             if($jenis) {
                 $payment_method = PaymentMethod::where('jenis', $jenis)->get();
@@ -43,7 +44,7 @@ class TransaksiController extends Controller
             $transaksi = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
             if($transaksi)
             {
-                return view('user.checkout', compact('unique_payment_methods','kopi', 'cart_data','payment_method' , 'total_amount', 'cartCount', 'transaksi'));
+                return view('user.checkout', compact('unique_payment_methods','kopi', 'cart_data','payment_method' , 'total_amount', 'cartCount', 'transaksi', 'alamat'));
             }
             else{
                 return redirect('/');
@@ -198,8 +199,8 @@ class TransaksiController extends Controller
                     'name' => Auth::user()->name_user,
                     'order_telah_diantar' => 'Belum diantar',
                     'bukti_payment' => $new_name,
-                    'dine_in' => $request->order, 
-                    'no_meja' => $request->nomor_meja, 
+                    'delivery' => $request->order, 
+                    'id_alamat' => $request->alamat, 
                     'total_price' => $request->total_amount
                 ]);
             }
@@ -243,18 +244,28 @@ class TransaksiController extends Controller
 
     public function history_pembelian(Request $request)
     {
-        // $transaksi_data = Cart::where('id_user', Auth::id())->get();
-        // $kopi = Kopi::all();
-        $transaksi_data = Cart::where('tbl_cart.id_user', Auth::id())
-                        ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
-                        ->select('tbl_cart.*', 'tbl_transaksi.bukti_payment', 'tbl_transaksi.updated_at as transaksi_updated_at', 'tbl_transaksi.order_telah_diantar')
-                        ->orderBy('tbl_transaksi.updated_at', 'desc') // Mengurutkan berdasarkan transaksi_updated_at terbaru
-                        ->get();
+        // Ambil semua transaksi untuk pengguna yang sedang login
+        $transaksi_data = Transaksi::where('id_user', Auth::id())
+                        ->orderBy('updated_at', 'desc')->get();
 
-         // Format the dates
+        // Format tanggal dan ambil item pesanan
         $transaksi_data->each(function($item) {
-            $item->transaksi_updated_at = Carbon::parse($item->transaksi_updated_at)->format('d M Y');
+            $item->transaksi_updated_at = Carbon::parse($item->updated_at)->format('d M Y');
+            $item->order_items = Cart::where('transaksi_id', $item->id)->get();
         });
-        return view('user.history_pembelian', compact('transaksi_data'));
+        return view('user.history_pembelian.index', compact('transaksi_data'));
+
+        // $transaksi_data = Cart::where('tbl_cart.id_user', Auth::id())
+        //                 ->join('tbl_transaksi', 'tbl_cart.transaksi_id', '=', 'tbl_transaksi.id')
+        //                 ->select('tbl_cart.*', 'tbl_transaksi.bukti_payment', 'tbl_transaksi.updated_at as transaksi_updated_at', 'tbl_transaksi.order_telah_diantar')
+        //                 ->orderBy('tbl_transaksi.updated_at', 'desc') // Mengurutkan berdasarkan transaksi_updated_at terbaru
+        //                 ->get();
+    }
+
+    public function detail_history_pembelian($id)
+    {
+        $transaksi_detail = Transaksi::find($id);
+        $order_items = Cart::where('transaksi_id', $id)->get();
+        return view('user.history_pembelian.detail', compact('transaksi_detail','order_items'));
     }
 }
