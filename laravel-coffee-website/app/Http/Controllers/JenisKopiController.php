@@ -25,9 +25,7 @@ class JenisKopiController extends Controller
             'kopi_id' => $request->nama_kopi,
             'nama_jenis' => $request->jenis,
         ]);
-        
-        // Redirect ke rute /cart setelah item berhasil ditambahkan ke keranjang
-        return redirect()->back()->with('success', 'Item added to cart');
+        return redirect()->back()->with('success', 'Berhasil tambah data');
     }
 
     // Method untuk mengupdate data rasa kopi

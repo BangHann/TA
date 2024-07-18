@@ -4,14 +4,15 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GatewayController;
 
-use App\Http\Controllers\KopiController;
 // use App\Http\Controllers\RasaKopiController;
+use App\Http\Controllers\KopiController;
 use App\Http\Controllers\JenisKopiController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentMethodController;
+use App\Http\Controllers\AlamatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,15 @@ Route::middleware(['auth','user'])->group(function () {
     Route::post('/checkout_order', [TransaksiController::class, 'checkout_order']);
 
     Route::get('/history-pembelian', [TransaksiController::class, 'history_pembelian']);
+
+    Route::get('/alamat', [AlamatController::class, 'index']);
+    Route::get('/alamat-input', [AlamatController::class, 'inputalamatpage']);
+    Route::post('/add-alamat', [AlamatController::class, 'add']);
+    Route::get('/alamat/{id}', [AlamatController::class, 'detail']);
+    Route::get('/get-kelurahan/{kecamatan}', [AlamatController::class, 'getKelurahan']);
+    // Route::get('/get-kelurahan/{nama_kec}', [AlamatController::class, 'getKelurahan']);
+    Route::put('/update_alamat/{id}', [AlamatController::class, 'update']);
+    Route::get('/delete_alamat/{id}', [AlamatController::class, 'delete']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
