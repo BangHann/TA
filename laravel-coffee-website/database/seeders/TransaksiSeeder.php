@@ -22,7 +22,7 @@ class TransaksiSeeder extends Seeder
                 'id_user' => $faker->numberBetween(1, 4),
                 'id_alamat' => $faker->numberBetween(1, 4),
                 'total_price' => $faker->numberBetween(10000, 100000),
-                'bukti_payment' => $faker->randomElement(['1716714624.jpeg', null]),
+                'bukti_payment' => '1716714624.jpeg',
                 'order_telah_diantar' => $faker->randomElement(['Belum diantar', 'Sudah diantar']),
                 'created_at' => $faker->dateTimeThisMonth(),
                 'delivery' => $faker->randomElement(['yes', 'no']),
