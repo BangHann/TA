@@ -13,13 +13,19 @@
         @csrf
     </form>
 
-    <form method="post" action="/edit-email-nama" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
-        @method('PUT')
-        {{-- @method('patch') --}}
+        @method('patch')
+
+        {{-- <div>
+            <x-input-label for="name" :value="__('Name')" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name_user)" required autofocus autocomplete="name" />
+            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+        </div> --}}
         <div>
-            <label for="" class="block font-medium text-sm text-gray-700">Nama</label>
-            <input class="mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" type="text" name="namauser" value="{{ Auth::user()->name_user }}">
+            <x-input-label for="name_user" :value="__('Name')" />
+            <x-text-input id="name_user" name="name_user" type="text" class="mt-1 block w-full" :value="old('name_user', $user->name_user)" required autofocus autocomplete="name_user" />
+            <x-input-error class="mt-2" :messages="$errors->get('name_user')" />
         </div>
 
         <div>
