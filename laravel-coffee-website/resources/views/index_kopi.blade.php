@@ -17,7 +17,7 @@
         <p class="text-2xl font-bold my-4">Seteguk Kopi</p>
     </center> --}}
     
-    <div class="my-4 sm:flex justify-center pt-[80px]">
+    <div class="my-4 flex justify-center pt-[80px]">
         <div class="grid-card mx-3 sm:mx-7 gap-4">
             @foreach ($kopi as $item)
                 <a class="card relative {{ $item->stok < 1 ? 'pointer-events-none' : '' }}" href="/kopi/{{ $item->id }}">

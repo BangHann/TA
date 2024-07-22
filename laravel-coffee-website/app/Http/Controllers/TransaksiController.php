@@ -138,7 +138,7 @@ class TransaksiController extends Controller
                 'id_user' => Auth::id(), 
             ]);
 
-            // $cartItems = json_decode($request->cart_items, true); // Decode JSON to array
+            $cartItems = json_decode($request->cart_items, true); // Decode JSON to array
 
             // Update each cart item
             foreach ($cartItems as $item) {
