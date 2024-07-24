@@ -141,13 +141,23 @@ class TransaksiController extends Controller
             $cartItems = json_decode($request->cart_items, true); // Decode JSON to array
 
             // Update each cartitem
-            foreach ($cartItems as $item) {
-                Cart::where('id', $item['id'])->update([
-                    'quantity' => $item['quantity'],
-                    'jumlah' => $item['total'],
-                ]);
+            // foreach ($cartItems as $item) {
+            //     Cart::where('id', $item['id'])->update([
+            //         'quantity' => $item['quantity'],
+            //         'jumlah' => $item['total'],
+            //     ]);
+            // }
+            if (is_array($cartItems)) {
+                foreach ($cartItems as $item) {
+                    Cart::where('id', $item['id'])->update([
+                        'quantity' => $item['quantity'],
+                        'jumlah' => $item['total'],
+                    ]);
+                }
+            } else {
+                return redirect('/checkout')->with('success', 'Berhasil');
             }
-            return redirect('/checkout')->with('success', 'Berhasil');
+            // return redirect('/checkout')->with('success', 'Berhasil');
         }
         else{
             return redirect('/login');
