@@ -140,7 +140,7 @@ class TransaksiController extends Controller
 
             $cartItems = json_decode($request->cart_items, true); // Decode JSON to array
 
-            // Update each cart item
+            // Update each cartitem
             foreach ($cartItems as $item) {
                 Cart::where('id', $item['id'])->update([
                     'quantity' => $item['quantity'],
