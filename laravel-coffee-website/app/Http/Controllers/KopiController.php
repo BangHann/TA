@@ -17,11 +17,14 @@ class KopiController extends Controller
     public function index()
     {
         $kopi = Kopi::all();
-
+        // $jeniskopi = JenisKopi::all();
+         // Mendapatkan data jenis kopi dan menyiapkan array untuk memeriksa ketersediaan stok
+        $jeniskopi = JenisKopi::all()->keyBy('id');
+        // dd($jeniskopi);
         // $cartCount = Cart::where('id_user', auth()->id())->count();
         $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
         // return view('layouts.nav_user', ['cartCount' => $cartCount]);
-        return view('index_kopi', compact('kopi', 'cartCount'));
+        return view('index_kopi', compact('kopi', 'jeniskopi', 'cartCount'));
     }
 
     public function dashboard(Request $request)
@@ -113,6 +116,7 @@ class KopiController extends Controller
         $data_jeniskopi = JenisKopi::where('kopi_id', $id)->get();
 
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
+        
         return view('user.detailkopi', compact('detail_kopi', 'data_jeniskopi', 'tidakada_bukti_payment'));
     }
 

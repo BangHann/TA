@@ -65,6 +65,15 @@ class KopiTableSeeder extends Seeder
         ]);
 
         Kopi::create([
+            'jenis_kopi' => 'Americano',
+            'foto' => 'kopi_americano.jpg',
+            'harga' => 15000,
+            'diskon' => 0,
+            'stok' => 45,
+            'deskripsi' => 'minuman kopi yang terdiri dari espresso yang ditambahkan dengan air panas, menciptakan minuman yang lebih ringan dan lebih encer dibandingkan dengan espresso murni'
+        ]);
+
+        Kopi::create([
             'jenis_kopi' => 'Matcha Latte',
             'foto' => 'MatchaLatte.jpg',
             'harga' => 12000,
@@ -89,15 +98,6 @@ class KopiTableSeeder extends Seeder
             'diskon' => 0,
             'stok' => 45,
             'deskripsi' => 'Terinspirasi dari kue Red Velvet. Minuman ini biasanya terdiri dari campuran berbagai bahan, termasuk susu, sirup vanila, pewarna merah (untuk memberikan warna merah yang khas).'
-        ]);
-
-        Kopi::create([
-            'jenis_kopi' => 'Americano',
-            'foto' => 'kopi_americano.jpg',
-            'harga' => 15000,
-            'diskon' => 0,
-            'stok' => 45,
-            'deskripsi' => 'minuman kopi yang terdiri dari espresso yang ditambahkan dengan air panas, menciptakan minuman yang lebih ringan dan lebih encer dibandingkan dengan espresso murni'
         ]);
 
         Kopi::create([

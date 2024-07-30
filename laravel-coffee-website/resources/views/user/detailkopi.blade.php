@@ -45,9 +45,16 @@
                     <p class="font-semibold pt-4">Jenis Kopi</p>
                     <div class="">
                         @foreach ($data_jeniskopi as $item)
-                            <button data-id="{{ $item->id }}" type="button" class="jenis-button mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary">
-                                {{ $item->nama_jenis }}
-                            </button>
+                            @if ($item->ready == 1)
+                                <button data-id="{{ $item->id }}" type="button" class="jenis-button mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary">
+                                    {{ $item->nama_jenis }}
+                                </button>
+                            @else
+                                <button type="" class="mr-1 mt-1 text-xs text-gray-400 bg-gray-100 rounded-md p-2" disabled>
+                                    {{ $item->nama_jenis }}
+                                </button>
+                            @endif
+                            
                         @endforeach
                     </div>
                     <p id="jenis-error" class="text-red-500 text-sm hidden">Silakan pilih jenis kopi</p>
@@ -104,9 +111,16 @@
                         <p class="font-semibold pt-4">Jenis Kopi</p>
                         <div class="">
                             @foreach ($data_jeniskopi as $item)
-                                <button data-idkopi="{{ $item->id }}" type="button" class="button-jenis mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary">
-                                    {{ $item->nama_jenis }}
-                                </button>
+                                @if($item->ready == 1)
+                                    <button data-idkopi="{{ $item->id }}" type="button" class="button-jenis mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary">
+                                        {{ $item->nama_jenis }}
+                                    </button>
+                                @else
+                                    <button type="" class="mr-1 mt-1 text-xs text-gray-400 bg-gray-100 rounded-md p-2" disabled>
+                                        {{ $item->nama_jenis }}
+                                    </button>
+                                @endif
+                                
                             @endforeach
                         </div>
                         <p id="jenis-eror-form" class="text-red-500 text-sm hidden">Silakan pilih jenis kopi</p>

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tbl_jenis_kopi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kopi_id');
+            $table->integer('ready')->default('1')->nullable();
             $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
             $table->string('nama_jenis');
             $table->timestamps();

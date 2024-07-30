@@ -14,19 +14,31 @@ class JenisKopiSeeder extends Seeder
      */
     public function run(): void
     {
-        // Bersihkan data tabel sebelum menambahkan data
-        // RasaKopi::truncate();
+        JenisKopi::create([
+            'kopi_id' => 1,
+            'nama_jenis' => 'Robusta',
+            'ready' => 0
+        ]);
+
+        JenisKopi::create([
+            'kopi_id' => 1,
+            'nama_jenis' => 'Arabica',
+            'ready' => 0
+        ]);
+
         $faker = Faker::create();
         // Asumsikan Anda memiliki 6 kopi_id yang berbeda (1 hingga 6)
-        for ($kopiId = 1; $kopiId <= 5; $kopiId++) {
+        for ($kopiId = 2; $kopiId <= 6; $kopiId++) {
             JenisKopi::create([
                 'kopi_id' => $kopiId,
                 'nama_jenis' => 'Robusta',
+                'ready' => rand(1, 0)
             ]);
 
             JenisKopi::create([
                 'kopi_id' => $kopiId,
                 'nama_jenis' => 'Arabica',
+                'ready' => rand(1, 0)
             ]);
         }
     }
