@@ -50,26 +50,28 @@
     
 </nav>
 
-<script>
-    $(document).ready(function(){
-        $.ajax({
-            url: "/cart/count",
-            type: "GET",
-            dataType: "json",
-            success: function(response){
-                if(response.cartCount > 0) {
-                    $('#cart_number').removeClass('hidden').addClass(
-                        'flex items-center justify-center text-[8px] h-4 font-semibold text-white w-[16px] bg-red-500 rounded-[100px]'
-                    ).text(response.cartCount);
-                } 
-                // else {
-                //     $('#undelivered-count').addClass('hidden');
-                // }
-            },
-            error: function(xhr, status, error){
-                console.error(error);
-                $('#cart_number').text('Failed to fetch data.');
-            }
+@auth
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: "/cart/count",
+                type: "GET",
+                dataType: "json",
+                success: function(response){
+                    if(response.cartCount > 0) {
+                        $('#cart_number').removeClass('hidden').addClass(
+                            'flex items-center justify-center text-[8px] h-4 font-semibold text-white w-[16px] bg-red-500 rounded-[100px]'
+                        ).text(response.cartCount);
+                    } 
+                    // else {
+                    //     $('#undelivered-count').addClass('hidden');
+                    // }
+                },
+                error: function(xhr, status, error){
+                    // console.error(error);
+                    // $('#cart_number').text('Failed to fetch data.');
+                }
+            });
         });
-    });
-</script>
+    </script>
+@endauth

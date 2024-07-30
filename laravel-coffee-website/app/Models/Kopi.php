@@ -21,6 +21,11 @@ class Kopi extends Model
         return $this->hasMany(JenisKopi::class);
     }
 
+    public function ingredient()
+    {
+        return $this->hasMany(Ingredient::class);
+    }
+
     // public function rasakopi()
     // {
     //     return $this->hasMany(RasaKopi::class);

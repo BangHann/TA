@@ -91,6 +91,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/add-jeniskopi', [JenisKopiController::class, 'add']);
     Route::put('/edit-jeniskopi/{id}', [JenisKopiController::class, 'update']);
     Route::delete('/delete_jenis/{id}', [JenisKopiController::class, 'destroy']);
+    Route::post('/update_jenis_kopi_status', [JenisKopiController::class, 'updateStatus']);
 });
 
 // Route::middleware('auth')->group(function () {

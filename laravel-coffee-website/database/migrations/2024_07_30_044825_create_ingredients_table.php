@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_jenis_kopi', function (Blueprint $table) {
+        Schema::create('tbl_ingredient', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('kopi_id');
             $table->foreign('kopi_id')->references('id')->on('tbl_kopi')->onDelete('cascade');
-            $table->integer('ready')->default('1')->nullable();
-            $table->string('nama_jenis');
+            $table->integer('available')->default('1')->nullable();
+            $table->string('nama_bahan');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jenis_kopis');
+        Schema::dropIfExists('ingredients');
     }
 };

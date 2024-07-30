@@ -17,13 +17,13 @@ class JenisKopiSeeder extends Seeder
         JenisKopi::create([
             'kopi_id' => 1,
             'nama_jenis' => 'Robusta',
-            'ready' => 0
+            'ready' => 2
         ]);
 
         JenisKopi::create([
             'kopi_id' => 1,
             'nama_jenis' => 'Arabica',
-            'ready' => 0
+            'ready' => 2
         ]);
 
         $faker = Faker::create();
@@ -32,13 +32,13 @@ class JenisKopiSeeder extends Seeder
             JenisKopi::create([
                 'kopi_id' => $kopiId,
                 'nama_jenis' => 'Robusta',
-                'ready' => rand(1, 0)
+                'ready' => rand(1, 2)
             ]);
 
             JenisKopi::create([
                 'kopi_id' => $kopiId,
                 'nama_jenis' => 'Arabica',
-                'ready' => rand(1, 0)
+                'ready' => rand(1, 2)
             ]);
         }
     }

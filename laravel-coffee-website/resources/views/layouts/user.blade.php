@@ -12,7 +12,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    @vite('resources/css/app.css')
+    {{-- @vite('resources/css/app.css') --}}
+    @include('layouts.vitecode')
 
     <!-- PWA  -->
     <meta name="theme-color" content="#6777ef"/>

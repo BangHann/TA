@@ -50,4 +50,17 @@ class JenisKopiController extends Controller
         $jenis_kopi->delete();
         return redirect()->back();
     }
+
+    public function updateStatus(Request $request)
+    {
+        $status = $request->input('status');
+        // JenisKopi::query()->update(['ready' => $status]);
+
+        $namaJenis = $request->input('nama_jenis');
+
+        JenisKopi::where('nama_jenis', $namaJenis)->update(['ready' => $status]);
+        
+        return response()->json(['message' => 'Status updated successfully.']);
+    }
+
 }

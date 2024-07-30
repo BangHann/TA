@@ -8,6 +8,7 @@ use App\Models\Kopi; // Import model Kopi
 use App\Models\Cart;
 use App\Models\Transaksi;
 use App\Models\User;
+use App\Models\JenisKopi;
 use Illuminate\Support\Facades\DB;
 
 class GatewayController extends Controller
@@ -19,8 +20,8 @@ class GatewayController extends Controller
             $role=Auth()->user()->role;
             if($role=='user')
             {
-                $kopi = Kopi::all();
-                // $cartCount = Cart::where('id_user', auth()->id())->count();
+                $kopi = Kopi::with('jeniskopi')->get();
+                // $jeniskopi = JenisKopi::all()->keyBy('id');
                 $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
                 return view('index_kopi', compact('kopi', 'cartCount'));
             }

@@ -65,16 +65,10 @@ class CartController extends Controller
 
     public function getCartCount()
     {
-        // if(Auth::id()){
-            // $count = Cart::where('id_user', auth()->id())->count();
-            $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
-            \Log::info('Undelivered count: ' . $cartCount);
-            // dd($cartCount );
-            return response()->json(['cartCount' => $cartCount]);
-        // }
-        // else
-        // $cartCount = Cart::where('id_user', auth()->id())->count();
-        // return view('layouts.nav_user', ['cartCount' => $cartCount]);
+        $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
+        \Log::info('Undelivered count: ' . $cartCount);
+        // dd($cartCount );
+        return response()->json(['cartCount' => $cartCount]);
     }
 
     public function destroy($id)

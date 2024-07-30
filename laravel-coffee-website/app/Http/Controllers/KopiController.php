@@ -16,15 +16,16 @@ class KopiController extends Controller
 {
     public function index()
     {
-        $kopi = Kopi::all();
+        // $kopi = Kopi::all();
+        $kopi = Kopi::with('jeniskopi')->get();
+        // dd($kopi);
         // $jeniskopi = JenisKopi::all();
          // Mendapatkan data jenis kopi dan menyiapkan array untuk memeriksa ketersediaan stok
         $jeniskopi = JenisKopi::all()->keyBy('id');
-        // dd($jeniskopi);
         // $cartCount = Cart::where('id_user', auth()->id())->count();
         $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
         // return view('layouts.nav_user', ['cartCount' => $cartCount]);
-        return view('index_kopi', compact('kopi', 'jeniskopi', 'cartCount'));
+        return view('index_kopi', compact('kopi', 'cartCount'));
     }
 
     public function dashboard(Request $request)
