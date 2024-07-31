@@ -16,10 +16,11 @@
     @include('layouts.vitecode')
 
     <!-- PWA  -->
-    <meta name="theme-color" content="#6777ef"/>
-    <link rel="apple-touch-icon" href="{{ asset('images/logo1.png') }}">
+    {{-- <meta name="theme-color" content="#6777ef"/> --}}
     {{-- <link rel="manifest" href="{{ asset('/manifest.json') }}"> --}}
-    <link rel="manifest" crossorigin="use-credentials" href="{{ asset('/manifest.json') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo1.png') }}">
+    <link rel="manifest" crossorigin="use-credentials" href="{{ asset('/manifest.json?v=1.0.1') }}">
+    <meta name='theme-color' content="#3d372b">
 
 </head>
 <body class="bg-[#ececec]">

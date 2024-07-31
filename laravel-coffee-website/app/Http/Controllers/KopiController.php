@@ -11,13 +11,14 @@ use App\Models\Transaksi;
 use App\Models\User;
 // use App\Models\RasaKopi;
 use App\Models\JenisKopi;
+use App\Models\Ingredient;
 
 class KopiController extends Controller
 {
     public function index()
     {
         // $kopi = Kopi::all();
-        $kopi = Kopi::with('jeniskopi')->get();
+        $kopi = Kopi::with('jeniskopi', 'ingredient')->get();
         // dd($kopi);
         // $jeniskopi = JenisKopi::all();
          // Mendapatkan data jenis kopi dan menyiapkan array untuk memeriksa ketersediaan stok
@@ -113,12 +114,14 @@ class KopiController extends Controller
 
     public function detail($id)
     {
-        $detail_kopi = Kopi::find($id);
+        // $detail_kopi = Kopi::find($id);
+        $detail_kopi = Kopi::where('id', $id)->with('ingredient')->first(); // Mengambil satu kopi dengan id
+        // dd($detail_kopi);
         $data_jeniskopi = JenisKopi::where('kopi_id', $id)->get();
 
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
         
-        return view('user.detailkopi', compact('detail_kopi', 'data_jeniskopi', 'tidakada_bukti_payment'));
+        return view('user.detail_kopi.detailkopi', compact('detail_kopi', 'data_jeniskopi', 'tidakada_bukti_payment'));
     }
 
     public function datakopiadmin()

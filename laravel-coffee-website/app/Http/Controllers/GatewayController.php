@@ -20,7 +20,7 @@ class GatewayController extends Controller
             $role=Auth()->user()->role;
             if($role=='user')
             {
-                $kopi = Kopi::with('jeniskopi')->get();
+                $kopi = Kopi::with('jeniskopi', 'ingredient')->get();
                 // $jeniskopi = JenisKopi::all()->keyBy('id');
                 $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();
                 return view('index_kopi', compact('kopi', 'cartCount'));

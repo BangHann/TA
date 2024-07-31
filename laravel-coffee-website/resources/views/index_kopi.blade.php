@@ -20,18 +20,25 @@
                     $kopiid = $item->jeniskopi->first()->kopi_id ?? false;
                     if ($kopiid) {
                         $allReadyTwo = true;
-                    foreach ($item->jeniskopi as $jenis) {
-                        if ($jenis->ready != 2) {
-                            $allReadyTwo = false;
-                            break;
+                        foreach ($item->jeniskopi as $jenis) {
+                            if ($jenis->ready != 2) {
+                                $allReadyTwo = false;
+                                break;
+                            }
                         }
+                        
+                        $oneoftwo = $item->ingredient->contains(function($data) {
+                        return $data->available == 2;
+                        });
+
+                        $isOutOfStock = $item->stok < 1 || $allReadyTwo  || $oneoftwo;
                     }
-                    $isOutOfStock = $item->stok < 1 || $allReadyTwo;
-                    }else {
-                        $isOutOfStock = $item->stok < 1;
+                    else {
+                        $oneoftwo = $item->ingredient->contains(function($data) {
+                        return $data->available == 2;
+                        });
+                        $isOutOfStock = $item->stok < 1 || $oneoftwo;
                     }
-                    
-                    
                 @endphp
 
                 <a class="card relative {{ $isOutOfStock ? 'pointer-events-none' : '' }}" href="/kopi/{{ $item->id }}">
@@ -67,7 +74,6 @@
             @endforeach
         </div>
     </div>
-    
 @endsection
 
 {{-- </body>

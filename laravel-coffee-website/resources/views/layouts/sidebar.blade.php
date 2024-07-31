@@ -17,6 +17,7 @@
             </a>
             <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-menukopi')) bg-primary_hover @endif" href="/admin-menukopi">Menu Kopi</a>
             <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-jeniskopi')) bg-primary_hover @endif" href="/admin-jeniskopi">Jenis Kopi</a>
+            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-ingredient')) bg-primary_hover @endif" href="/admin-ingredient">Ingredient Kopi</a>
             <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('payment_method')) bg-primary_hover @endif" href="/payment_method">Payment Method</a>
             <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('users')) bg-primary_hover @endif" href="/users">Users</a>
         @elseif(Auth::user()->role == 'admin')

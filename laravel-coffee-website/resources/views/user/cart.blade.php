@@ -43,7 +43,7 @@
                 
                     @if($tidakada_bukti_payment)
                         <a id="order-link" class="flex justify-center w-[40%] rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm" href="#">
-                            Order x
+                            Order
                         </a>
                     @else
                         <div class="w-[40%]">
@@ -51,7 +51,7 @@
                                 @csrf
                                 <input type="hidden" name="cart_items" id="cart-items" value="">
                                 <button type="submit" class="w-full rounded-md py-3 bg-[#3d372b] border border-[#3d372b] text-[#FFE5B6] hover:bg-[#25211a] text-sm">
-                                    Order p
+                                    Order
                                 </button>
                             </form>
                         </div>

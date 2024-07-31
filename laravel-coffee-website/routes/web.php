@@ -13,6 +13,7 @@ use App\Http\Controllers\TransaksiAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\AlamatController;
+use App\Http\Controllers\IngredientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,6 +93,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/edit-jeniskopi/{id}', [JenisKopiController::class, 'update']);
     Route::delete('/delete_jenis/{id}', [JenisKopiController::class, 'destroy']);
     Route::post('/update_jenis_kopi_status', [JenisKopiController::class, 'updateStatus']);
+
+    Route::get('/admin-ingredient', [IngredientController::class, 'index']);
+    Route::post('/add-ingredient', [IngredientController::class, 'add']);
+    Route::put('/edit-ingredient/{id}', [IngredientController::class, 'update']);
+    Route::delete('/delete-ingredient/{id}', [IngredientController::class, 'destroy']);
+    Route::post('/update_stok_ingredient', [IngredientController::class, 'update_stok_bahan']);
 });
 
 // Route::middleware('auth')->group(function () {
