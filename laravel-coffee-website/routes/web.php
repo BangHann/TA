@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\RawJenisKopiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +94,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/edit-jeniskopi/{id}', [JenisKopiController::class, 'update']);
     Route::delete('/delete_jenis/{id}', [JenisKopiController::class, 'destroy']);
     Route::post('/update_jenis_kopi_status', [JenisKopiController::class, 'updateStatus']);
+
+    Route::get('/admin-rawjeniskopi', [RawJenisKopiController::class, 'index']);
+    Route::post('/add-rawjeniskopi', [RawJenisKopiController::class, 'add']);
+    Route::put('/edit-rawjeniskopi/{id}', [RawJenisKopiController::class, 'update']);
+    Route::delete('/delete-rawjeniskopi/{id}', [RawJenisKopiController::class, 'destroy']);
 
     Route::get('/admin-ingredient', [IngredientController::class, 'index']);
     Route::post('/add-ingredient', [IngredientController::class, 'add']);

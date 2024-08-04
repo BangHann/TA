@@ -21,7 +21,7 @@ class KopiController extends Controller
         $kopi = Kopi::with('jeniskopi', 'ingredient')->get();
         // dd($kopi);
         // $jeniskopi = JenisKopi::all();
-         // Mendapatkan data jenis kopi dan menyiapkan array untuk memeriksa ketersediaan stok
+        
         $jeniskopi = JenisKopi::all()->keyBy('id');
         // $cartCount = Cart::where('id_user', auth()->id())->count();
         $cartCount = Cart::where('id_user', auth()->id())->whereNull('transaksi_id')->count();

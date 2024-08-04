@@ -16,12 +16,14 @@ class JenisKopiSeeder extends Seeder
     {
         JenisKopi::create([
             'kopi_id' => 1,
+            'id_rawjeniskopi' => 1,
             'nama_jenis' => 'Robusta',
             'ready' => 2
         ]);
 
         JenisKopi::create([
             'kopi_id' => 1,
+            'id_rawjeniskopi' => 2,
             'nama_jenis' => 'Arabica',
             'ready' => 2
         ]);
@@ -31,12 +33,14 @@ class JenisKopiSeeder extends Seeder
         for ($kopiId = 2; $kopiId <= 6; $kopiId++) {
             JenisKopi::create([
                 'kopi_id' => $kopiId,
+                'id_rawjeniskopi' => 1,
                 'nama_jenis' => 'Robusta',
                 'ready' => rand(1, 2)
             ]);
 
             JenisKopi::create([
                 'kopi_id' => $kopiId,
+                'id_rawjeniskopi' => 2,
                 'nama_jenis' => 'Arabica',
                 'ready' => rand(1, 2)
             ]);

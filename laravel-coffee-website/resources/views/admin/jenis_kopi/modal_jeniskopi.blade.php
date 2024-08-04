@@ -1,7 +1,7 @@
 <div id="myModal" class="hidden">
     <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
         <div class="flex justify-between items-center">
-            <h1 class="text-lg font-semibold mb-4">Tambah Jenis Kopi</h1>
+            <h1 class="text-lg font-semibold mb-4">Tambah Jenis Kopi ke Menu</h1>
             <button id="closeModalButton" class="p-2">
                 <h1 class="text-lg font-semibold mb-4">x</h1>
             </button>
@@ -14,8 +14,9 @@
                 {{-- <input type="text" name="jenis" id="jenis" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md"> --}}
                 <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis" id="jenis" required>
                     <option value="" disabled selected hidden>Pilih Nama Jenis Kopi</option>
-                    <option value="Arabica">Arabica</option>
-                    <option value="Robusta">Robusta</option>
+                    @foreach ($rawjeniskopi as $data)
+                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="mb-4">
@@ -43,7 +44,7 @@
 <div id="editModal" class="hidden">
     <div class="modal-content w-[440px] bg-white p-8 rounded-lg shadow-md m-auto h-auto">
         <div class="flex justify-between items-center">
-            <h1 class="text-lg font-semibold mb-4">Edit Jenis Kopi</h1>
+            <h1 class="text font-semibold mb-4">Edit Jenis Kopi pada Menu</h1>
             <button id="closeEditModalButton" class="p-2">
                 <h1 class="text-lg font-semibold mb-4">x</h1>
             </button>
@@ -57,8 +58,9 @@
                 {{-- <input type="text" name="jenis" id="edit_jenis" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md"> --}}
                 <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="jenis" id="edit_jenis">
                     <option value="" disabled selected hidden>{{ $data->nama_jenis }}</option>
-                    <option value="Arabica">Arabica</option>
-                    <option value="Robusta">Robusta</option>
+                    @foreach ($rawjeniskopi as $data)
+                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="mb-4">
@@ -102,8 +104,9 @@
             event.preventDefault();
             const id = this.getAttribute('data-id');
             const nama = this.getAttribute('data-nama');
+            const namajeniskopi = this.getAttribute('data-jeniskopi');
             const kopiId = this.getAttribute('data-kopi');
-            document.getElementById('edit_jenis').value = nama;
+            document.getElementById('edit_jenis').value = namajeniskopi;
             document.getElementById('edit_nama_kopi').value = kopiId;
             document.getElementById('editJenisForm').setAttribute('action', '/edit-jeniskopi/' + id);
             document.getElementById('editModal').classList.remove('hidden');

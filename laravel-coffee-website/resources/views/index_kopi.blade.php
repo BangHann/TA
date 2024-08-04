@@ -17,11 +17,11 @@
         <div class="grid-card mx-3 sm:mx-7 sm:w-[1100px] gap-4">
             @foreach ($kopi as $item)
                 @php
-                    $kopiid = $item->jeniskopi->first()->kopi_id ?? false;
+                    $kopiid = $item->jeniskopi->first()->kopi_id ?? false; //cek apakah menu memili jenis kopi
                     if ($kopiid) {
                         $allReadyTwo = true;
-                        foreach ($item->jeniskopi as $jenis) {
-                            if ($jenis->ready != 2) {
+                        foreach ($item->jeniskopi as $jenis) { //Cek jenis kopi, apakah keduanya habis atau tidak?
+                            if ($jenis->ready != 2) { // 1 adalah ready, 2 tidak ready
                                 $allReadyTwo = false;
                                 break;
                             }
@@ -47,7 +47,6 @@
                             Stok Habis
                         </div>
                     @endif
-                    
                     <img src="{{ asset('images/' . $item->foto) }}" class="{{ $isOutOfStock ? 'opacity-30' : '' }} card-img-kopi rounded-t-lg" alt="{{ $item->jenis_kopi }}">
                     <div class="card-body m-2 {{ $isOutOfStock ? 'opacity-50' : '' }}">
                         <div class="flex items-center gap-1">

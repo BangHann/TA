@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         
         $this->call(KopiTableSeeder::class);
         // $this->call(RasaKopiTableSeeder::class);
+        $this->call(RawJenisKopiSeeder::class);
         $this->call(JenisKopiSeeder::class);
         $this->call(TransaksiSeeder::class);
         $this->call(CartSeeder::class);

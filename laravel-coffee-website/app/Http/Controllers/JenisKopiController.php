@@ -7,6 +7,7 @@ use App\Models\JenisKopi;
 use App\Models\Kopi;
 use App\Models\Cart;
 use App\Models\Transaksi;
+use App\Models\RawJenisKopi;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,16 +15,18 @@ class JenisKopiController extends Controller
 {
     public function index()
     {
-        $jeniskopi = JenisKopi::all();
+        // $jeniskopi = JenisKopi::all();
+        $jeniskopi = JenisKopi::with(['raw_jeniskopi', 'kopi'])->get();
+        $rawjeniskopi = RawJenisKopi::all();
         $kopi = Kopi::all();
-        return view('admin.jenis_kopi', compact('jeniskopi', 'kopi'));
+        return view('admin.jenis_kopi.jenis_kopi', compact('jeniskopi', 'kopi', 'rawjeniskopi'));
     }
 
     public function add(Request $request)
     {
         JenisKopi::create([
             'kopi_id' => $request->nama_kopi,
-            'nama_jenis' => $request->jenis,
+            'id_rawjeniskopi' => $request->jenis,
         ]);
         return redirect()->back()->with('success', 'Berhasil tambah data');
     }
@@ -37,7 +40,8 @@ class JenisKopiController extends Controller
         // ]);
 
         $jeniskopi = JenisKopi::findOrFail($id);
-        $jeniskopi->nama_jenis = $request->jenis;
+        // $jeniskopi->nama_jenis = $request->jenis;
+        $jeniskopi->id_rawjeniskopi = $request->jenis;
         $jeniskopi->kopi_id = $request->nama_kopi;
         $jeniskopi->save();
 
@@ -56,9 +60,10 @@ class JenisKopiController extends Controller
         $status = $request->input('status');
         // JenisKopi::query()->update(['ready' => $status]);
 
-        $namaJenis = $request->input('nama_jenis');
+        // $namaJenis = $request->input('nama_jenis');
+        $namaJenis = $request->input('id_rawjeniskopi');
 
-        JenisKopi::where('nama_jenis', $namaJenis)->update(['ready' => $status]);
+        JenisKopi::where('id_rawjeniskopi', $namaJenis)->update(['ready' => $status]);
         
         return response()->json(['message' => 'Status updated successfully.']);
     }

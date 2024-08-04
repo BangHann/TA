@@ -11,6 +11,8 @@ use App\Models\Cart;
 use App\Models\Transaksi;
 use App\Models\PaymentMethod;
 use App\Models\Alamat;
+use App\Models\RawJenisKopi;
+use App\Models\JenisKopi;
 use Carbon\Carbon;
 
 class TransaksiController extends Controller
@@ -187,8 +189,6 @@ class TransaksiController extends Controller
     {
         if(Auth::id()){
             $request->validate([ // Validasi request
-                // 'kopi_id' => 'required|exists:tbl_kopi,id',
-                // 'quantity' => 'required|integer|min:1',
                 'bukti_bayar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             ],
             [
@@ -218,11 +218,21 @@ class TransaksiController extends Controller
             $cartItems = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')->get();
             foreach ($cartItems as $cart) {
                 $kopi = Kopi::find($cart->kopi_id);
-                if ($kopi->stok >= $cart->quantity) {
-                    $kopi->stok -= $cart->quantity;
-                    $kopi->save();
+                $jeniskopimenu = JenisKopi::find($cart->jenis_kopi_id);
+
+                if ($jeniskopimenu) { // Pastikan $jeniskopimenu tidak null
+                    $jeniskopistok = RawJenisKopi::find($jeniskopimenu->id_rawjeniskopi);
+
+                    if ($kopi->stok >= $cart->quantity) {
+                        $kopi->stok -= $cart->quantity;
+                        $jeniskopistok->stok -= $cart->quantity;
+                        $kopi->save();
+                        $jeniskopistok->save();
+                    } else {
+                        return redirect('/')->with('error', 'Stok kopi tidak mencukupi untuk pesanan Anda.');
+                    }
                 } else {
-                    return redirect('/')->with('error', 'Stok kopi tidak mencukupi untuk pesanan Anda.');
+                    return redirect('/')->with('error', 'Jenis kopi tidak ditemukan untuk pesanan Anda.');
                 }
             }
 

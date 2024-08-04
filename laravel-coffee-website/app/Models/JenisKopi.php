@@ -20,4 +20,9 @@ class JenisKopi extends Model
     {
         return $this->hasMany(Cart::class);
     }
+
+    public function raw_jeniskopi()
+    {
+        return $this->belongsTo(RawJenisKopi::class, 'id_rawjeniskopi');
+    }
 }
