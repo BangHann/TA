@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Ingredient;
+use App\Models\RawIngredient;
 use App\Models\Kopi;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,17 +14,17 @@ class IngredientController extends Controller
     public function index()
     {
         // $bahan_bahan = Ingredient::all();
-        $bahan_bahan = Ingredient::orderBy('nama_bahan', 'asc')->get();
+        $bahan_bahan = Ingredient::orderBy('rawingredient_id', 'asc')->get();
         $kopi = Kopi::all();
-        $unique_ingredient = Ingredient::select('nama_bahan')->distinct()->get();
-        return view('admin.ingredient_kopi.ingredient', compact('bahan_bahan', 'kopi', 'unique_ingredient'));
+        $rawingredient = RawIngredient::all();
+        return view('admin.ingredient_kopi.ingredient', compact('rawingredient','bahan_bahan', 'kopi'));
     }
 
     public function add(Request $request)
     {
         Ingredient::create([
             'kopi_id' => $request->nama_kopi,
-            'nama_bahan' => $request->bahan,
+            'rawingredient_id' => $request->bahan,
         ]);
         return redirect()->back()->with('success', 'Berhasil tambah data');
     }
@@ -32,7 +33,7 @@ class IngredientController extends Controller
     public function update(Request $request, $id)
     {
         $bahankopi = Ingredient::findOrFail($id);
-        $bahankopi->nama_bahan = $request->bahan;
+        $bahankopi->rawingredient_id = $request->bahan;
         $bahankopi->kopi_id = $request->nama_kopi;
         $bahankopi->save();
 
@@ -49,8 +50,8 @@ class IngredientController extends Controller
     public function update_stok_bahan(Request $request)
     {
         $status = $request->input('status');
-        $namaBahan = $request->input('nama_bahan');
-        Ingredient::where('nama_bahan', $namaBahan)->update(['available' => $status]);
+        $namaBahan = $request->input('rawingredient_id');
+        Ingredient::where('rawingredient_id', $namaBahan)->update(['available' => $status]);
         
         return response()->json(['message' => 'Ingredient updated successfully.']);
     }

@@ -40,11 +40,12 @@
                 @foreach ($data_jeniskopi as $item)
                     @if($item->ready == 1)
                         <button data-idkopi="{{ $item->id }}" type="button" class="button-jenis mr-1 mt-1 text-xs text-secondary bg-primary rounded-md p-2 hover:bg-primary_hover active:bg-secondary active:text-primary">
-                            {{ $item->nama_jenis }}
+                            {{ $item->raw_jeniskopi->nama }}
                         </button>
                     @else
                         <button type="" class="mr-1 mt-1 text-xs text-gray-400 bg-gray-100 rounded-md p-2" disabled>
-                            {{ $item->nama_jenis }}
+                            {{-- {{ $item->nama_jenis }} --}}
+                            {{ $item->raw_jeniskopi->nama }}
                         </button>
                     @endif
                     
@@ -114,13 +115,25 @@
 
 <p class="hidden sm:block mx-4 font-semibold pt-4">Ingredients</p>
 <p class="hidden sm:block mx-4 text-sm">
-    @php
+    {{-- @php
         $ingredients = $detail_kopi->ingredient->pluck('nama_bahan')->toArray();
         $lastIngredient = array_pop($ingredients); // Ambil elemen terakhir
     @endphp
 
     @if (count($ingredients) > 0)
         {{ implode(', ', $ingredients) }}, dan {{ $lastIngredient }}
+    @else
+        {{ $lastIngredient }}
+    @endif --}}
+    @php
+        $ingredientNames = $data_ingredient->map(function ($data) {
+            return $data->raw_ingredient->nama;
+        })->toArray();
+        $lastIngredient = array_pop($ingredientNames); // Ambil elemen terakhir
+    @endphp
+
+    @if (count($ingredientNames) > 0)
+        {{ implode(', ', $ingredientNames) }}, dan {{ $lastIngredient }}
     @else
         {{ $lastIngredient }}
     @endif

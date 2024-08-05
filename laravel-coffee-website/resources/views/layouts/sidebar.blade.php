@@ -19,11 +19,18 @@
             <details>
                 <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('admin-jeniskopi') || Request::is('admin-rawjeniskopi')) bg-primary_hover @endif">Jenis Kopi</summary>
                 <div class="flex flex-col">
-                    <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-jeniskopi')) bg-primary_hover font-semibold @endif" href="/admin-jeniskopi">Jenis Kopi In Menu</a>
+                    <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-jeniskopi')) bg-primary_hover font-semibold @endif" href="/admin-jeniskopi">Display In Menu</a>
                     <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-rawjeniskopi')) bg-primary_hover font-semibold @endif" href="/admin-rawjeniskopi">Nama & Stok Jenis Kopi</a>
                 </div>
             </details>
-            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-ingredient')) bg-primary_hover @endif" href="/admin-ingredient">Ingredient Kopi</a>
+            {{-- <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-ingredient')) bg-primary_hover @endif" href="/admin-ingredient">Ingredient Kopi</a> --}}
+            <details>
+                <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('admin-ingredient') || Request::is('admin-rawingredient')) bg-primary_hover @endif">Ingredient Kopi</summary>
+                <div class="flex flex-col">
+                    <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-ingredient')) bg-primary_hover font-semibold @endif" href="/admin-ingredient">Display In Menu</a>
+                    <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-rawingredient')) bg-primary_hover font-semibold @endif" href="/admin-rawingredient">Nama & Stok Ingredient</a>
+                </div>
+            </details>
             <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('payment_method')) bg-primary_hover @endif" href="/payment_method">Payment Method</a>
             <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('users')) bg-primary_hover @endif" href="/users">Users</a>
         @elseif(Auth::user()->role == 'admin')
@@ -42,7 +49,14 @@
                     <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-rawjeniskopi')) bg-primary_hover font-semibold @endif" href="/admin-rawjeniskopi">Nama & Stok</a>
                 </div>
             </details>
-            <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-ingredient')) bg-primary_hover @endif" href="/admin-ingredient">Ingredient Kopi</a>
+            {{-- <a class="py-2 px-2 font-semibold hover:bg-primary_hover @if(Request::is('admin-ingredient')) bg-primary_hover @endif" href="/admin-ingredient">Ingredient Kopi</a> --}}
+            <details>
+                <summary class="cursor-pointer p-2 font-semibold hover:bg-primary_hover focus:bg-primary_hover @if(Request::is('admin-ingredient') || Request::is('admin-rawingredient')) bg-primary_hover @endif">Ingredient Kopi</summary>
+                <div class="flex flex-col">
+                    <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-ingredient')) bg-primary_hover font-semibold @endif" href="/admin-ingredient">Display In Menu</a>
+                    <a class="pl-6 py-1 text-sm hover:bg-primary_hover @if(Request::is('admin-rawingredient')) bg-primary_hover font-semibold @endif" href="/admin-rawingredient">Nama & Stok Ingredient</a>
+                </div>
+            </details>
         @endif
         
         <form method="POST" action="{{ route('logout') }}" class="py-2 px-2 font-semibold">

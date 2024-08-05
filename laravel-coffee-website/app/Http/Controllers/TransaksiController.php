@@ -13,6 +13,8 @@ use App\Models\PaymentMethod;
 use App\Models\Alamat;
 use App\Models\RawJenisKopi;
 use App\Models\JenisKopi;
+use App\Models\RawIngredient;
+use App\Models\Ingredient;
 use Carbon\Carbon;
 
 class TransaksiController extends Controller
@@ -218,14 +220,34 @@ class TransaksiController extends Controller
             $cartItems = Cart::where('id_user', Auth::id())->whereNull('transaksi_id')->get();
             foreach ($cartItems as $cart) {
                 $kopi = Kopi::find($cart->kopi_id);
+                //Mencari data jeniskopi berdasarkan jenis_kopi_id yang tertera pada data Cart
                 $jeniskopimenu = JenisKopi::find($cart->jenis_kopi_id);
+                $ingredientmenu = Ingredient::where('kopi_id', $cart->kopi_id)->get();
 
                 if ($jeniskopimenu) { // Pastikan $jeniskopimenu tidak null
+                    
+                    //Mencari data rawjeniskopi berdasarkan id_rawjeniskopi kopi yang tertera pada data JenisKopi
                     $jeniskopistok = RawJenisKopi::find($jeniskopimenu->id_rawjeniskopi);
-
+                    
                     if ($kopi->stok >= $cart->quantity) {
                         $kopi->stok -= $cart->quantity;
                         $jeniskopistok->stok -= $cart->quantity;
+                        
+                        foreach ($ingredientmenu as $ingredient) {
+                            $ingredientstok = RawIngredient::find($ingredient->rawingredient_id);
+                            if ($ingredientstok) {
+                                $ingredientstok->stok -= $cart->quantity;
+            
+                                if ($ingredientstok->stok <= 0) {
+                                    Ingredient::where('rawingredient_id', $ingredient->rawingredient_id)->update(['available' => 2]);
+                                }
+                                $ingredientstok->save();
+                            }
+                        }
+
+                        if ( $jeniskopistok->stok - $cart->quantity <= 0) {
+                            JenisKopi::where('id_rawjeniskopi', $jeniskopimenu->id_rawjeniskopi)->update(['ready' => 2]);
+                        }
                         $kopi->save();
                         $jeniskopistok->save();
                     } else {

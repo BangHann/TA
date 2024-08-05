@@ -11,7 +11,13 @@
             @csrf
             <div class="mb-4">
                 <label for="jenis" class="block text-sm font-medium text-gray-700">Nama Bahan Kopi</label>
-                <input type="text" name="bahan" id="bahan" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required>
+                {{-- <input type="text" name="bahan" id="bahan" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md" required> --}}
+                <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="bahan" id="bahan" required>
+                    <option value="" disabled selected hidden>Pilih Bahan Kopi</option>
+                    @foreach ($rawingredient as $data)
+                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="mb-4">
                 <label for="Nama Kopi" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
@@ -48,8 +54,14 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-                <label for="edit_bahan" class="block text-sm font-medium text-gray-700">Nama Jenis Kopi</label>
-                <input type="text" name="bahan" id="edit_bahan" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <label for="edit_bahan" class="block text-sm font-medium text-gray-700">Nama Bahan Kopi</label>
+                {{-- <input type="text" name="bahan" id="edit_bahan" class="mt-1 focus:ring-secondary focus:border-secondary w-full shadow-sm sm:text-sm border-gray-300 rounded-md"> --}}
+                <select class="mt-1 w-full text-sm font-mediumshadow-sm sm:text-sm border-gray-300 rounded-md" name="bahan" id="edit_bahan">
+                    <option value="" disabled selected hidden>Pilih Bahan Kopi</option>
+                    @foreach ($rawingredient as $data)
+                        <option value="{{ $data->id }}">{{ $data->nama }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="mb-4">
                 <label for="edit_nama_kopi" class="block text-sm font-medium text-gray-700">Nama Menu Kopi</label>
@@ -90,8 +102,9 @@
             event.preventDefault();
             const id = this.getAttribute('data-id_bahan');
             const nama = this.getAttribute('data-nama_bahan');
+            const namaingredient = this.getAttribute('data-ingredient');
             const kopiId = this.getAttribute('data-nama_kopi');
-            document.getElementById('edit_bahan').value = nama;
+            document.getElementById('edit_bahan').value = namaingredient;
             document.getElementById('edit_nama_kopi').value = kopiId;
             document.getElementById('editBahanForm').setAttribute('action', '/edit-ingredient/' + id);
             document.getElementById('editModal').classList.remove('hidden');

@@ -9,6 +9,8 @@ use App\Models\Cart;
 use App\Models\Transaksi;
 use App\Models\User;
 use App\Models\JenisKopi;
+use App\Models\RawJenisKopi;
+use App\Models\RawIngredient;
 use Illuminate\Support\Facades\DB;
 
 class GatewayController extends Controller
@@ -103,10 +105,21 @@ class GatewayController extends Controller
                 $kopiStockLabels = $kopiStocks->pluck('jenis_kopi');
                 $kopiStockQuantities = $kopiStocks->pluck('stok');
 
-                return view('admin.main', compact(
+                // Data Chart stok Jenis Kopi
+                $rawjenikkopi = RawJenisKopi::select('nama', 'stok')->get();
+                $labelstokjeniskopi = $rawjenikkopi->pluck('nama');
+                $stok_jenikkopi = $rawjenikkopi->pluck('stok');
+
+                // Data Chart stok Ingredient
+                $rawingredient = RawIngredient::select('nama', 'stok')->get();
+                $labelstokingredient = $rawingredient->pluck('nama');
+                $stok_ingredient = $rawingredient->pluck('stok');
+
+                return view('admin.mainpage.main', compact(
                     'totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 
                     'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years',
-                    'kopiStockLabels', 'kopiStockQuantities'
+                    'kopiStockLabels', 'kopiStockQuantities', 'labelstokjeniskopi', 'stok_jenikkopi',
+                    'stok_ingredient', 'labelstokingredient'
                 ));
             }
             // {

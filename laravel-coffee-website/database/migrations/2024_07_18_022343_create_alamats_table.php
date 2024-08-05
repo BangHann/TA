@@ -23,6 +23,12 @@ return new class extends Migration
         //     $table->integer('harga_ongkir')->nullable();
         //     $table->timestamps();
         // });
+        Schema::create('tbl_raw_ingredient', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->integer('stok')->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -30,6 +36,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alamats');
+        // Schema::dropIfExists('alamats');
+        Schema::dropIfExists('tbl_raw_ingredient');
     }
 };

@@ -15,4 +15,9 @@ class Ingredient extends Model
     {
         return $this->belongsTo(Kopi::class);
     }
+
+    public function raw_ingredient()
+    {
+        return $this->belongsTo(RawIngredient::class, 'rawingredient_id');
+    }
 }

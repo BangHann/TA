@@ -11,6 +11,8 @@ use App\Models\Transaksi;
 use App\Models\User;
 // use App\Models\RasaKopi;
 use App\Models\JenisKopi;
+use App\Models\RawJenisKopi;
+use App\Models\RawIngredient;
 use App\Models\Ingredient;
 
 class KopiController extends Controller
@@ -19,7 +21,6 @@ class KopiController extends Controller
     {
         // $kopi = Kopi::all();
         $kopi = Kopi::with('jeniskopi', 'ingredient')->get();
-        // dd($kopi);
         // $jeniskopi = JenisKopi::all();
         
         $jeniskopi = JenisKopi::all()->keyBy('id');
@@ -99,14 +100,26 @@ class KopiController extends Controller
         $years = range(now()->year - 5, now()->year); // Mengambil 5 tahun terakhir
 
         // Data stok kopi
+        //Pluck berfungsi utk mengambil nilai dari kolom tertentu dalam sebuah koleksi data
         $kopiStocks = Kopi::select('jenis_kopi', 'stok')->get();
         $kopiStockLabels = $kopiStocks->pluck('jenis_kopi');
         $kopiStockQuantities = $kopiStocks->pluck('stok');
+        
+        // Data Chart stok Jenis Kopi
+        $rawjenikkopi = RawJenisKopi::select('nama', 'stok')->get();
+        $labelstokjeniskopi = $rawjenikkopi->pluck('nama');
+        $stok_jenikkopi = $rawjenikkopi->pluck('stok');
 
-        return view('admin.main', compact(
+        // Data Chart stok Ingredient
+        $rawingredient = RawIngredient::select('nama', 'stok')->get();
+        $labelstokingredient = $rawingredient->pluck('nama');
+        $stok_ingredient = $rawingredient->pluck('stok');
+
+        return view('admin.mainpage.main', compact(
             'totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities', 
             'formattedData', 'kopiNames', 'bulan', 'tahun', 'months', 'years',
-            'kopiStockLabels', 'kopiStockQuantities'
+            'kopiStockLabels', 'kopiStockQuantities', 'labelstokjeniskopi', 'stok_jenikkopi',
+            'stok_ingredient', 'labelstokingredient'
         ));
 
         // return view('admin.main', compact('totalPrice', 'totalTransaksi', 'totalUsers', 'kopiLabels', 'kopiQuantities'));
@@ -115,13 +128,16 @@ class KopiController extends Controller
     public function detail($id)
     {
         // $detail_kopi = Kopi::find($id);
-        $detail_kopi = Kopi::where('id', $id)->with('ingredient')->first(); // Mengambil satu kopi dengan id
-        // dd($detail_kopi);
-        $data_jeniskopi = JenisKopi::where('kopi_id', $id)->get();
+
+        // Mengambil kopi dengan id dan relasi ingredient
+        $detail_kopi = Kopi::where('id', $id)->with('ingredient')->first(); 
+        
+        $data_jeniskopi = JenisKopi::where('kopi_id', $id)->with('raw_jeniskopi')->get();
+        $data_ingredient = Ingredient::where('kopi_id', $id)->with('raw_ingredient')->get();
 
         $tidakada_bukti_payment = Transaksi::where('id_user', auth()->id())->whereNull('bukti_payment')->first();
         
-        return view('user.detail_kopi.detailkopi', compact('detail_kopi', 'data_jeniskopi', 'tidakada_bukti_payment'));
+        return view('user.detail_kopi.detailkopi', compact('detail_kopi', 'data_jeniskopi', 'tidakada_bukti_payment', 'data_ingredient'));
     }
 
     public function datakopiadmin()

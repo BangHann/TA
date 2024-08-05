@@ -35,14 +35,14 @@ class JenisKopiSeeder extends Seeder
                 'kopi_id' => $kopiId,
                 'id_rawjeniskopi' => 1,
                 'nama_jenis' => 'Robusta',
-                'ready' => rand(1, 2)
+                // 'ready' => rand(1, 2)
             ]);
 
             JenisKopi::create([
                 'kopi_id' => $kopiId,
                 'id_rawjeniskopi' => 2,
                 'nama_jenis' => 'Arabica',
-                'ready' => rand(1, 2)
+                // 'ready' => rand(1, 2)
             ]);
         }
     }
